@@ -42,8 +42,33 @@ public class PageSearch extends Page {
 				pageField.get(key).getField().setAccessible(true);
 				fieldType = pageField.get(key).getField().getType().getSimpleName().toUpperCase();
 	    		val= "";
-				//val = Utility.stringWithoutNull(String.valueOf(pageField.get(key).getField().get(this.getMapModel())));	 
-				if (pageField.get(key).getType().trim().toUpperCase().compareTo("TEXTAREA") == 0) {
+				//val = Utility.stringWithoutNull(String.valueOf(pageField.get(key).getField().get(this.getMapModel())));	
+	    		if (pageField.get(key).getType().trim().toUpperCase().compareTo("SELECT") == 0) {
+	    			this.setSearchForm(Utility.stringWithoutNull(this.getSearchForm())
+							+ "<div class='col-sm-12 col-md-6'>" 
+	    			+ "<div class='form-group'>"
+	    			+ "<label>"+pageField.get(key).getNameDisplay()+"</label>"
+	    			+ "<select class='custom-select2 form-control'name='"+ pageField.get(key).getField().getName()+"'style='width: 100%; height: 38px'>"
+							+"<optgroup label='"+pageField.get(key).getNameDisplay()+"'>");	    			
+	    			String methodName = "";
+	    			Method m = null;	 
+	    			for(int i=0;i<this.pageField.get(key).getMultipleData().length;i++) {
+	    				//key
+	    				methodName = this.pageField.get(key).getMultipleKey() ;
+	    				methodName = "get" + (methodName.charAt(0) + "").toUpperCase() + (methodName.substring(1));
+ 	    				m = this.pageField.get(key).getMultipleData()[i].getClass().getMethod(methodName, null);
+	    				val += "<option value='"+m.invoke(this.pageField.get(key).getMultipleData()[i], null)+"'>";
+	    				//value
+	    				methodName = this.pageField.get(key).getMultipleValue() ;
+	    				methodName = "get" + (methodName.charAt(0) + "").toUpperCase() + (methodName.substring(1));
+ 	    				m = this.pageField.get(key).getMultipleData()[i].getClass().getMethod(methodName, null);
+	    				val += m.invoke(this.pageField.get(key).getMultipleData()[i], null);
+	    				val += "</option>"; 
+	    			}
+ 	    			this.setSearchForm(Utility.stringWithoutNull(this.getSearchForm())+
+    						val+"</optgroup>");	 
+							this.setSearchForm(Utility.stringWithoutNull(this.getSearchForm())+"</select> </div></div>");
+	    		}else if (pageField.get(key).getType().trim().toUpperCase().compareTo("TEXTAREA") == 0) {
 					this.setLineForm(Utility.stringWithoutNull(this.getLineForm())
 							+ "<div class='form-group row'><label class='col-sm-12 col-md-2 col-form-label'>"
 							+ pageField.get(key).getNameDisplay()
@@ -51,7 +76,7 @@ public class PageSearch extends Page {
 							+ pageField.get(key).getField().getName() + " type='" + pageField.get(key).getType()
 							+ "' class='form-control'>" + val + "</textarea></div></div>");
 				}
-				if (pageField.get(key).getType().trim().toUpperCase().compareTo("POPUP") == 0) {
+				else if (pageField.get(key).getType().trim().toUpperCase().compareTo("POPUP") == 0) {
 					this.setLineForm(Utility.stringWithoutNull(this.getLineForm()) + "<div class='form-group row'>"
 							+ "<label class='col-sm-12 col-md-2 col-form-label'>" + pageField.get(key).getNameDisplay()
 							+ "</label>" + "<div class='col-sm-12 col-md-10'>" + "<div class='input-group'>"
@@ -113,6 +138,7 @@ public class PageSearch extends Page {
  				sql +=  fields[i].getName()+",";
  			}
 		}
+		where += Utility.stringWithoutNull(this.getWhere());
 		sql = sql.substring(0,sql.length()-1);
 		sql = sql+" FROM "+this.getMapModel().getCompleteTableName()+where;
 		if(request.getParameter("currPage")==null||request.getParameter("currPage").compareTo("null")==0||request.getParameter("currPage").compareTo("")==0) {

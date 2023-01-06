@@ -16,6 +16,7 @@ public class Page {
 	MapModel mapModel;
 	HashMap<String,PageField>pageField;
 	String lineForm;
+	String where;
 	public Page(MapModel map) throws Exception {
 		lineForm = "";
 		mapModel = map;
@@ -27,6 +28,21 @@ public class Page {
 		PageField pf =pageField.get(fieldName);
  		if(pf!=null) {
 			pf.setVisible(false);
+			this.getPageField().put(fieldName, pf);
+ 		}
+	}
+	public void setMutilpleData(String fieldName,MapModel[]data) {
+		PageField pf =pageField.get(fieldName);
+ 		if(pf!=null) {
+ 			pf.setMultipleData(data);
+			this.getPageField().put(fieldName, pf);
+ 		}
+	} 
+	public void setMutilpleKeyValue(String fieldName,String key,String value) {
+		PageField pf =pageField.get(fieldName);
+ 		if(pf!=null) {
+ 			pf.setMultipleKey(key);
+ 			pf.setMultipleValue(value);
 			this.getPageField().put(fieldName, pf);
  		}
 	} 
@@ -125,5 +141,13 @@ public class Page {
 			}
 		}
 	}
- 
+
+	public String getWhere() {
+		return where;
+	}
+
+	public void setWhere(String where) {
+		this.where = where;
+	}
+	
 }

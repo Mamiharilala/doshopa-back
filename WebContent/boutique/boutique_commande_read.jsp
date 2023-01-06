@@ -3,9 +3,14 @@
 <%@ page import="front.*"%>
 <%@ page import="java.sql.Date"%>
 <%@ page import="oadmin.*"%>
+<%@ page import="system.*"%>
 <% 
+Utilisateur u = (Utilisateur)session.getAttribute("user");
 BoutiqueCommande commande = new BoutiqueCommande();
 commande.setCompleteTableName("commandeliste_boutique");
+Categorie cat = new Categorie();
+cat.setCompleteTableName("etat_commande");
+Categorie[]etat =(Categorie[])Generalize.getListObject(cat, null);
 %>
 <!-- horizontal Basic Forms Start -->
 <div class="pd-20 card-box mb-30">
@@ -13,7 +18,9 @@ commande.setCompleteTableName("commandeliste_boutique");
 		 <%
 			 	PageSearch ps = new PageSearch(commande);
 		 		ps.setVisibleEntry("id", false);
-		 		ps.setVisibleEntry("etat", false);
+		 		ps.setType("etat", "SELECT");
+		 		ps.setMutilpleKeyValue("etat","code","description");
+		 		ps.setMutilpleData("etat", etat);
  		 		ps.chargeForm();
 			 	out.println(ps.getSearchForm());
 			 	ps.loadResult(request);
@@ -27,8 +34,8 @@ commande.setCompleteTableName("commandeliste_boutique");
 	<div class="table-responsive">
 		<table class="table table-striped">
 			<% 
- 				ps.setColDisplay(new String[]{"id","designation","quantite","pu","montant","code_collecter","date_fille"});
-				ps.setColRenameDisplay(new String[]{"Numéro de commande","Designation","quantité","pu","montant","code_collecter","Date"});
+ 				ps.setColDisplay(new String[]{"id","designation","quantite","pu","montant","code_collecter","date_fille","etatlib"});
+				ps.setColRenameDisplay(new String[]{"Numéro de commande","Designation","quantité","pu","montant","code_collecter","Date","etatlib"});
  				ps.prepareData(request);
 				out.println(ps.getResultDisplay());
 			%>
