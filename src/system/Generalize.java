@@ -106,7 +106,7 @@ public class Generalize {
 				c = new DBConnect().getConnection();
 				isNullConn = true;
 			}
-			Object[] data = new Generalize().getListObjectWithWhere(mm, " AND ID='" + mm.getId() + "'", c);
+			Object[] data = Generalize.getListObjectWithWhere(mm, " AND ID='" + mm.getId() + "'", c);
 			if (data.length > 0) {
 				return data[0];
 			}
@@ -120,7 +120,7 @@ public class Generalize {
 		return null;
 	}
 
-	public static int getCountTable(MapModel mm, Connection c) throws Exception {
+	public static int getCountTable(MapModel mm,String where, Connection c) throws Exception {
 		int len = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -131,7 +131,7 @@ public class Generalize {
 				c = new DBConnect().getConnection();
 				isNullConn = true;
 			}
-			String sql = "select count(*) from " + mm.getCompleteTableName();
+			String sql = "select count(*) from " + mm.getCompleteTableName()+" WHERE 1<2 " +where;
 			Field[] listFieldName = getCommonField(mm, c);
 			pstmt = c.prepareStatement(sql);
 			rs = pstmt.executeQuery();

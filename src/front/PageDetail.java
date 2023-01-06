@@ -20,7 +20,7 @@ public class PageDetail extends Page{
 		    if(pageField.get(key).isVisible()) {
 		    	pageField.get(key).getField().setAccessible(true);
 		    	fieldType = pageField.get(key).getField().getType().getSimpleName().toUpperCase();
-		    	if(fieldType.compareTo("DOUBLE")==0||fieldType.compareTo("FLOAT")==0||fieldType.compareTo("INT")==0) {
+ 		    	if(fieldType.compareTo("DOUBLE")==0||fieldType.compareTo("FLOAT")==0||fieldType.compareTo("INT")==0) {
 		    		val =Utility.format(pageField.get(key).getField().get(this.getMapModel()));
 		    		
 		    	}else {    		

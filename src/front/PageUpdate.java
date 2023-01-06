@@ -1,11 +1,13 @@
 package front;
 
+import system.Generalize;
 import system.MapModel;
 import util.Utility;
 
 public class PageUpdate extends Page{
 	public PageUpdate(MapModel map) throws Exception {
 		super(map);
+		this.setMapModel((MapModel)new Generalize().getById(map,null));
 	}
 	
 	public void chargeForm() throws Exception {

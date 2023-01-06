@@ -20,6 +20,7 @@ public class Page {
 	public Page(MapModel map) throws Exception {
 		lineForm = "";
 		mapModel = map;
+		this.setWhere(" AND 1<2 ");
 		pageField = new HashMap<String,PageField>();
 		load();
 	}
@@ -135,8 +136,10 @@ public class Page {
 				} else if (typeSimpleName.compareTo("DATE") == 0) {
 					//System.out.println("   "+request.getParameter(fieldName));
 					m.invoke(getMapModel(), Date.valueOf(request.getParameter(fieldName)));
-				}if (typeSimpleName.compareTo("INT") == 0||typeSimpleName.compareTo("INTEGER") == 0) {
+				}else if (typeSimpleName.compareTo("INT") == 0||typeSimpleName.compareTo("INTEGER") == 0) {
 					m.invoke(getMapModel(), Integer.parseInt(request.getParameter(fieldName)));
+				}else if (typeSimpleName.compareTo("BOOLEAN") == 0) {
+					m.invoke(getMapModel(), Boolean.parseBoolean(request.getParameter(fieldName)));
 				}
 			}
 		}
