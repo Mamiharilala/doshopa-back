@@ -1,4 +1,8 @@
- create or replace view boutique_and_categorie as select b.*,c.code as categorie  from boutique as b 
+CREATE EXTENSION pgcrypto;
+CREATE OR REPLACE FUNCTION sha1(bytea) returns text AS $$
+SELECT encode(digest($1, 'sha1'), 'hex')
+$$ LANGUAGE SQL STRICT IMMUTABLE;
+create or replace view boutique_and_categorie as select b.*,c.code as categorie  from boutique as b 
 join  boutique_categorie as c on b.categorie_id = c.id where etat>=11
 
 
@@ -63,3 +67,4 @@ CREATE OR REPLACE VIEW commandeliste_boutique
 AS SELECT * from commandeliste where etat >= 10;
 
  create or replace view etat_commande as select * from etat where id in(11,14,12,22,10) order by id asc
+ 
