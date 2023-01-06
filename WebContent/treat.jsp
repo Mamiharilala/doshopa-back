@@ -10,6 +10,12 @@
 		pv.completeAllField(request);
 		pv.getMapModel().insertIntoTable(null);
  	} 
+ 	if(request.getParameter("mode").compareTo("updateMultiple")==0){
+		String[]idFille = request.getParameterValues("id_fille");
+		for(int i=0;i<idFille.length;i++){
+			System.out.println(idFille[i]);
+		}
+	}
 
 %>
 <script>window.location.replace('<%=request.getParameter("after")%>');</script>

@@ -25,8 +25,7 @@ public class PageSearch extends Page {
 	int lenData;
 	String resultDisplay;
 	int totalRow = 10;
-	String pagination;
-	public PageSearch(MapModel map) throws Exception {
+ 	public PageSearch(MapModel map) throws Exception {
 		super(map);
 		searchForm = "";
 		intervalleField = new HashMap<String,PageField>();
@@ -203,7 +202,7 @@ public class PageSearch extends Page {
 	public void retrieveResult(HttpServletRequest request) throws Exception { 
 		Connection c = new DBConnect().getConnection();
 		MapModel[]d = (MapModel[])Generalize.getListObject(this.getMapModel(),this.getRequest(),c);
-		this.setLenData(Generalize.getCountTable(this.getMapModel(),c));
+		this.setLenData(Generalize.getCountTable(this.getMapModel(),this.getWhere(),c));
 		if(c!=null) {
 			c.close();
 		}
@@ -302,10 +301,6 @@ public class PageSearch extends Page {
 				"</div>" + 
 				"</div>";
 		return res;
-	}
-
-	public void setPagination(String pagination) {
-		this.pagination = pagination;
 	}
 
 	public int getLenData() {
