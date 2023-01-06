@@ -18,14 +18,14 @@ public class Generalize {
 		ArrayList<String> ans = new ArrayList();
 		PreparedStatement pstmt = null;
 		try {
-			String sql = "SELECT attname  FROM   pg_attribute WHERE  attrelid = ?::regclass AND attnum > 0 AND    NOT attisdropped ORDER  BY attnum"; 
-			//System.out.println(sql);
- 			pstmt = c.prepareStatement(sql);
- 			pstmt.setString(1, mm.getCompleteTableName());
-  			ResultSet rs = pstmt.executeQuery();
+			String sql = "SELECT attname  FROM   pg_attribute WHERE  attrelid = ?::regclass AND attnum > 0 AND    NOT attisdropped ORDER  BY attnum";
+			// System.out.println(sql);
+			pstmt = c.prepareStatement(sql);
+			pstmt.setString(1, mm.getCompleteTableName());
+			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				//System.out.println(rs.getString(1));
- 				ans.add(rs.getString(1));
+				// System.out.println(rs.getString(1));
+				ans.add(rs.getString(1));
 			}
 			rs.close();
 			pstmt.close();
@@ -39,74 +39,87 @@ public class Generalize {
 		boolean isNull = false;
 		ArrayList<Field> ans = new ArrayList();
 		try {
-			if(c==null) {
+			if (c == null) {
 				c = new DBConnect().getConnection();
 				isNull = true;
-			}	
+			}
 			Field[] fields = getAllFields(mm);
 			String[] cols = getDBColumn(mm, c);
 			for (int i = 0; i < fields.length; i++) {
-	 			for (int j = 0; j < cols.length; j++) {
-	 				//System.out.println(fields[i].getName().trim().toUpperCase()+" "+cols[j].trim().toUpperCase());
+				for (int j = 0; j < cols.length; j++) {
+					// System.out.println(fields[i].getName().trim().toUpperCase()+"
+					// "+cols[j].trim().toUpperCase());
 					if (fields[i].getName().trim().toUpperCase().compareTo(cols[j].trim().toUpperCase()) == 0) {
 						ans.add(fields[i]);
 					}
 				}
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			throw e;
-		}finally {
-			if(isNull&&c!=null)c.close();
+		} finally {
+			if (isNull && c != null)
+				c.close();
 		}
 		return ans.toArray(new Field[ans.size()]);
 	}
 
-	public Object[] getListObject(MapModel mm, Connection c) throws Exception {
-		String sql = "select * from "+ mm.getCompleteTableName();
-		try {
-			return getListObject(mm,sql,c);
-		} catch (Exception e) {
-			throw e;
-		} finally {
-		}
-	}
-	public static Object[] getListObjectWithWhere(MapModel mm,String where, Connection c) throws Exception {
+	public static Object[] getListObject(MapModel mm, Connection c) throws Exception {
+		String sql = "select * from " + mm.getCompleteTableName();
 		boolean isNullConn = false;
-		String sql = "select * from "+ mm.getCompleteTableName()+" where 1<2 "+where;
 		try {
-			if(c==null) {
+			if (c == null) {
 				c = new DBConnect().getConnection();
 				isNullConn = true;
 			}
-			return getListObject(mm,sql,c);
-		}catch(Exception e) {
+			return getListObject(mm, sql, c);
+		} catch (Exception e) {
 			throw e;
-		}finally {
-			if(isNullConn&&c!=null) {
+		} finally {
+			if (isNullConn && c != null) {
 				c.close();
 			}
 		}
 	}
-	public Object getById(MapModel mm,Connection c) throws Exception {
+
+	public static Object[] getListObjectWithWhere(MapModel mm, String where, Connection c) throws Exception {
 		boolean isNullConn = false;
+		String sql = "select * from " + mm.getCompleteTableName() + " where 1<2 " + where;
 		try {
-			if(c==null) {
+			if (c == null) {
 				c = new DBConnect().getConnection();
 				isNullConn = true;
 			}
-			Object[]data = new Generalize().getListObjectWithWhere(mm," AND ID='"+mm.getId()+"'", c);
-			if(data.length>0) {
-				return data[0]; 
-			}
-		}catch(Exception e) {
+			return getListObject(mm, sql, c);
+		} catch (Exception e) {
 			throw e;
-		}finally {
-			if(isNullConn&&c!=null) {
+		} finally {
+			if (isNullConn && c != null) {
+				c.close();
+			}
+		}
+	}
+
+	public Object getById(MapModel mm, Connection c) throws Exception {
+		boolean isNullConn = false;
+		try {
+			if (c == null) {
+				c = new DBConnect().getConnection();
+				isNullConn = true;
+			}
+			Object[] data = new Generalize().getListObjectWithWhere(mm, " AND ID='" + mm.getId() + "'", c);
+			if (data.length > 0) {
+				return data[0];
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (isNullConn && c != null) {
 				c.close();
 			}
 		}
 		return null;
 	}
+
 	public static int getCountTable(MapModel mm, Connection c) throws Exception {
 		int len = 0;
 		PreparedStatement pstmt = null;
@@ -114,17 +127,17 @@ public class Generalize {
 		Method m = null;
 		boolean isNullConn = false;
 		try {
-			if(c==null) {
+			if (c == null) {
 				c = new DBConnect().getConnection();
 				isNullConn = true;
 			}
-			String sql = "select count(*) from "+ mm.getCompleteTableName();
+			String sql = "select count(*) from " + mm.getCompleteTableName();
 			Field[] listFieldName = getCommonField(mm, c);
 			pstmt = c.prepareStatement(sql);
-    		rs = pstmt.executeQuery();
-   			String simpleName ="";
+			rs = pstmt.executeQuery();
+			String simpleName = "";
 			while (rs.next()) {
-				 len = rs.getInt(1);
+				len = rs.getInt(1);
 			}
 		} catch (Exception e) {
 			throw e;
@@ -135,14 +148,14 @@ public class Generalize {
 			if (pstmt != null) {
 				pstmt.close();
 			}
-			if(c!=null&&isNullConn) {
+			if (c != null && isNullConn) {
 				c.close();
 			}
 		}
 		return len;
 	}
-	
-	public static Object[] getListObject(MapModel mm,String sql, Connection c) throws Exception {
+
+	public static Object[] getListObject(MapModel mm, String sql, Connection c) throws Exception {
 		Vector ans = new Vector();
 		MapModel o = null;
 		PreparedStatement pstmt = null;
@@ -152,17 +165,17 @@ public class Generalize {
 		Method m = null;
 		boolean isNullConn = false;
 		try {
-			if(c==null) {
+			if (c == null) {
 				c = new DBConnect().getConnection();
 				isNullConn = true;
 			}
 			Field[] listFieldName = Generalize.getCommonField(mm, c);
- 			pstmt = c.prepareStatement(sql);
-    		rs = pstmt.executeQuery();
-   			String simpleName ="";
+			pstmt = c.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			String simpleName = "";
 			while (rs.next()) {
 				o = mm.getClass().newInstance();
- 				for (int j = 0; j < listFieldName.length; j++) {
+				for (int j = 0; j < listFieldName.length; j++) {
 					columnName = listFieldName[j].getName();
 					methodName = "set" + (columnName.charAt(0) + "").toUpperCase() + (columnName.substring(1));
 					columnName = columnName.toUpperCase();
@@ -176,10 +189,11 @@ public class Generalize {
 						m.invoke(o, rs.getFloat(columnName));
 					} else if (simpleName.compareTo("DATE") == 0) {
 						m.invoke(o, rs.getDate(columnName));
-					}if (simpleName.compareTo("INT") == 0||simpleName.compareTo("INTEGER") == 0) {
+					}
+					if (simpleName.compareTo("INT") == 0 || simpleName.compareTo("INTEGER") == 0) {
 						m.invoke(o, rs.getInt(columnName));
 					}
- 				}
+				}
 				ans.add(o);
 			}
 		} catch (Exception e) {
@@ -191,22 +205,23 @@ public class Generalize {
 			if (pstmt != null) {
 				pstmt.close();
 			}
-			if(isNullConn&&c!=null) {
+			if (isNullConn && c != null) {
 				c.close();
 			}
 		}
-		Object[] data = (Object[]) java.lang.reflect.Array.newInstance(mm.getClass().newInstance().getClass(), ans.size());
-        ans.copyInto(data);
+		Object[] data = (Object[]) java.lang.reflect.Array.newInstance(mm.getClass().newInstance().getClass(),
+				ans.size());
+		ans.copyInto(data);
 		return data;
 	}
-	
+
 	public static Field[] getAllFields(MapModel t) {
-        List<Field> fields = new ArrayList<>();
-        Class clazz = t.getClass();
-        while (clazz != Object.class) {
-            fields.addAll(Arrays.asList(clazz.getDeclaredFields()));
-            clazz = clazz.getSuperclass();
-        }
-        return fields.toArray(new Field[fields.size()]);
-    }
+		List<Field> fields = new ArrayList<>();
+		Class clazz = t.getClass();
+		while (clazz != Object.class) {
+			fields.addAll(Arrays.asList(clazz.getDeclaredFields()));
+			clazz = clazz.getSuperclass();
+		}
+		return fields.toArray(new Field[fields.size()]);
+	}
 }
