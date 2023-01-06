@@ -6,9 +6,14 @@
 <%
 	Utilisateur u = new Utilisateur();
 	boolean val = u.treatLogin(request.getParameter("login"),request.getParameter("pwd"));
+	String nextTarget = request.getParameter("nextTarget");
 	if(val){
 		session.setAttribute("user", u);
-		response.sendRedirect("../container.jsp?content=produit/produit_read.jsp");
+		if(nextTarget.equals("dashboard")){
+			response.sendRedirect("../");
+		}else{
+			response.sendRedirect("../container.jsp?content=produit/produit_read.jsp");
+		}
 	}else{
 		out.println("Echec d'authentification");
 	}

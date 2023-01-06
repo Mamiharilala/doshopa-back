@@ -138,6 +138,11 @@
 											<label class="custom-control-label" for="customCheck1"
 												>Afficher le mot de passe</label
 											>
+											<input
+												type="hidden"
+												name="nextTarget"
+												value="<%= request.getParameter("next") %>"
+											/>
 										</div>
 									</div>
 									<div class="col-6">

@@ -44,8 +44,7 @@ AS SELECT fille.id,
     fille.pu,
     fille.commande_type,
     fille.date_fille,
-    fille.quantite,
-    mere.montant,
+    fille.quantite::double precision * fille.pu AS montant,
     mere.utilisateur_id,
     fille.etat,
     etat.description AS etatlib,
@@ -63,3 +62,4 @@ CREATE OR REPLACE VIEW commandeliste_boutique
 AS SELECT * from commandeliste where etat >= 10;
 
  create or replace view etat_commande as select * from etat where id in(11,14,12,22,10) order by id asc
+ 
