@@ -111,11 +111,7 @@ public class MapModel {
 				simpleName = listFieldName[i].getType().getSimpleName().toUpperCase();
 				listFieldName[i].setAccessible(true);
 				sql +=  listFieldName[i].getName()+",";
-				if(simpleName.compareTo("DOUBLE") == 0||simpleName.compareTo("INT") == 0||simpleName.compareTo("INTEGER") == 0||simpleName.compareTo("FLOAT") == 0) {
-					val +=  ""+listFieldName[i].get(this)+",";
-				}else {
-					val +=  "'"+listFieldName[i].get(this)+"',";
-				}	
+				val+= Generalize.valStringQuery(simpleName,listFieldName[i].get(this));
 			}
 			sql = sql.substring(0, sql.length()-1)+")";
 			val = val.substring(0, val.length()-1)+")";

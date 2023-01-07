@@ -19,7 +19,7 @@ public class Page {
 	String where;
 	public Page(MapModel map) throws Exception {
 		lineForm = "";
-		mapModel = map;
+		this.setMapModel(map);
 		this.setWhere(" AND 1<2 ");
 		pageField = new HashMap<String,PageField>();
 		load();

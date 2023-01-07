@@ -11,10 +11,15 @@
 		pv.getMapModel().insertIntoTable(null);
  	} 
  	if(request.getParameter("mode").compareTo("updateMultiple")==0){
-		String[]idFille = request.getParameterValues("id_fille");
-		for(int i=0;i<idFille.length;i++){
-			System.out.println(idFille[i]);
-		}
+ 		String classPath = request.getParameter("classFille");
+ 		Class<?> t = Class.forName(classPath);
+		MapModel instanceFille = (MapModel) t.newInstance();
+		classPath = request.getParameter("classMere");
+ 		t = Class.forName(classPath);
+		MapModel instanceMere = (MapModel) t.newInstance();
+		instanceMere.setId(request.getParameter("idMere"));
+ 		PageUpdateMultiple pu = new PageUpdateMultiple(instanceMere, instanceFille, request.getParameter("fieldMere"));
+		pu.saveUpdateMultiple(request);
 	}
 
 %>

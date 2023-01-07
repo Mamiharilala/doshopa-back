@@ -14,6 +14,12 @@ import java.util.Vector;
 import util.DBConnect;
 
 public class Generalize {
+	public static String valStringQuery(String strTypeField,Object val) {
+		if(strTypeField.compareTo("BOOLEAN") == 0||strTypeField.compareTo("DOUBLE") == 0||strTypeField.compareTo("INT") == 0||strTypeField.compareTo("INTEGER") == 0||strTypeField.compareTo("FLOAT") == 0) {
+			return String.valueOf(val);
+		}
+		return "'"+String.valueOf(val)+"'";
+	}
 	public static String[] getDBColumn(MapModel mm, Connection c) throws Exception {
 		ArrayList<String> ans = new ArrayList();
 		PreparedStatement pstmt = null;
