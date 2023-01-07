@@ -38,10 +38,11 @@
 					out.println(pv.getResultDisplay());
 				%>
 			</table>
-			<%=pv.getFooter(request)%>
-		</div>
-
+			
+		</div><br>
+	<%=pv.getFooter(request)%>
 	</div>
+	
 	<div class="col-md-12 col-sm-12 mb-30">
 		<div class="pd-20 height-100-p">
 			<button type="submit" class="btn btn-success btn-lg btn-block">Mettre

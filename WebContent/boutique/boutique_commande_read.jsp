@@ -4,6 +4,7 @@
 <%@ page import="java.sql.Date"%>
 <%@ page import="oadmin.*"%>
 <%@ page import="system.*"%>
+<%@ page import="java.util.*"%>
 <% 
 Utilisateur u = (Utilisateur)session.getAttribute("user");
 BoutiqueCommande commande = new BoutiqueCommande();
@@ -36,7 +37,18 @@ Categorie[]etat =(Categorie[])Generalize.getListObject(cat, null);
 			<% 
  				ps.setColDisplay(new String[]{"id","designation","quantite","pu","montant","code_collecter","date_fille","etatlib"});
 				ps.setColRenameDisplay(new String[]{"Numéro de commande","Designation","quantité","pu","montant","code_collecter","Date","etatlib"});
- 				ps.prepareData(request);
+ 				// field to redirect
+				HashMap<String,String>map = new HashMap<String,String>();
+ 				map.put("designation","id");
+ 				map.put("id","id");
+ 				ps.setColRedirection(map);
+ 				// Href of redirect
+ 				map = new HashMap<String,String>();
+ 				map.put("designation","container.jsp?content=boutique/boutique_commande_fille_update.jsp");
+ 				map.put("id","container.jsp?content=boutique/boutique_commande_mere_fille_update.jsp");
+ 				ps.setColRedirectionHref(map);
+ 				
+				ps.prepareData(request);
 				out.println(ps.getResultDisplay());
 			%>
 		</table>

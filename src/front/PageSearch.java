@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,6 +22,8 @@ public class PageSearch extends Page {
 	HashMap<String, PageField> intervalleField;
 	String[] colDisplay;
 	String[] colRenameDisplay;
+	HashMap<String,String>colRedirection;
+	HashMap<String,String>colRedirectionHref;
 	MapModel[] data;
 	int lenData;
 	String resultDisplay;
@@ -257,9 +260,22 @@ public class PageSearch extends Page {
 		for (int i = 0; i < data.length; i++) {
 			body += "<tr><th scope='row'>" + (i + 1) + "</th>";
 			for (int j = 0; j < name.length; j++) {
-				methodName = "get" + (name[j].charAt(0) + "").toUpperCase() + (name[j].substring(1));
-				m = this.getMapModel().getClass().getMethod(methodName, null);
-				body += "<td>" + m.invoke(data[i], null) + "</td>";
+				String ref = "";
+				if(this.getColRedirection().containsKey(name[j])) {
+					ref = this.getColRedirection().get(name[j])+"=";
+					methodName = "get" + (this.getColRedirection().get(name[j]).charAt(0) + "").toUpperCase() + (this.getColRedirection().get(name[j]).substring(1));
+					m = this.getMapModel().getClass().getMethod(methodName, null);
+					ref += m.invoke(data[i], null);
+					ref = this.getColRedirectionHref().get(name[j])+"?"+ref;
+					methodName = "get" + (name[j].charAt(0) + "").toUpperCase() + (name[j].substring(1));
+					m = this.getMapModel().getClass().getMethod(methodName, null);
+					body += "<td><a href='"+ref+"' style='color:#1b00ff;'>" + m.invoke(data[i], null) + "</a></td>";
+				}else {
+					methodName = "get" + (name[j].charAt(0) + "").toUpperCase() + (name[j].substring(1));
+					m = this.getMapModel().getClass().getMethod(methodName, null);
+					body += "<td>"+ m.invoke(data[i], null) + "</td>";
+				}
+				
 			}
 			body += "</tr>";
 		}
@@ -327,4 +343,19 @@ public class PageSearch extends Page {
 		this.lenData = lenData;
 	}
 
+	public HashMap<String,String> getColRedirection() {
+		return colRedirection;
+	}
+
+	public void setColRedirection(HashMap<String,String>map) {
+		this.colRedirection = map;
+	}
+	public HashMap<String,String> getColRedirectionHref() {
+		return colRedirectionHref;
+	}
+
+	public void setColRedirectionHref(HashMap<String,String>map) {
+		this.colRedirectionHref = map;
+	}
+	
 }
