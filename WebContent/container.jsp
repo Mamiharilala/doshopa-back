@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="front.*"%>
+<%@ page import="java.time.Year"%>
 <%@ page import="system.*"%>
 <% 
 	
@@ -302,7 +303,7 @@
 
 			</div>
 			<div class="footer-wrap pd-20 mb-20 card-box">
-				Copyright © 2023 Doshopa Tous droits reserv<%="&eacute;"%>s
+				Copyright &copy; <%= Year.now()%> Doshopa Tous droits reserv<%="&eacute;"%>s
 			</div>
 		</div>
 	</div>

@@ -54,5 +54,4 @@
 	<input type="hidden" name="classFille" class="form-control" value="oadmin.CommandeFille">
 	<input type="hidden" name="classMere" class="form-control" value="oadmin.CommandeMere">
 	<input type="hidden" name="after" class="form-control" value="${pageContext.request.contextPath}/container.jsp?content=boutique/boutique_commande_update.jsp" >
-	
 </form>
