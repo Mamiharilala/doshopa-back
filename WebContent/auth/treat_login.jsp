@@ -8,7 +8,7 @@
 	String nextTarget = request.getParameter("nextTarget");
 	if(val){
 		session.setAttribute("user", u);
-		if(nextTarget.equals("dashboard") || nextTarget == null){
+		if(nextTarget==null || nextTarget.equals("dashboard")){
 			response.sendRedirect("../container.jsp?content=boutique/boutique_dashboard.jsp");
 		}else{
 			response.sendRedirect("../container.jsp?content=produit/produit_read.jsp");
