@@ -6,7 +6,7 @@
 <%@ page import="oadmin.*"%>
 <%
 	CommandeMere p = new CommandeMere();
-	p.setId("CM10");
+	p.setId(request.getParameter("idMere"));
 %>
 <form action="${pageContext.request.contextPath}/treat.jsp" method="POST">
 	<div class="pd-20 card-box mb-30">
@@ -54,5 +54,5 @@
 	<input type="hidden" name="idMere" class="form-control" value="<%= p.getId() %>">
 	<input type="hidden" name="classFille" class="form-control" value="oadmin.CommandeFille">
 	<input type="hidden" name="classMere" class="form-control" value="oadmin.CommandeMere">
-	<input type="hidden" name="after" class="form-control" value="${pageContext.request.contextPath}/container.jsp?content=boutique/boutique_commande_update.jsp" >
+	<input type="hidden" name="after" class="form-control" value="${pageContext.request.contextPath}/container.jsp?content=boutique/boutique_commande_mere_fille_update.jsp&idMere=<%=request.getParameter("idMere")%>" >
 </form>

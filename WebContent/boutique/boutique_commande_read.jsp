@@ -35,17 +35,17 @@ Categorie[]etat =(Categorie[])Generalize.getListObject(cat, null);
 	<div class="table-responsive">
 		<table class="table table-striped">
 			<% 
- 				ps.setColDisplay(new String[]{"id","designation","quantite","pu","montant","code_collecter","date_fille","etatlib"});
+ 				ps.setColDisplay(new String[]{"idmere","designation","quantite","pu","montant","code_collecter","date_fille","etatlib"});
 				ps.setColRenameDisplay(new String[]{"Numéro de commande","Designation","quantité","pu","montant","code_collecter","Date","etatlib"});
  				// field to redirect
 				HashMap<String,String>map = new HashMap<String,String>();
  				map.put("designation","id");
- 				map.put("id","id");
+ 				map.put("idmere","idmere");
  				ps.setColRedirection(map);
  				// Href of redirect
  				map = new HashMap<String,String>();
- 				map.put("designation","container.jsp?content=boutique/boutique_commande_fille_update.jsp");
- 				map.put("id","container.jsp?content=boutique/boutique_commande_mere_fille_update.jsp");
+ 				map.put("designation","container.jsp?content=boutique/boutique_commande_fille_update.jsp&id=");
+ 				map.put("idmere","container.jsp?content=boutique/boutique_commande_mere_fille_update.jsp&idMere=");
  				ps.setColRedirectionHref(map);
  				
 				ps.prepareData(request);

@@ -29,12 +29,17 @@ Boutique boutique = new Boutique();
 			<% 
 				ps.setColDisplay(new String[]{"denomination","siege","categorie_id","logo","mail","telephone","type_id","views","remarque"});
 				ps.setColRenameDisplay(new String[]{"denomination","siege","categorie_id","logo","mail","telephone","type_id","views","remarque"});
- 				ps.prepareData(request);
+				HashMap<String,String>map = new HashMap<String,String>();
+ 				ps.setColRedirection(map);
+ 				// Href of redirect
+ 				map = new HashMap<String,String>();
+ 				ps.setColRedirectionHref(map);
+				ps.prepareData(request);
 				out.println(ps.getResultDisplay());
 			%>
 		</table>
-		<%=ps.getFooter(request)%>
-	</div>
+	</div><br>
+	<%=ps.getFooter(request)%>
 </div>
  
 

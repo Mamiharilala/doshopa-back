@@ -70,7 +70,12 @@ public class MapModel {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String val ="";
+		boolean isConnNull = false; 
 		try {
+			if(c==null) {
+				c = new DBConnect().getConnection();
+				isConnNull = true;
+			}
 			pstmt = c.prepareStatement(sql);
 			pstmt.setString(1,this.getSequenceName());
 			rs = pstmt.executeQuery();
@@ -85,6 +90,41 @@ public class MapModel {
 			}
 			if (pstmt != null) {
 				pstmt.close();
+			}
+			if(isConnNull&&c!=null) {
+				c.close();
+			}
+		}
+		return val;
+	}
+	public static String generateId(Connection c,String sequenceName) throws Exception {
+		String sql = "select nextval(?) as sequence";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String val ="";
+		boolean isConnNull = false; 
+		try {
+			if(c==null) {
+				c = new DBConnect().getConnection();
+				isConnNull = true;
+			}
+			pstmt = c.prepareStatement(sql);
+			pstmt.setString(1,sequenceName);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				val = rs.getString("sequence");
+			}
+		}catch(Exception e) {
+			
+		}finally {
+			if (rs != null) {
+				rs.close();
+			}
+			if (pstmt != null) {
+				pstmt.close();
+			}
+			if(isConnNull&&c!=null) {
+				c.close();
 			}
 		}
 		return val;
@@ -132,7 +172,7 @@ public class MapModel {
 			}
 		}
 	}
-	
+	 
 	public Field[] getAllFields() {
         List<Field> fields = new ArrayList<>();
         Class clazz = this.getClass();

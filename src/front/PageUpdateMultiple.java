@@ -84,7 +84,7 @@ public class PageUpdateMultiple extends PageUpdate {
 				methodName = "get" + (name[j].charAt(0) + "").toUpperCase() + (name[j].substring(1));
 				m = this.getClassFille().getClass().getMethod(methodName, null);
 				body += "<td><input value=" + m.invoke(data[i], null) + " name='" + name[j]
-						+ "_"+data[i].getId()+"' style='border-radius: 5px;border-color:#28a745;padding:4px;'></td>";
+						+ "_"+data[i].getId()+"' style='border-radius: 5px;border-color:#c9c9c9;padding:4px;'></td>";
 			}
 			body += "</tr>";
 		}
@@ -177,8 +177,7 @@ public class PageUpdateMultiple extends PageUpdate {
 				pstmt = c.prepareStatement(str[i]);
 				pstmt.execute();
 			}
-			pstmt.executeBatch();
-		}catch(Exception e) {
+ 		}catch(Exception e) {
 			
 		}finally {
 			if (pstmt != null) {

@@ -262,11 +262,11 @@ public class PageSearch extends Page {
 			for (int j = 0; j < name.length; j++) {
 				String ref = "";
 				if(this.getColRedirection().containsKey(name[j])) {
-					ref = this.getColRedirection().get(name[j])+"=";
+					ref = "";
 					methodName = "get" + (this.getColRedirection().get(name[j]).charAt(0) + "").toUpperCase() + (this.getColRedirection().get(name[j]).substring(1));
 					m = this.getMapModel().getClass().getMethod(methodName, null);
 					ref += m.invoke(data[i], null);
-					ref = this.getColRedirectionHref().get(name[j])+"?"+ref;
+					ref = this.getColRedirectionHref().get(name[j])+""+ref;
 					methodName = "get" + (name[j].charAt(0) + "").toUpperCase() + (name[j].substring(1));
 					m = this.getMapModel().getClass().getMethod(methodName, null);
 					body += "<td><a href='"+ref+"' style='color:#1b00ff;'>" + m.invoke(data[i], null) + "</a></td>";
@@ -275,7 +275,6 @@ public class PageSearch extends Page {
 					m = this.getMapModel().getClass().getMethod(methodName, null);
 					body += "<td>"+ m.invoke(data[i], null) + "</td>";
 				}
-				
 			}
 			body += "</tr>";
 		}
