@@ -66,3 +66,5 @@ CREATE OR REPLACE VIEW commandeliste_boutique
 AS SELECT * from commandeliste where etat >= 10;
 
  create or replace view etat_commande as select * from etat where id in(11,14,12,22,10) order by id asc
+ 
+ALTER TABLE utilisateur ADD UNIQUE (login);

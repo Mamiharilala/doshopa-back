@@ -31,3 +31,12 @@ VALUES('MENU'||(select nextval('seq_menu')), 'Boutique', 'micon bi bi-house', ''
 INSERT INTO  menu
 (id, libelle, icone, src, rang, profondeur, mere)
 VALUES('MENU'||(select nextval('seq_menu')), 'Promotion', 'micon bi bi-calendar4-week', '', 3, 2, 'MENU1');
+INSERT INTO menu
+(id, libelle, icone, src, rang, profondeur, mere)
+VALUES('MENU'||(select nextval('seq_menu')), 'Affecter code collecter', 'icon-copy dw dw-add', 'container.jsp?content=boutique/boutique_affectation_code_collecter.jsp', 4, 3, 'MENU4');
+INSERT INTO menu
+(id, libelle, icone, src, rang, profondeur, mere)
+VALUES('MENU'||(select nextval('seq_menu'))  , 'Collecter', 'micon bi bi-table', 'container.jsp?content=boutique/boutique_collecter.jsp', 5, 3, 'MENU4');
+ INSERT INTO menu
+(id, libelle, icone, src, rang, profondeur, mere)
+VALUES('MENU'||(select nextval('seq_menu'))  , 'Livraison', 'micon bi bi-table', 'container.jsp?content=boutique/boutique_livrer.jsp', 6, 3, 'MENU4');
