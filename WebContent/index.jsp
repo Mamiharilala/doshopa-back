@@ -5,19 +5,6 @@
 	if(session.getAttribute("user") == null){
 		response.sendRedirect("auth/login.jsp?next=dashboard");
 	}else{
-%>   
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Tableau de bord</title>
-</head>
-<body>
-	Dashboard
-</body>
-</html>
-
-<% 
+		response.sendRedirect("container.jsp?content=boutique/boutique_dashboard.jsp");
 	}
 %>
