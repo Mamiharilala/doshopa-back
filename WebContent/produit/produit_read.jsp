@@ -3,6 +3,7 @@
 <%@ page import="oadmin.Article"%>
 <%@ page import="oadmin.Promotion"%>
 <%@ page import="front.*"%>
+<%@ page import="java.util.*"%>
 <%@ page import="java.sql.Date"%>
 <% 
 Article p = new Article();
@@ -35,7 +36,12 @@ p.setCompleteTableName("article_libcomplet");
 			<% 
 				ps.setColDisplay(new String[]{"designation","reference","prix","devise_id","quantite","observation","categorie_id","boutique_denomination"});
 				ps.setColRenameDisplay(new String[]{"designation","reference","prix","devise_id","quantite","observation","categorie_id","boutique"});
- 				ps.prepareData(request);
+				HashMap<String,String>map = new HashMap<String,String>();
+  				ps.setColRedirection(map);
+ 				// Href of redirect
+ 				map = new HashMap<String,String>();
+ 				ps.setColRedirectionHref(map);
+				ps.prepareData(request);
 				out.println(ps.getResultDisplay());
 			%>
 		</table>

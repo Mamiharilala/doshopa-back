@@ -3,12 +3,11 @@
 <%@ page import="front.*"%>
 <%@ page import="java.time.Year"%>
 <%@ page import="system.*"%>
-<% 
-	
-	if(session.getAttribute("user")==null){
+<%
+	if (session.getAttribute("user") == null) {
 		response.sendRedirect("auth/login.jsp");
-	}else{
-		Utilisateur u = (Utilisateur)session.getAttribute("user");
+	} else {
+		Utilisateur u = (Utilisateur) session.getAttribute("user");
 %>
 <!DOCTYPE html>
 <html>
@@ -276,8 +275,8 @@
 
 	<div class="left-side-bar">
 		<div class="brand-logo">
-			<a href="index.html"> 
-				<div class="dark-logo" style="color:black;">Doshopa</div>
+			<a href="index.html">
+				<div class="dark-logo" style="color: black;">Doshopa</div>
 				<div class="light-logo">doshopa.com</div>
 			</a>
 			<div class="close-sidebar" data-toggle="left-sidebar-close">
@@ -287,7 +286,9 @@
 		<div class="menu-block customscroll">
 			<div class="sidebar-menu">
 				<ul id="accordion-menu">
-					<% out.println(new Menu().getStringMenu());%>			 
+					<%
+						out.println(new Menu().getStringMenu());
+					%>
 				</ul>
 			</div>
 		</div>
@@ -300,12 +301,13 @@
 				<!-- Default Basic Forms Start -->
 				<jsp:include page='<%=request.getParameter("content")%>' />
 				<!-- Default Basic Forms End -->
-
-			</div>
-			<div class="footer-wrap pd-20 mb-20 card-box">
-				Copyright &copy; <%= Year.now()%> Doshopa Tous droits reserv<%="&eacute;"%>s
 			</div>
 		</div>
+	</div>
+	<div class="footer-wrap pd-20 mb-20 card-box">
+		Copyright &copy;
+		<%=Year.now()%>
+		Doshopa Tous droits reserv<%="&eacute;"%>s
 	</div>
 	<!-- js -->
 	<script
@@ -325,6 +327,6 @@
 	<!-- End Google Tag Manager (noscript) -->
 </body>
 </html>
-<% 
+<%
 	}
 %>

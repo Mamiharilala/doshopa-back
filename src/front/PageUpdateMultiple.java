@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,12 +28,14 @@ public class PageUpdateMultiple extends PageUpdate {
 	int lenData;
 	int totalRow = 10;
 	String resultDisplay;
+	HashMap<String,PageField> pageFieldFille;
 
 	public PageUpdateMultiple(MapModel mere, MapModel fille, String fieldmere) throws Exception {
 		super(mere);
 		this.setFieldMere(fieldmere);
 		this.setClassFille(fille);
 		this.setWhere(" AND " + this.getFieldMere() + " = '" + this.getMapModel().getId() + "'");
+		this.setPageFieldFille(new HashMap<String,PageField>());
 	}
 
 	public void loadResult(HttpServletRequest request) throws Exception {
@@ -81,7 +84,7 @@ public class PageUpdateMultiple extends PageUpdate {
 				methodName = "get" + (name[j].charAt(0) + "").toUpperCase() + (name[j].substring(1));
 				m = this.getClassFille().getClass().getMethod(methodName, null);
 				body += "<td><input value=" + m.invoke(data[i], null) + " name='" + name[j]
-						+ "_"+data[i].getId()+"' style='border-radius: 5px;border-color:#28a745;padding:4px;'></td>";
+						+ "_"+data[i].getId()+"' style='border-radius: 5px;border-color:#c9c9c9;padding:4px;'></td>";
 			}
 			body += "</tr>";
 		}
@@ -115,22 +118,26 @@ public class PageUpdateMultiple extends PageUpdate {
 				cont += "&" + paramName + "=" + request.getParameter(paramName);
 			}
 		}
-		res += "<a href='" + request.getRequestURL() + "" + cont
-				+ "&currPage=1' class='btn btn-outline-primary prev'><i class='fa fa-angle-double-left'></i></a>";
+		res+="<div class='paginate_button page-item previous' id='DataTables_Table_2_previous'>";
+				res+="<a href='" + request.getRequestURL() + "" + cont + "&currPage=1' aria-controls='DataTables_Table_2' data-dt-idx='0' tabindex='0' class='page-link'>";
+				res+="<i class='ion-chevron-left'></i></a></div>";
+	 
+ 
 		for (int i = 0; i < 5; i++) {
 			if (tabPage[i] > 0 && tabPage[i] <= nbPage) {
 				if (tabPage[i] == current) {
-					res += "<a href='" + request.getRequestURL() + "" + cont + "&currPage=" + tabPage[i]
-							+ "' ><span class='btn btn-primary current'>" + tabPage[i] + "</span></a>";
+						res+="<div class='paginate_button page-item active'>";
+						res+="<a href='" + request.getRequestURL() + "" + cont + "&currPage=" + tabPage[i]+ "' aria-controls='DataTables_Table_2' data-dt-idx='1' tabindex='0' class='page-link'>" + tabPage[i] + "</a></div>"; 
 				} else {
-					res += "<a href='" + request.getRequestURL() + "" + cont + "&currPage=" + tabPage[i]
-							+ "' class='btn btn-outline-primary'>" + tabPage[i] + "</a>";
+					res += "<div class='paginate_button page-item '>";
+					res += "<a href='" + request.getRequestURL() + "" + cont + "&currPage=" + tabPage[i]+ "' aria-controls='DataTables_Table_2' data-dt-idx='2' tabindex='0' class='page-link'>"
+							+ tabPage[i] + "</a></div>";
 				}
 			}
 		}
-		res += "<a href='" + request.getRequestURL() + "" + cont + "&currPage=" + nbPage
-				+ "' class='btn btn-outline-primary next'><i class='fa fa-angle-double-right'></i></a>";
-		res += "</div>" + "</div>" + "</div>";
+		res += "<div class='paginate_button page-item next' id='DataTables_Table_2_next'>";
+				res+="<a href='" + request.getRequestURL() + "" + cont + "&currPage=" + nbPage+ "' aria-controls='DataTables_Table_2' data-dt-idx='3' tabindex='0' class='page-link'><i class='ion-chevron-right'></i></a></div>";
+		res += "</ul>";
 		return res;
 	}
 
@@ -170,8 +177,7 @@ public class PageUpdateMultiple extends PageUpdate {
 				pstmt = c.prepareStatement(str[i]);
 				pstmt.execute();
 			}
-			pstmt.executeBatch();
-		}catch(Exception e) {
+ 		}catch(Exception e) {
 			
 		}finally {
 			if (pstmt != null) {
@@ -263,4 +269,12 @@ public class PageUpdateMultiple extends PageUpdate {
 		this.resultDisplay = resultDisplay;
 	}
 
+	public HashMap<String, PageField> getPageFieldFille() {
+		return pageFieldFille;
+	}
+
+	public void setPageFieldFille(HashMap<String, PageField> pageFieldFille) {
+		this.pageFieldFille = pageFieldFille;
+	}
+	
 }
