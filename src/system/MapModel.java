@@ -172,7 +172,76 @@ public class MapModel {
 			}
 		}
 	}
-	 
+	
+	public void updateIntoTable(Connection c) throws Exception {	
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;	
+		boolean isConnNull = false; 
+		try {
+			if(c==null) {
+				c = new DBConnect().getConnection();
+				isConnNull = true;
+			}
+			String sql = "UPDATE "+this.getCompleteTableName()+" SET ";
+			Field[] listFieldName = new Generalize().getCommonField(this, c);
+			String simpleName = "";
+			for(int i=0;i<listFieldName.length;i++){
+				listFieldName[i].setAccessible(true);
+				if(listFieldName[i].get(this)!=null&&String.valueOf(listFieldName[i].get(this))!=""&&String.valueOf(listFieldName[i].get(this))!="null") {
+					simpleName = listFieldName[i].getType().getSimpleName().toUpperCase();
+					sql +=  listFieldName[i].getName()+"=";
+					sql += Generalize.valStringQuery(simpleName,listFieldName[i].get(this))+",";
+				}
+			}
+			sql = sql.substring(0, sql.length()-1)+"";
+			sql += " WHERE ID= '"+this.getId()+"'";
+ 			pstmt = c.prepareStatement(sql);
+ 			//System.out.println(sql);
+			pstmt.executeUpdate();			 
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw e;
+		}finally {
+			if (rs != null) {
+				rs.close();
+			}
+			if (pstmt != null) {
+				pstmt.close();
+			}
+			if(isConnNull&&c!=null) {
+				c.close();
+			}
+		}
+	} 
+	public void deleteIntoTable(Connection c) throws Exception {	
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;	
+		boolean isConnNull = false; 
+		try {
+			if(c==null) {
+				c = new DBConnect().getConnection();
+				isConnNull = true;
+			}
+			String sql = "DELETE FROM "+this.getCompleteTableName();
+			sql += " WHERE ID= '"+this.getId()+"'";
+ 			pstmt = c.prepareStatement(sql);
+ 			//System.out.println(sql);
+			pstmt.executeUpdate();			 
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw e;
+		}finally {
+			if (rs != null) {
+				rs.close();
+			}
+			if (pstmt != null) {
+				pstmt.close();
+			}
+			if(isConnNull&&c!=null) {
+				c.close();
+			}
+		}
+	} 
 	public Field[] getAllFields() {
         List<Field> fields = new ArrayList<>();
         Class clazz = this.getClass();

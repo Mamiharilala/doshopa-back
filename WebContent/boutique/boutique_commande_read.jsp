@@ -36,7 +36,7 @@ Categorie[]etat =(Categorie[])Generalize.getListObject(cat, null);
 		<table class="table table-striped">
 			<% 
  				ps.setColDisplay(new String[]{"idmere","designation","quantite","pu","montant","code_collecter","date_fille","etatlib"});
-				ps.setColRenameDisplay(new String[]{"Numéro de commande","Designation","quantité","pu","montant","code_collecter","Date","etatlib"});
+				ps.setColRenameDisplay(new String[]{"Numéro de commande","Designation","quantité","pu","montant","code_collecter","Date","Etat"});
  				// field to redirect
 				HashMap<String,String>map = new HashMap<String,String>();
  				map.put("designation","id");

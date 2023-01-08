@@ -2,25 +2,28 @@ package system;
 
 public class ObjectType extends MapModel{
 	String id;
-	Object val;
-	Object desc;
+	Object code;
+	Object description;
+	public ObjectType() {
+		
+	}
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-	public Object getVal() {
-		return val;
+	public Object getCode() {
+		return code;
 	}
-	public void setVal(Object val) {
-		this.val = val;
+	public void setCode(Object val) {
+		this.code = val;
 	}
-	public Object getDesc() {
-		return desc;
+	public Object getDescription() {
+		return description;
 	}
-	public void setDesc(Object desc) {
-		this.desc = desc;
+	public void setDescription(Object desc) {
+		this.description = desc;
 	}
 	
 }

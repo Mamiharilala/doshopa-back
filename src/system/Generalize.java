@@ -184,6 +184,7 @@ public class Generalize {
 				for (int j = 0; j < listFieldName.length; j++) {
 					columnName = listFieldName[j].getName();
 					methodName = "set" + (columnName.charAt(0) + "").toUpperCase() + (columnName.substring(1));
+					
 					columnName = columnName.toUpperCase();
 					m = mm.getClass().getMethod(methodName, new Class[] { listFieldName[j].getType() });
 					simpleName = listFieldName[j].getType().getSimpleName().toUpperCase();
@@ -195,9 +196,10 @@ public class Generalize {
 						m.invoke(o, rs.getFloat(columnName));
 					} else if (simpleName.compareTo("DATE") == 0) {
 						m.invoke(o, rs.getDate(columnName));
-					}
-					if (simpleName.compareTo("INT") == 0 || simpleName.compareTo("INTEGER") == 0) {
+					} else if (simpleName.compareTo("INT") == 0 || simpleName.compareTo("INTEGER") == 0) {
 						m.invoke(o, rs.getInt(columnName));
+					}else if (simpleName.compareTo("BOOLEAN") == 0) {
+						m.invoke(o, rs.getBoolean(columnName));
 					}
 				}
 				ans.add(o);

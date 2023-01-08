@@ -3,6 +3,7 @@
 <%@ page import="oadmin.Promotion"%>
 <%@ page import="front.*"%>
 <%@ page import="java.sql.Date"%>
+<%@ page import="java.util.*"%>
 <%
 	Promotion p = new Promotion();
 %>
@@ -34,11 +35,17 @@
 				<%
 					ps.setColDisplay(new String[] { "id", "article_id", "quantite" });
 					ps.setColRenameDisplay(new String[] { "id", "Article", "quantite" });
+					HashMap<String,String>map = new HashMap<String,String>();
+	  				ps.setColRedirection(map);
+	 				// Href of redirect
+	 				map = new HashMap<String,String>();
+	 				ps.setColRedirectionHref(map);
+					ps.prepareData(request);
 					ps.prepareData(request);
 					out.println(ps.getResultDisplay());
 				%>
 			</table>
-			<%=ps.getFooter(request)%>		
 		</div>
+		<%=ps.getFooter(request)%>		
 	</div>
 </form>

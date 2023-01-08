@@ -10,6 +10,17 @@
 		pv.completeAllField(request);
 		pv.getMapModel().insertIntoTable(null);
  	} 
+	if(request.getParameter("mode").compareTo("update")==0){
+		PageCreate pv = new PageCreate(new MapModel());
+		pv.completeAllField(request);
+		pv.getMapModel().setId(request.getParameter("id"));
+		pv.getMapModel().updateIntoTable(null);
+	}
+	if(request.getParameter("mode").compareTo("delete")==0){
+		MapModel map = new MapModel();
+		map.setId(request.getParameter("id"));
+		map.deleteIntoTable(null);
+	} 
  	if(request.getParameter("mode").compareTo("updateMultiple")==0){
  		String classPath = request.getParameter("classFille");
  		Class<?> t = Class.forName(classPath);

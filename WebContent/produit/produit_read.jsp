@@ -40,6 +40,7 @@ p.setCompleteTableName("article_libcomplet");
   				ps.setColRedirection(map);
  				// Href of redirect
  				map = new HashMap<String,String>();
+ 				ps.setColRedirectionHref(map);
 				ps.prepareData(request);
 				out.println(ps.getResultDisplay());
 			%>
