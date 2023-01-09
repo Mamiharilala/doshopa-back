@@ -349,6 +349,7 @@ public class PageSearch extends Page {
 	public void setColRedirection(HashMap<String,String>map) {
 		this.colRedirection = map;
 	}
+	
 	public HashMap<String,String> getColRedirectionHref() {
 		return colRedirectionHref;
 	}

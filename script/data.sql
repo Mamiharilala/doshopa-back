@@ -40,3 +40,11 @@ VALUES('MENU'||(select nextval('seq_menu'))  , 'Collecter', 'micon bi bi-table',
  INSERT INTO menu
 (id, libelle, icone, src, rang, profondeur, mere)
 VALUES('MENU'||(select nextval('seq_menu'))  , 'Livraison', 'micon bi bi-table', 'container.jsp?content=boutique/boutique_livrer.jsp', 6, 3, 'MENU4');
+
+-- JAN 09 2023
+INSERT INTO  menu
+(id, libelle, icone, src, rang, profondeur, mere)
+VALUES('MENU'||(select nextval('seq_menu')), 'Accueil', 'micon dw dw-home', '', 1, 2, 'MENU1');
+INSERT INTO  menu
+(id, libelle, icone, src, rang, profondeur, mere)
+VALUES('MENU'||(select nextval('seq_menu')), 'Tableau de bord', 'micon dw dw-home', 'container.jsp?content=boutique/boutique_dashboard.jsp', 1, 3, 'MENU1');
