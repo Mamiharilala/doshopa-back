@@ -10,5 +10,5 @@
 </div>
 
 <div class="row pb-10">
-	
+	<% out.println(dashboard.dashboardDisplay()); %>
 </div>
