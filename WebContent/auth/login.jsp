@@ -119,6 +119,7 @@
 										type="password"
 										name = "pwd"
 										class="form-control form-control-lg"
+										id="password"
 										placeholder="**********"
 									/>
 									<div class="input-group-append custom">
@@ -131,9 +132,9 @@
 									<div class="col-6">
 										<div class="custom-control custom-checkbox">
 											<input
+												id="customCheck1"
 												type="checkbox"
 												class="custom-control-input"
-												id="customCheck1"
 											/>
 											<label class="custom-control-label" for="customCheck1"
 												>Afficher le mot de passe</label
@@ -171,6 +172,14 @@
 		<script src="${pageContext.request.contextPath}/vendors/scripts/script.min.js"></script>
 		<script src="${pageContext.request.contextPath}/vendors/scripts/process.js"></script>
 		<script src="${pageContext.request.contextPath}/vendors/scripts/layout-settings.js"></script>
+		<script>
+			const togglePassword = document.querySelector("#customCheck1");
+			const password = document.querySelector("#password");
+			togglePassword.addEventListener("click", function () {
+				const type = password.getAttribute("type") === "password" ? "text" : "password";
+				password.setAttribute("type", type);
+			});
+		</script>
 		<!-- Google Tag Manager (noscript) -->
 		<noscript
 			><iframe
