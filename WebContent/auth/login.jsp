@@ -81,8 +81,8 @@
 				class="container-fluid d-flex justify-content-between align-items-center"
 			>
 				<div class="brand-logo">
-					<a href="login.html">
-						<img src="${pageContext.request.contextPath}/vendors/images/deskapp-logo.svg" alt="" />
+					<a href="#" class="text-dark">
+						Doshopa
 					</a>
 				</div>
 			</div>
