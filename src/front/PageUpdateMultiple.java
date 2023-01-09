@@ -28,6 +28,7 @@ public class PageUpdateMultiple extends PageUpdate {
 	int lenData;
 	int totalRow = 10;
 	String resultDisplay;
+	String afterPageFille;
 	HashMap<String,PageField> pageFieldFille;
 
 	public PageUpdateMultiple(MapModel mere, MapModel fille, String fieldmere) throws Exception {
@@ -78,13 +79,12 @@ public class PageUpdateMultiple extends PageUpdate {
 		Object obj = null;
 		String methodName = "";
 		for (int i = 0; i < data.length; i++) {
-			body += "<tr><input name='id_fille' value='" + data[i].getId() + "' type='hidden'><th scope='row'>"
-					+ (i + 1) + "</th>";
+			body += "<tr><th scope='row'>"
+					+ "<a target='_blank' href='"+this.getAfterPageFille()+"&id="+data[i].getId()+"'><i class='icon-copy dw dw-edit-1'></i></a>"  + "</th>";
 			for (int j = 0; j < name.length; j++) {
 				methodName = "get" + (name[j].charAt(0) + "").toUpperCase() + (name[j].substring(1));
 				m = this.getClassFille().getClass().getMethod(methodName, null);
-				body += "<td><input value=" + m.invoke(data[i], null) + " name='" + name[j]
-						+ "_"+data[i].getId()+"' style='border-radius: 5px;border-color:#c9c9c9;padding:4px;'></td>";
+				body += "<td>" + m.invoke(data[i], null) + "</td>";
 			}
 			body += "</tr>";
 		}
@@ -140,55 +140,7 @@ public class PageUpdateMultiple extends PageUpdate {
 		res += "</ul>";
 		return res;
 	}
-
-	public String[] completeAllFilleField(HttpServletRequest request) throws Exception {
-		String classPath = request.getParameter("classFille");
-		Class<?> t = Class.forName(classPath);
-		MapModel instanceFille = (MapModel) t.newInstance();
-		Field[] fields = instanceFille.getAllFields();
-		String fieldName = "";
-		String typeSimpleName = "";
-		String methodName = "";
-		Method m = null;
-		String[] idFille = request.getParameterValues("id_fille");
-		String[]val = new String[idFille.length];
-		for (int j = 0; j < idFille.length; j++) {
-			val[j] = "UPDATE "+instanceFille.getCompleteTableName()+" SET "; 
-			for (int i = 0; i < fields.length; i++) {
-				typeSimpleName = fields[i].getType().getSimpleName().toUpperCase();
-				fieldName = fields[i].getName()+"_"+idFille[j];
- 				if (request.getParameter(fieldName) != null) {
- 					val[j] += ""+fields[i].getName()+"="+Generalize.valStringQuery(typeSimpleName,request.getParameter(fieldName))+",";
-				}
-			}
-			val[j] = val[j].substring(0,val[j].length()-1);
-			val[j] += " WHERE id = '"+idFille[j]+"'";
-		}
-		return val;
-	}
-	public void saveUpdateMultiple(HttpServletRequest request)throws Exception{
- 		PreparedStatement pstmt = null;
- 		String val ="";
- 		Connection c = null;
-		try {
-			c = new DBConnect().getConnection();
-			String[]str = completeAllFilleField(request);
-			for(int i=0;i<str.length;i++) {
-				pstmt = c.prepareStatement(str[i]);
-				pstmt.execute();
-			}
- 		}catch(Exception e) {
-			
-		}finally {
-			if (pstmt != null) {
-				pstmt.close();
-			}
-			if (c != null) {
-				c.close();
-			}
-		}
- 		
-	} 
+ 
 	public String getFieldMere() {
 		return fieldMere;
 	}
@@ -275,6 +227,14 @@ public class PageUpdateMultiple extends PageUpdate {
 
 	public void setPageFieldFille(HashMap<String, PageField> pageFieldFille) {
 		this.pageFieldFille = pageFieldFille;
+	}
+
+	public String getAfterPageFille() {
+		return afterPageFille;
+	}
+
+	public void setAfterPageFille(String afterPageFille) {
+		this.afterPageFille = afterPageFille;
 	}
 	
 }
