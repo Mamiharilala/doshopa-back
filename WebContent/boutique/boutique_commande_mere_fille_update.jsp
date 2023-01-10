@@ -8,20 +8,33 @@
 	CommandeMere p = new CommandeMere();
 	p.setId(request.getParameter("idMere"));
 %>
-<form action="${pageContext.request.contextPath}/treat.jsp" method="POST">
-	<div class="pd-20 card-box mb-30">
-		<div class="clearfix">
-			<div class="pull-left">
-				<h4 class="text-blue h4">Default Basic Forms</h4>
-				<p class="mb-30">All bootstrap element classies</p>
-			</div>
+<div class="page-header">
+	<div class="row">
+		<div class="col-md-6 col-sm-12">
+			<nav aria-label="breadcrumb" role="navigation">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">Boutique</a></li>
+					<li class="breadcrumb-item"><a href="index.html">Commande</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Détail de commande</li>
+				</ol>
+			</nav>
 		</div>
-
+	</div>
+</div>
+<form action="${pageContext.request.contextPath}/treat.jsp"
+	method="POST">
+	<div class="pd-20 card-box mb-30">
 		<%
 			CommandeFille fille = new CommandeFille();
 			fille.setCompleteTableName("commande_fille");
 			PageUpdateMultiple pv = new PageUpdateMultiple(p, fille, "mere");
-			pv.setVisibleEntry("id", false);
+			pv.setVisibleEntry("etat", false);
+			pv.setVisibleEntry("remarque", false);
+			pv.setHtml("date_mere", "readonly");
+			pv.setHtml("id", "readonly");
+			pv.setHtml("utilisateur_id", "readonly");
+			pv.setNameDisplay("id", "Numéro de commande");
+			pv.setAfterPageFille("container.jsp?content=boutique/boutique_commande_fille_update.jsp&mode=update");
 			pv.chargeForm();
 			out.println(pv.getLineForm());
 			pv.loadResult(request);
@@ -32,27 +45,16 @@
 		<div class="table-responsive">
 			<table class="table table-striped">
 				<%
-					pv.setColDisplay(new String[] { "article_id", "quantite", "pu", "etat","date_fille" });
-					pv.setColRenameDisplay(new String[] {"article_id", "quantite", "pu", "etat","date_fille"});
+					pv.setColDisplay(new String[] { "article_id", "quantite", "pu", "etat", "date_fille" });
+					pv.setColRenameDisplay(new String[] { "article_id", "quantite", "pu", "etat", "date_fille" });
 					pv.prepareData(request);
 					out.println(pv.getResultDisplay());
 				%>
 			</table>
-			
-		</div><br>
-	<%=pv.getFooter(request)%>
-	</div>
-	
-	<div class="col-md-12 col-sm-12 mb-30">
-		<div class="pd-20 height-100-p">
-			<button type="submit" class="btn btn-success btn-lg btn-block">Mettre
-				à jour</button>
+
 		</div>
+		<br>
+		<%=pv.getFooter(request)%>
 	</div>
-	<input type="hidden" name="mode" class="form-control" value="updateMultiple">
-	<input type="hidden" name="fieldMere" class="form-control" value="mere">
-	<input type="hidden" name="idMere" class="form-control" value="<%= p.getId() %>">
-	<input type="hidden" name="classFille" class="form-control" value="oadmin.CommandeFille">
-	<input type="hidden" name="classMere" class="form-control" value="oadmin.CommandeMere">
-	<input type="hidden" name="after" class="form-control" value="${pageContext.request.contextPath}/container.jsp?content=boutique/boutique_commande_mere_fille_update.jsp&idMere=<%=request.getParameter("idMere")%>" >
+ 
 </form>

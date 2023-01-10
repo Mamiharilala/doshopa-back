@@ -21,17 +21,5 @@
 		map.setId(request.getParameter("id"));
 		map.deleteIntoTable(null);
 	} 
- 	if(request.getParameter("mode").compareTo("updateMultiple")==0){
- 		String classPath = request.getParameter("classFille");
- 		Class<?> t = Class.forName(classPath);
-		MapModel instanceFille = (MapModel) t.newInstance();
-		classPath = request.getParameter("classMere");
- 		t = Class.forName(classPath);
-		MapModel instanceMere = (MapModel) t.newInstance();
-		instanceMere.setId(request.getParameter("idMere"));
- 		PageUpdateMultiple pu = new PageUpdateMultiple(instanceMere, instanceFille, request.getParameter("fieldMere"));
-		pu.saveUpdateMultiple(request);
-	}
-
 %>
 <script>window.location.replace('<%=request.getParameter("after")%>');</script>

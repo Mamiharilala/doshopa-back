@@ -223,8 +223,9 @@ public class MapModel {
 				isConnNull = true;
 			}
 			String sql = "DELETE FROM "+this.getCompleteTableName();
-			sql += " WHERE ID= '"+this.getId()+"'";
+			sql += " WHERE ID= ?";
  			pstmt = c.prepareStatement(sql);
+ 			pstmt.setString(1, this.getId());
  			//System.out.println(sql);
 			pstmt.executeUpdate();			 
 		}catch(Exception e) {

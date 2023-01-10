@@ -17,6 +17,7 @@ public class Page {
 	HashMap<String,PageField>pageField;
 	String lineForm;
 	String where;
+	String afterPage;
 	public Page(MapModel map) throws Exception {
 		lineForm = "";
 		this.setMapModel(map);
@@ -151,6 +152,14 @@ public class Page {
 
 	public void setWhere(String where) {
 		this.where = where;
+	}
+
+	public String getAfterPage() {
+		return afterPage;
+	}
+
+	public void setAfterPage(String afterPage) {
+		this.afterPage = afterPage;
 	}
 	
 }
