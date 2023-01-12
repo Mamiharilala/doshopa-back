@@ -304,7 +304,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="footer-wrap pd-20 mb-20 card-box">
+	<div class="footer-wrap pd-20 mb-20">
 		Copyright &copy;
 		<%=Year.now()%>
 		Doshopa Tous droits reserv<%="&eacute;"%>s
