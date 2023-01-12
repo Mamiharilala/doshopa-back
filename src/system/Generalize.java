@@ -105,7 +105,7 @@ public class Generalize {
 		}
 	}
 
-	public Object getById(MapModel mm, Connection c) throws Exception {
+	public static Object getById(MapModel mm, Connection c) throws Exception {
 		boolean isNullConn = false;
 		try {
 			if (c == null) {

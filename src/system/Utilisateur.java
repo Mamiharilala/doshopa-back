@@ -4,10 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import oadmin.Boutique;
 import util.DBConnect;
 
 public class Utilisateur extends MapModel {
-	String nom, prenom, mail, telephone, mot_passe, adresse, sexe, role_id, login;
+	String nom, prenom, mail, telephone, mot_passe, adresse, sexe, role_id, login,boutique_id;
 	int etat;
 
 	public Utilisateur() {
@@ -40,6 +41,7 @@ public class Utilisateur extends MapModel {
 				this.setRole_id(rs.getString("role_id"));
 				this.setNom(rs.getString("nom"));
 				this.setPrenom(rs.getString("prenom"));
+				this.setBoutique_id(rs.getString("boutique_id"));
 			}else {
 				return false;
 			}
@@ -66,6 +68,33 @@ public class Utilisateur extends MapModel {
 
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+	public boolean isBoutique() {
+ 		if(this.getBoutique_id()!=null&&this.getBoutique_id()!=""&&this.getBoutique_id()!="null") {
+			return true;
+		}
+		return false;
+	}
+	public Boutique getBoutique()throws Exception {
+		try {
+			if(!isBoutique()) {
+				throw new Exception ("Utilisateur n'a pas de boutique!");
+			}
+			Boutique m = new Boutique();
+			m.setId(this.getBoutique_id());
+			return (Boutique)Generalize.getById(m, null);
+ 		}catch(Exception e) {
+			throw e;
+		}
+		 
+	}
+	
+	public String getBoutique_id() {
+		return boutique_id;
+	}
+
+	public void setBoutique_id(String boutique_id) {
+		this.boutique_id = boutique_id;
 	}
 
 	public String getPrenom() {
