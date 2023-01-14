@@ -7,10 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import system.Generalize;
+import system.MapModel;
 import system.MapModelStateful;
 import system.Utilisateur;
 
-public class BoutiqueDashboard extends MapModelStateful{
+public class BoutiqueDashboard extends Article{
 	int total_views, total_blog, total_articles, total_promotions, commande_en_cours, quantite_vente, totales_boutiques;
 	String utilisateur_id;
 	double chiffre_affaires;
