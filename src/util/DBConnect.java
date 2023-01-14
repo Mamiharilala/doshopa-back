@@ -8,7 +8,7 @@ public class DBConnect {
 		Connection c = null;
 		try {
 			Class.forName("org.postgresql.Driver");
-			c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/doshopa", "postgres", "123456");
+			c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/online", "postgres", "postgres");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
