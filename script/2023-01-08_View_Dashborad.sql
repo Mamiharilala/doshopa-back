@@ -2,7 +2,13 @@
 CREATE OR REPLACE VIEW public.dashboarddata
 AS
 select 
-	b.id Boutique_id, 
+	b.id Boutique_id,
+	(select id 
+		from 
+			utilisateur u
+		where 
+		u.boutique_id = b.id
+	) as Utilisateur_id,
 	(select count(*) 
 		from 
 			commande_fille cf2
@@ -54,6 +60,7 @@ group by
 create or replace view public.alldashboarddata
 as
 select
+	coalesce(count(Boutique_id), 0) Totales_boutiques,
 	coalesce(sum(Commande_en_cours), 0) Commande_en_cours,
 	coalesce(sum(Quantite_vente), 0) Quantite_vente,
 	coalesce(sum(Chiffre_affaires), 0) Chiffre_affaires,

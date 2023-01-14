@@ -1,17 +1,22 @@
 package oadmin;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import system.Generalize;
 import system.MapModelStateful;
+import system.Utilisateur;
 
 public class BoutiqueDashboard extends MapModelStateful{
-	int total_views, total_blog, total_articles, total_promotions, commande_en_cours, quantite_vente;
+	int total_views, total_blog, total_articles, total_promotions, commande_en_cours, quantite_vente, totales_boutiques;
+	String utilisateur_id;
 	double chiffre_affaires;
 	public BoutiqueDashboard(){
-		this.setTableName("alldashboarddata");
-		this.setCompleteTableName("alldashboarddata");
+		this.setTableName("dashboarddata");
+		this.setCompleteTableName("dashboarddata");
 		this.setSchema("public");
  	}
 	public int getTotal_views() {
@@ -50,31 +55,66 @@ public class BoutiqueDashboard extends MapModelStateful{
 	public void setQuantite_vente(int quantite_vente) {
 		this.quantite_vente = quantite_vente;
 	}
+	public String getUtilisateur_id() {
+		return this.utilisateur_id;
+	}
+	public void setUtilisateur_id(String utilisateur_id) {
+		this.utilisateur_id = utilisateur_id;
+	}
 	public double getChiffre_affaires() {
 		return chiffre_affaires;
 	}
 	public void setChiffre_affaires(double chiffre_affaires) {
 		this.chiffre_affaires = chiffre_affaires;
 	}
+	public int getTotales_boutiques() {
+		return totales_boutiques;
+	}
+	public void setTotales_boutiques(int totales_boutiques) {
+		this.totales_boutiques = totales_boutiques;
+	}
 	
 	// Dashboard data fetch
-	public HashMap<String, String> getDashBoardData() throws Exception{
+	public HashMap<String, String> getDashBoardData(Utilisateur utilisateur) throws Exception{
 		HashMap<String, String> displayFormat = new HashMap<String, String>();
-		String[] fields = {"chiffre_affaires", "total_views", "total_blog", 
-				"total_articles", "total_promotions", "commande_en_cours", "quantite_vente"};
-		String[] toBeDisplayed = {"Chiffre d'Affaires", "Vues", "Blogs",
-				"Articles", "Promotions", "Commandes en cours", "Ventes totales"};
-		for (int i = 0; i < fields.length; i++) {
-			displayFormat.put(fields[i], toBeDisplayed[i]);
-		}
+		ArrayList<String> fields = new ArrayList<String>();
+		fields.add("chiffre_affaires");
+		fields.add("total_views");
+		fields.add("total_blog");
+		fields.add("total_articles");
+		fields.add("total_promotions");
+		fields.add("commande_en_cours");
+		fields.add("quantite_vente");
+		
+		ArrayList<String> toBeDisplayed = new ArrayList<String>();
+		toBeDisplayed.add("Chiffre d'Affaires");
+		toBeDisplayed.add("Vues");
+		toBeDisplayed.add("Blogs");
+		toBeDisplayed.add("Articles");
+		toBeDisplayed.add("Promotions");
+		toBeDisplayed.add("Commandes en cours");
+		toBeDisplayed.add("Ventes totales");
 		
 		HashMap<String, String> result = new HashMap<String, String>();
-		BoutiqueDashboard [] data = (BoutiqueDashboard[]) Generalize.getListObject(this, null);
+		BoutiqueDashboard [] data = null;
+		data = (BoutiqueDashboard[]) Generalize.getListObjectWithWhere(this, " AND utilisateur_id = '" + utilisateur.getId() +"' " ,null);
+		if (data.length == 0) {
+			this.setTableName("alldashboarddata");
+			this.setCompleteTableName("alldashboarddata");
+			data = (BoutiqueDashboard[]) Generalize.getListObject(this, null);
+			fields.add("totales_boutiques");
+			toBeDisplayed.add("Boutiques");
+		}
+		
+		for (int i = 0; i < fields.size(); i++) {
+			displayFormat.put(fields.get(i), toBeDisplayed.get(i));
+		}
+		
 		if (data.length > 0) {
-			for (int i = 0; i < fields.length; i ++) {
+			for (int i = 0; i < fields.size(); i ++) {
 				for (Method method : Class.forName("oadmin.BoutiqueDashboard").getMethods()) {
-					if (method.getName().startsWith("get") && method.getName().toLowerCase().endsWith(fields[i].toLowerCase())) {
-						result.put(displayFormat.get(fields[i]), method.invoke(data[0]).toString());
+					if (method.getName().startsWith("get") && method.getName().toLowerCase().endsWith(fields.get(i).toLowerCase())) {
+						result.put(displayFormat.get(fields.get(i)), method.invoke(data[0]).toString());
 					}
 				}
 			}
@@ -83,14 +123,14 @@ public class BoutiqueDashboard extends MapModelStateful{
 	}
 	
 	// Dashboard display
-	public String dashboardDisplay() throws Exception {
-		String[] toBeDisplayed = {"Chiffre d'Affaires", "Vues", "Blogs",
+	public String dashboardDisplay(Utilisateur utilisateur) throws Exception {
+		String[] toBeDisplayed = {"Chiffre d'Affaires", "Boutiques" , "Vues", "Blogs",
 				"Articles", "Promotions", "Commandes en cours", "Ventes totales"};
-		String[] icones = {"icon-copy fa fa-money", "icon-copy fa fa-eye", "icon-copy fa fa-rocket",
+		String[] icones = {"icon-copy fa fa-money", "icon-copy fa fa-institution", "icon-copy fa fa-eye", "icon-copy fa fa-rocket",
 				"icon-copy fa fa-archive", "icon-copy fa fa-gift", "icon-copy fa fa-shopping-basket", "icon-copy fa fa-shopping-cart"};
-		String[] colors = {"#00eccf", "", "",
+		String[] colors = {"#00eccf", "", "", "",
 				"", "", "", ""};
-		HashMap<String, String> data = this.getDashBoardData();
+		HashMap<String, String> data = this.getDashBoardData(utilisateur);
 		String html = "";
 		for (int i = 0; i < toBeDisplayed.length; i++ ) {
 			String label = toBeDisplayed[i];
@@ -117,7 +157,7 @@ public class BoutiqueDashboard extends MapModelStateful{
 	}
 	
 	public static void main(String []args) throws Exception {
-		BoutiqueDashboard dashboard = new BoutiqueDashboard();
-		System.out.println(dashboard.dashboardDisplay());
+		// BoutiqueDashboard dashboard = new BoutiqueDashboard();
+		// System.out.println(dashboard.getDashBoardData(null));
 	}
 }

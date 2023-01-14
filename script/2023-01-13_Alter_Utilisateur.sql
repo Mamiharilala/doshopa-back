@@ -1,0 +1,1 @@
+alter table utilisateur add column boutique_id character varying(100);
