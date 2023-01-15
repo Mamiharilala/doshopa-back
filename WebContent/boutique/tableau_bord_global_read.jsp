@@ -9,7 +9,7 @@
 <%@ page import="java.util.*"%>
 <% 
 	BoutiqueDashboard dashboard = new BoutiqueDashboard();
-	dashboard.setCompleteTableName("dashboard_lib");
+	dashboard.setCompleteTableName("dashboarddata_lib");
 %>
 
 

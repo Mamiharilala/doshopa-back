@@ -275,7 +275,7 @@
 
 	<div class="left-side-bar">
 		<div class="brand-logo">
-			<a href="index.html">
+			<a href="#">
 				<div class="dark-logo" style="color: black;">Doshopa</div>
 				<div class="light-logo">doshopa.com</div>
 			</a>
