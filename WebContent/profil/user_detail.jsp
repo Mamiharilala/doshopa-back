@@ -6,28 +6,22 @@
 <%@ page import="java.sql.Date"%>
 <%
 	Utilisateur user = (Utilisateur) session.getAttribute("user");
-	Boutique boutique = null;
- 	if(user.isBoutique()){
-		boutique = user.getBoutique();
-	 
 %>
 
 <div class="pd-20 card-box mb-30">
 	<%
-		PageDetail pd = new PageDetail(boutique);
+		PageDetail pd = new PageDetail(user);
 		pd.setVisibleEntry("id", false);
 		pd.setVisibleEntry("etat", false);
-		pd.setVisibleEntry("categorie_id", false);
-		pd.setVisibleEntry("type_id", false);
-		pd.setVisibleEntry("views", false);
- 		pd.chargeForm();
+		pd.setVisibleEntry("mot_passe", false);
+		pd.setVisibleEntry("Poste", false);
+		pd.chargeForm();
 		out.println(pd.getLineForm());
 	%>
 	<div class="nav justify-content-center">
 		<a
-			href="${pageContext.request.contextPath}/container.jsp?content=profil/profil_boutique_update.jsp"><button
+			href="${pageContext.request.contextPath}/container.jsp?content=profil/user_update.jsp"><button
 				type="submit" class="btn btn-success btn-lg">Modifier</button></a>
 	</div>
 </div>
 
-<% } %>

@@ -8,13 +8,10 @@
 <%
 	Utilisateur user = (Utilisateur) session.getAttribute("user");
 
-	ObjectType[] sexe = new ObjectType[2];
-	sexe[0] = new ObjectType();
-	sexe[0].setCode("m");
-	sexe[0].setDescription("Homme");
-	sexe[1] = new ObjectType();
-	sexe[1].setCode("f");
-	sexe[1].setDescription("Femme");
+	Boutique boutique = null;
+	if(user.isBoutique()){
+		boutique = user.getBoutique();
+	
 %>
 <div class="page-header">
 	<div class="row">
@@ -32,24 +29,21 @@
 	<form action="${pageContext.request.contextPath}/treat.jsp"
 		method="POST">
 		<%
-			PageUpdate pv = new PageUpdate(user);
+			PageUpdate pv = new PageUpdate(boutique);
 			pv.setVisibleEntry("id", false);
 			pv.setVisibleEntry("etat", false);
-			pv.setVisibleEntry("mot_passe", false);
-			pv.setVisibleEntry("role_id", false);
-			pv.setHtml("mail", " readonly ");
-			pv.setMutilpleKeyValue("sexe", "code", "description");
-			pv.setMutilpleData("sexe", sexe);
-			pv.setType("sexe", "SELECT");
+ 			pv.setVisibleEntry("type_id", false);
+ 			pv.setVisibleEntry("categorie_id", false);
+ 			pv.setVisibleEntry("views", false);
 			pv.chargeForm();
 			out.println(pv.getLineForm());
 		%>
 		<input type="hidden" class="form-control" value="update" name="mode">
-		<input type="hidden" class="form-control" value="<%=user.getId()%>" name="id">
+		<input type="hidden" class="form-control" value="<%=boutique.getId()%>" name="id">
 		<input type="hidden" class="form-control"
-			value="${pageContext.request.contextPath}/container.jsp?content=profil/profil_user_detail.jsp"
+			value="${pageContext.request.contextPath}/container.jsp?content=profil/boutique_detail.jsp"
 			name="after"> <input type="hidden" class="form-control"
-			name="class" value="system.Utilisateur">
+			name="class" value="oadmin.Boutique">
 		<div class="nav justify-content-center">
 			<button type="submit"
 				class="btn btn-success btn-lg col-xs-4  col-sm-4">Modifier</button>
@@ -57,12 +51,10 @@
 		</div>
 		<br>
 		<div class="nav justify-content-center">
-			<a href="${pageContext.request.contextPath}/container.jsp?content=profil/profil_user_detail.jsp&id=<%=request.getParameter("id")%>"><button type="button" class="btn btn-warning">Voir détail</button>
+			<a href="${pageContext.request.contextPath}/container.jsp?content=profil/boutique_detail.jsp&id=<%=boutique.getId()%>"><button type="button" class="btn btn-warning">Voir détail</button>
 		</div>
 
 	</form>
 	<br>
 </div>
-<script>
-	
-</script>
+<% } %>
