@@ -98,7 +98,7 @@ public class BoutiqueDashboard extends Article{
 		
 		HashMap<String, String> result = new HashMap<String, String>();
 		BoutiqueDashboard [] data = null;
-		data = (BoutiqueDashboard[]) Generalize.getListObjectWithWhere(this, " AND utilisateur_id = '" + utilisateur.getId() +"' " ,null);
+		data = (BoutiqueDashboard[]) Generalize.getListObjectWithWhere(this, " AND boutique_id = '" + utilisateur.getBoutique_id() +"' " ,null);
 		if (data.length == 0) {
 			this.setTableName("alldashboarddata");
 			this.setCompleteTableName("alldashboarddata");

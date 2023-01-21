@@ -18,6 +18,9 @@ public class Page {
 	String lineForm;
 	String where;
 	String afterPage;
+	public Page() {
+		
+	}
 	public Page(MapModel map) throws Exception {
 		lineForm = "";
 		this.setMapModel(map);

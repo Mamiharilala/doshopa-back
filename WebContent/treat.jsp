@@ -11,10 +11,11 @@
 		pv.getMapModel().insertIntoTable(null);
  	} 
 	if(request.getParameter("mode").compareTo("update")==0){
-		PageCreate pv = new PageCreate(new MapModel());
-		pv.completeAllField(request);
-		pv.getMapModel().setId(request.getParameter("id"));
-		pv.getMapModel().updateIntoTable(null);
+		MapModel model = new MapModel();
+		model.setId(request.getParameter("id"));
+		PageUpdate pv = new PageUpdate();
+		pv.setMapModel(model);
+		pv.updateIntoTable(request);
 	}
 	if(request.getParameter("mode").compareTo("delete")==0){
 		MapModel map = new MapModel();

@@ -4,6 +4,7 @@ import java.sql.Connection;
 
 import system.Generalize;
 import system.MapModel;
+import system.Utilisateur;
 import util.DBConnect;
 
 public class Menu extends MapModel{
@@ -23,18 +24,18 @@ public class Menu extends MapModel{
 		setSchema("public");
 		setCompleteTableName("menu");
 	}
-	public void loadFille(Connection c) throws Exception {
+	public void loadFille(Connection c,Utilisateur u) throws Exception {
 		boolean isNullConn = false;
 		try {
 			if(c==null) {
 				c = new DBConnect().getConnection();
 				isNullConn = true;
 			}
-			this.setFille((Menu[]) Generalize.getListObjectWithWhere(this," AND mere like '"+this.getId()+"' order by rang asc", c));
+			this.setFille((Menu[]) Generalize.getListObjectWithWhere(this," AND utilisateur_id like '"+u.getId()+"'AND mere like '"+this.getId()+"' order by rang asc", c));
 			if(this.getFille()!=null) {
 				for(int i=0;i<this.getFille().length;i++) {
 					this.getFille()[i].setCompleteTableName(this.getCompleteTableName());
-					this.getFille()[i].loadFille(c);
+					this.getFille()[i].loadFille(c,u);
 				}
 			}
 		}catch(Exception e) {
@@ -45,10 +46,10 @@ public class Menu extends MapModel{
 			}
 		}
 	}
-	public String generateMenu(String racine) throws Exception {
+	public String generateMenu(String racine,Utilisateur u) throws Exception {
 		String val = "";
 		try {
-			loadFille(null);
+			loadFille(null,u);
 			for(int i=0;i<this.getFille().length;i++) {
 				if((this.getFille()[i].getFille()==null||this.getFille()[i].getFille().length==0) && this.getFille()[i].getMere().compareTo(racine)==0) {
 					val +="<li>";
@@ -67,7 +68,7 @@ public class Menu extends MapModel{
 									val+= "<span class='mtext'>"+this.getFille()[i].getLibelle()+"</span>";
 								val+="</a>";
 							val+="<ul class='submenu'>";
-							val+= this.getFille()[i].generateMenu(racine);
+							val+= this.getFille()[i].generateMenu(racine,u);
 							val+="</ul>";
 					val+="</li>";
 				}
@@ -78,11 +79,12 @@ public class Menu extends MapModel{
 		val += ""; 
 		return val;
 	}
-	public String getStringMenu()throws Exception {
+	public String getStringMenu(Utilisateur u)throws Exception {
 		try {
 			Menu[]menu = (Menu[]) new Generalize().getListObjectWithWhere(this," AND mere like '' or mere is null ", null); 
-			if(menu!=null&&menu.length>0) {				 
-				return menu[0].generateMenu( menu[0].getId());
+			if(menu!=null&&menu.length>0) {	
+				menu[0].setCompleteTableName("menu_granted");
+				return menu[0].generateMenu(menu[0].getId(),u);
 			}
 		}catch(Exception e) {
 			throw e;

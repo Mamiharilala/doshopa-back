@@ -287,7 +287,9 @@
 			<div class="sidebar-menu">
 				<ul id="accordion-menu">
 					<%
-						out.println(new Menu().getStringMenu());
+						Menu menu = new Menu();
+						menu.setCompleteTableName("menu_granted");
+						out.println(menu.getStringMenu(u));
 					%>
 				</ul>
 			</div>
