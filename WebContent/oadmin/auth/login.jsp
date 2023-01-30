@@ -99,11 +99,12 @@
 							<div class="login-title">
 								<h2 class="text-center text-primary">Bienvenue</h2>
 							</div>
-							<form action="${pageContext.request.contextPath}/auth/treat_login.jsp" method="POST"> 
+							<form action="${pageContext.request.contextPath}/oadmin/auth/treat_login.jsp" method="POST"> 
 								<div class="input-group custom">
 									<input
 										type="text"
 										name = "login"
+										value=""
 										class="form-control form-control-lg"
 										placeholder="Login"
 									/>
@@ -117,6 +118,7 @@
 									<input
 										type="password"
 										name = "pwd"
+										value=""
 										class="form-control form-control-lg"
 										id="password"
 										placeholder="**********"

@@ -1,0 +1,4 @@
+systemMail=contact.doshopa@gmail.com
+systemPassword=knxjonynfesvcmos
+host=smtp.gmail.com
+mail.smtp.port=465
