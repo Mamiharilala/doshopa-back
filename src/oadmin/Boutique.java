@@ -13,6 +13,7 @@ public class Boutique extends MapModelStateful{
 	String nif;
 	String stat;
 	String type_id;
+	String categorielib;
 	int views;
  
 	public Boutique(){
@@ -88,6 +89,14 @@ public class Boutique extends MapModelStateful{
 	}
 	public void setViews(int views) {
 		this.views = views;
+	}
+
+	public String getCategorielib() {
+		return categorielib;
+	}
+
+	public void setCategorielib(String categorielib) {
+		this.categorielib = categorielib;
 	}
 	
 }

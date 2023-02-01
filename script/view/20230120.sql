@@ -1,5 +1,27 @@
-
---menu 
+ CREATE OR REPLACE VIEW boutique_and_categorie_4first
+AS SELECT boutique_and_categorie.id,
+    boutique_and_categorie.denomination,
+    boutique_and_categorie.siege,
+    boutique_and_categorie.categorie_id,
+    boutique_and_categorie.logo,
+    boutique_and_categorie.mail,
+    boutique_and_categorie.telephone,
+    boutique_and_categorie.remarque,
+    boutique_and_categorie.nif,
+    boutique_and_categorie.stat,
+    boutique_and_categorie.etat,
+    boutique_and_categorie.type_id,
+    boutique_and_categorie.views,
+    boutique_and_categorie.apropos,
+    boutique_and_categorie.information,
+    boutique_and_categorie.note,
+    boutique_and_categorie.categorie as categorielib
+   FROM boutique_and_categorie
+  ORDER BY boutique_and_categorie.views DESC
+ LIMIT 4;
+  create or replace view article_search as
+ select distinct b.*,a.id as article,a.designation as article_designation,a.categorie_id as article_categorie,b.categorie from article a join boutique_and_categorie b on b.id = a.boutique_id 
+ --menu 
 create or replace view menu_granted as 
  select menu.*,utilisateur_id from menu join utilisateur_privilege up on up.menu_id = menu.id 
 --Fin menu
