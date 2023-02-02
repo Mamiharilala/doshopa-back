@@ -33,7 +33,7 @@ public class UserLoginServlet extends HttpServlet {
 		if (action != null && action.equals("logout")) {
 			session.removeAttribute("user");
 			session.invalidate();
-			response.sendRedirect("auth/login.jsp");
+			response.sendRedirect("oadmin/auth/login.jsp");
 		}
 	}
 

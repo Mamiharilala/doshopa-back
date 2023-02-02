@@ -27,7 +27,7 @@
                     <li><a href="" class="nav-link px-2 link-dark"><i class="fa-solid fa-cart-shopping fa-lg mt-1"></i></a></li>
                 </ul>
                 <div>
-                    <a href=""><button type="button"
+                    <a href="${pageContext.request.contextPath}/user?action=logout"><button type="button"
                             class="btn btn-outline-dark me-2">Se déconnecter</button></a>
                 </div>
                 <div>
