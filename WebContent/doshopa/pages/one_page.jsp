@@ -14,6 +14,10 @@
 	boutique.setCompleteTableName("boutique_and_categorie_4first");
 	Boutique[]arrayBoutique =(Boutique[])Generalize.getListObject(boutique, null);
 	String image ="";
+//4 first Boutique 
+	Blog blog = new Blog();
+	blog.setCompleteTableName("boutique_blog_4first");
+	Blog[]arrayBlog =(Blog[])Generalize.getListObject(blog, null);
 %>
 <jsp:include page='../incs/header_common.jsp' />
 <section class="container">
@@ -77,7 +81,7 @@
     </div>
 </section><br><br>
 <section class="text-center">
-    <a href="<?php echo base_url('boutique');?>" class="text-decoration-none"><button
+    <a href="" class="text-decoration-none"><button
             class="btn btn-outline-dark btn-sm">Voir toutes les boutiques</button></a>
 </section>
 <br>
@@ -137,14 +141,15 @@ vous pouvez acheter dans les boutiques ce que vous voulez de n'importe où en tou
             <div class="container owl-2-style">
                 <h4 class="fst-italic text-center py-3 text-center">Blogs</h4>
                 <div class="owl-carousel owl-2">
-                    <?php for($i=0;$i<count($blog);$i++){?>
+                    <%for(int i=0;i<arrayBlog.length;i++){ image = request.getContextPath()+""+arrayBlog[i].getImage();
+                    %>
                     <div class="media-29101 card mb-20 col-xs-12 col-sm-12 shadow">
                         <!-- Card -->
                         <div class="card">
                             <!-- Card image -->
                             <div class="view overlay">
                                 <img class="card-img-top"
-                                    src="<?php echo base_url('assets/images/pineapple-3836576_1920.jpg');?>"
+                                    src="<%=image %>"
                                     alt="Card image cap">
                                 <a href="#!">
                                     <div class="mask rgba-white-slight"></div>
@@ -155,12 +160,12 @@ vous pouvez acheter dans les boutiques ce que vous voulez de n'importe où en tou
                             <div class="card-body">
 
                                 <!-- Title -->
-                                <h4 class="card-title"><?php echo $blog[$i]->titre;?></h4>
+                                <h4 class="card-title"><%=arrayBlog[i].getTitre()%></h4>
                                 <!-- Text -->
                                 <p class="card-text text-dark text-truncate" style="height: 96px;">
-                                    <?php echo $blog[$i]->body;?></p>
+                                    <%= arrayBlog[i].getBody() %></p>
                                 <!-- Button -->
-                                <a href="<?php echo base_url('blog/'.$blog[$i]->id);?>"
+                                <a href=""
                                     class="btn btn-dark shadow-lg">Lire la suite</a>
 
                             </div>
@@ -168,7 +173,7 @@ vous pouvez acheter dans les boutiques ce que vous voulez de n'importe où en tou
                         </div>
                         <!-- Card -->
                     </div>
-                    <?php } ?>
+                    <% } %>
                 </div>
             </div>
         </div>
