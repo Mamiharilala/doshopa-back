@@ -1,4 +1,4 @@
-package oadmin;
+package doshopa;
 
 import system.Categorie;
 

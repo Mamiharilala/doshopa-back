@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="system.MapModel"%>
 <%@ page import="main.*"%>
-<%@ page import="oadmin.*"%>
+<%@ page import="doshopa.*"%>
 <%@ page import="java.lang.reflect.Field"%>
 <%@ page import="front.*"%>
 <% 

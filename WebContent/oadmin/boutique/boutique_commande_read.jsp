@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="front.*"%>
 <%@ page import="java.sql.Date"%>
-<%@ page import="oadmin.*"%>
+<%@ page import="doshopa.*"%>
 <%@ page import="system.*"%>
 <%@ page import="java.util.*"%>
 <% 

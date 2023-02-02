@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="oadmin.*"%>
+<%@ page import="doshopa.*"%>
 <div class="pd-20 card-box mb-30">
 	<div class="clearfix">
 		<h4 class="text-blue h4">Step wizard vertical</h4>

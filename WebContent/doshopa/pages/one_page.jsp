@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="system.*"%>
-<%@ page import="oadmin.*"%>
+<%@ page import="doshopa.*"%>
 <% try{ 
 	Categorie cat = new Categorie();
 	cat.setCompleteTableName("article_categorie");
@@ -121,10 +121,10 @@
         <div class="col-xs-4 col-sm-4">
             <div class="position-sticky" style="top: 2rem;">
                 <div class="p-4 mb-3 bg-light rounded">
-                    <h4 class="fst-italic" id="apropos">A propos</h4>
-                    <p class="mb-0 text-dark">Nous vous facilitons la recherche de boutique à l'aide d'un seul site
-                        internet <a href='#' class="text-warning">doshopa.com</a>, vous pouvez consulter, reserver et
-                        même acheter des produits ici, simple clic et vous aurez tous dont vous voulez.</p>
+                    <h4 class="fst-italic" id="apropos"></h4>
+                    <p class="mb-0 text-dark">Vous souhaitez acheter des produits ou des services sans avoir à vous rendre dans un magasin physique ? 
+Doshopa le rend possible pour vous ! Avec notre plateforme e-commerce, 
+vous pouvez acheter dans les boutiques ce que vous voulez de n'importe où en toute sécurité, facilement et rapidement.</p>
                 </div>
             </div>
         </div>

@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import oadmin.Boutique;
+import doshopa.Boutique;
 import util.DBConnect;
 
 public class Utilisateur extends MapModel {

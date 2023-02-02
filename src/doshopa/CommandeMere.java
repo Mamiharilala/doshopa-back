@@ -1,4 +1,4 @@
-package oadmin;
+package doshopa;
 
 import java.sql.Connection;
 import java.sql.Date;

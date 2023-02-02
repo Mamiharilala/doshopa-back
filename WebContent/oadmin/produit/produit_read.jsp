@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="oadmin.Article"%>
-<%@ page import="oadmin.Promotion"%>
+<%@ page import="doshopa.Article"%>
+<%@ page import="doshopa.Promotion"%>
 <%@ page import="front.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.sql.Date"%>

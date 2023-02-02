@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="oadmin.BoutiqueDashboard"%>
+<%@ page import="doshopa.BoutiqueDashboard"%>
 <%@ page import="system.Utilisateur"%>
 
 <% 

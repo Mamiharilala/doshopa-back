@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="oadmin.Promotion"%>
+<%@ page import="doshopa.Promotion"%>
 <%@ page import="front.*"%>
 <%@ page import="java.sql.Date"%>
 <%@ page import="java.util.*"%>
