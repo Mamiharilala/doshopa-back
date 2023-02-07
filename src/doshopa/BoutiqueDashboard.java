@@ -8,7 +8,7 @@ import system.Utilisateur;
 
 public class BoutiqueDashboard extends Article{
 	int total_views, total_blog, total_articles, total_promotions, commande_en_cours, quantite_vente, totales_boutiques;
-	String utilisateur_id;
+	String utilisateur_id, boutique_denomination;
 	double chiffre_affaires;
 	public BoutiqueDashboard(){
 		this.setTableName("dashboarddata");
@@ -69,6 +69,12 @@ public class BoutiqueDashboard extends Article{
 	public void setTotales_boutiques(int totales_boutiques) {
 		this.totales_boutiques = totales_boutiques;
 	}
+	public String getBoutique_denomination() {
+		return boutique_denomination;
+	}
+	public void setBoutique_denomination(String boutique_denomination) {
+		this.boutique_denomination = boutique_denomination;
+	}
 	
 	// Dashboard data fetch
 	public HashMap<String, String> getDashBoardData(Utilisateur utilisateur, String boutiqueId) throws Exception{
@@ -124,6 +130,11 @@ public class BoutiqueDashboard extends Article{
 				}
 			}
 		}
+		
+		if (boutiqueId != null) {
+			result.put("market_place", data[0].getBoutique_denomination());
+		}
+		
 		return result;
 	}
 	
@@ -136,7 +147,16 @@ public class BoutiqueDashboard extends Article{
 		String[] colors = {"#00eccf", "", "", "",
 				"", "", "", ""};
 		HashMap<String, String> data = this.getDashBoardData(utilisateur, boutiqueId);
-		String html = "";
+		String marketplace = "Tableau de bord";
+		if (data.containsKey("market_place")) {
+			marketplace += ": " + data.get("market_place");
+		}
+		
+		String html = "<div class=\"title pb-20\">\r\n"
+				+ "	<h2 class=\"h3 mb-0\">"+ marketplace +"</h2>\r\n"
+				+ "</div>\r\n"
+				+ "\r\n"
+				+ "<div class=\"row pb-10\">";
 		for (int i = 0; i < toBeDisplayed.length; i++ ) {
 			String label = toBeDisplayed[i];
 			String temp_html = "<div class='col-xl-3 col-lg-3 col-md-6 mb-20'>"
@@ -160,7 +180,7 @@ public class BoutiqueDashboard extends Article{
 				html += temp_html;
 			}
 		}
-		return html;
+		return html + "</div>";
 	}
 	
 	public static void main(String []args) throws Exception {
