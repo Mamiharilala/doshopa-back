@@ -32,15 +32,15 @@
 	<div class="table-responsive">
 		<table class="table table-striped">
 			<% 
- 				ps.setColDisplay(new String[]{"boutique_denomination", "commande_en_cours", "quantite_vente", "chiffre_affaires", "total_views", "total_articles", "total_promotions", "total_blog"});
-				ps.setColRenameDisplay(new String[]{"boutique_denomination", "commande_en_cours", "quantite_vente", "chiffre_affaires", "total_views", "total_articles", "total_promotions", "total_blog"});
+ 				ps.setColDisplay(new String[]{"boutique_id", "boutique_denomination", "commande_en_cours", "quantite_vente", "chiffre_affaires", "total_views", "total_articles", "total_promotions", "total_blog"});
+				ps.setColRenameDisplay(new String[]{"boutique_id", "boutique_denomination", "commande_en_cours", "quantite_vente", "chiffre_affaires", "total_views", "total_articles", "total_promotions", "total_blog"});
  				// field to redirect
 				HashMap<String,String>map = new HashMap<String,String>();
- 				map.put("id","id");
+ 				map.put("boutique_id","boutique_id");
  				ps.setColRedirection(map);
  				// Href of redirect
  				map = new HashMap<String,String>();
- 				map.put("boutique_denomination","container.jsp?content=boutique/boutique_dashboard.jsp?id=");
+ 				map.put("boutique_id","container.jsp?content=boutique/boutique_dashboard.jsp?id=");
  				ps.setColRedirectionHref(map);		
 				ps.prepareData(request);
 				out.println(ps.getResultDisplay());

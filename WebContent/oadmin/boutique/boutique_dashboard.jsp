@@ -6,11 +6,12 @@
 <% 
 	BoutiqueDashboard dashboard = new BoutiqueDashboard();
 	Utilisateur loggedIn = (Utilisateur) session.getAttribute("user");
+	String boutiqueId = request.getParameter("id");
 %>
 <div class="title pb-20">
 	<h2 class="h3 mb-0">Tableau de bord</h2>
 </div>
 
 <div class="row pb-10">
-	<% out.println(dashboard.dashboardDisplay(loggedIn)); %>
+	<% out.println(dashboard.dashboardDisplay(loggedIn, boutiqueId)); %>
 </div>

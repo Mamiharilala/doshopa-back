@@ -71,7 +71,7 @@ public class BoutiqueDashboard extends Article{
 	}
 	
 	// Dashboard data fetch
-	public HashMap<String, String> getDashBoardData(Utilisateur utilisateur) throws Exception{
+	public HashMap<String, String> getDashBoardData(Utilisateur utilisateur, String boutiqueId) throws Exception{
 		HashMap<String, String> displayFormat = new HashMap<String, String>();
 		ArrayList<String> fields = new ArrayList<String>();
 		fields.add("chiffre_affaires");
@@ -93,7 +93,16 @@ public class BoutiqueDashboard extends Article{
 		
 		HashMap<String, String> result = new HashMap<String, String>();
 		BoutiqueDashboard [] data = null;
-		data = (BoutiqueDashboard[]) Generalize.getListObjectWithWhere(this, " AND boutique_id = '" + utilisateur.getBoutique_id() +"' " ,null);
+		String boutique = null;
+		if(utilisateur.getBoutique_id() != null){
+			boutique = utilisateur.getBoutique_id();
+		}
+		if(boutiqueId != null) {
+			boutique = boutiqueId;
+			this.setTableName("dashboarddata_lib");
+			this.setCompleteTableName("dashboarddata_lib");
+		} 
+		data = (BoutiqueDashboard[]) Generalize.getListObjectWithWhere(this, " AND boutique_id = '" + boutique +"' " ,null);
 		if (data.length == 0) {
 			this.setTableName("alldashboarddata");
 			this.setCompleteTableName("alldashboarddata");
@@ -119,14 +128,14 @@ public class BoutiqueDashboard extends Article{
 	}
 	
 	// Dashboard display
-	public String dashboardDisplay(Utilisateur utilisateur) throws Exception {
+	public String dashboardDisplay(Utilisateur utilisateur, String boutiqueId) throws Exception {
 		String[] toBeDisplayed = {"Chiffre d'Affaires", "Boutiques" , "Vues", "Blogs",
 				"Articles", "Promotions", "Commandes en cours", "Ventes totales"};
 		String[] icones = {"icon-copy fa fa-money", "icon-copy fa fa-institution", "icon-copy fa fa-eye", "icon-copy fa fa-rocket",
 				"icon-copy fa fa-archive", "icon-copy fa fa-gift", "icon-copy fa fa-shopping-basket", "icon-copy fa fa-shopping-cart"};
 		String[] colors = {"#00eccf", "", "", "",
 				"", "", "", ""};
-		HashMap<String, String> data = this.getDashBoardData(utilisateur);
+		HashMap<String, String> data = this.getDashBoardData(utilisateur, boutiqueId);
 		String html = "";
 		for (int i = 0; i < toBeDisplayed.length; i++ ) {
 			String label = toBeDisplayed[i];
