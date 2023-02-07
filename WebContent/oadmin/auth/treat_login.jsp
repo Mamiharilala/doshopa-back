@@ -14,10 +14,11 @@
 			} else if (u != null && u.getRole_id().trim().compareTo("boutique") == 0) {
 				response.sendRedirect("../container.jsp?content=boutique/boutique_dashboard.jsp");
 			}
+			return;
 		}
 		throw new Exception("Echec d\'authentification");
 	} catch (Exception e) {
-		//e.printStackTrace();
+		e.printStackTrace();
 %>
 <script language="JavaScript"> 
 	alert("<%=e.getMessage()%>");

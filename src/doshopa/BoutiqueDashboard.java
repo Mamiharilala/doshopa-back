@@ -2,13 +2,8 @@ package doshopa;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
-
 import system.Generalize;
-import system.MapModel;
-import system.MapModelStateful;
 import system.Utilisateur;
 
 public class BoutiqueDashboard extends Article{

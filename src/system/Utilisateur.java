@@ -30,7 +30,7 @@ public class Utilisateur extends MapModel {
 			c = new DBConnect().getConnection();
 			pstmt = c.prepareStatement(sql);
 			pstmt.setString(1, login);
-			pstmt.setString(2,pwd);			
+			pstmt.setString(2,pwd);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				this.setId(rs.getString("id"));
