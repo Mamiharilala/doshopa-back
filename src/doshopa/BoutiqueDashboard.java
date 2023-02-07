@@ -108,7 +108,7 @@ public class BoutiqueDashboard extends Article{
 		
 		if (data.length > 0) {
 			for (int i = 0; i < fields.size(); i ++) {
-				for (Method method : Class.forName("oadmin.BoutiqueDashboard").getMethods()) {
+				for (Method method : Class.forName("doshopa.BoutiqueDashboard").getMethods()) {
 					if (method.getName().startsWith("get") && method.getName().toLowerCase().endsWith(fields.get(i).toLowerCase())) {
 						result.put(displayFormat.get(fields.get(i)), method.invoke(data[0]).toString());
 					}
