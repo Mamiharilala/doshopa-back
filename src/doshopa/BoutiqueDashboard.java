@@ -147,7 +147,9 @@ public class BoutiqueDashboard extends Article{
 				+ "</div>"
 				+ "</div>"
 				+ "</div>";
-			html += temp_html;
+			if(data.get(label) != null) {
+				html += temp_html;
+			}
 		}
 		return html;
 	}
