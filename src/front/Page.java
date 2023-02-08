@@ -4,7 +4,9 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -164,5 +166,52 @@ public class Page {
 	public void setAfterPage(String afterPage) {
 		this.afterPage = afterPage;
 	}
-	
+	public static String getpagination(HttpServletRequest request,double lenData,double totalRowPage) {
+		String page = request.getParameter("current_page");
+		int current = 1;
+		if (Utility.stringWithoutNull(page).compareTo("") != 0) {
+			current = Integer.parseInt(page.trim());
+		}
+ 		int[] tabPage = new int[5];
+		tabPage[2] = current;
+		tabPage[3] = current + 1;
+		tabPage[4] = current + 2;
+		tabPage[1] = current - 1;
+		tabPage[0] = current - 2;
+ 		int nbPage = (int) Math.ceil(lenData / totalRowPage);
+		String res = "<nav aria-label='Page navigation'>\r\n" + 
+				"  <ul class='pagination'>";
+		Map<String, String[]> parameters = request.getParameterMap();
+		String cont = "?";
+		String paramName = "";
+		Enumeration in = request.getParameterNames();
+		boolean hasPassDebut = false; 
+		while (in.hasMoreElements()) {
+			paramName = in.nextElement().toString();
+			if (paramName.trim().compareTo("current_page") != 0 && hasPassDebut==false) {
+				cont += "" + paramName + "=" + request.getParameter(paramName);
+				hasPassDebut = true;
+			}else if (paramName.trim().compareTo("current_page") != 0 ){
+				cont += "&" + paramName + "=" + request.getParameter(paramName);
+			}
+		}
+ 		res+="<li class='page-item'><a class='page-link' href='"+ request.getRequestURL() + "" + cont +"&current_page=1'><span aria-hidden='true'>&laquo;</span></a></li>";
+		for (int i = 0; i < 5; i++) {
+			if (tabPage[i] > 0 && tabPage[i] <= nbPage) {
+				if (tabPage[i] == current) {
+					res += "<li class='page-item active'>";
+					res += "<a href='" + request.getRequestURL() + "" + cont + "&current_page=" + tabPage[i]
+							+ "'   class='page-link'>"
+							+ tabPage[i] + "</a></li>";
+				} else {
+					res += "<li class='page-item '>";
+					res += "<a href='" + request.getRequestURL() + "" + cont + "&current_page=" + tabPage[i]+ "' class='page-link'>"
+							+ tabPage[i] + "</a></li>";
+				}
+			}
+		}
+		res += "<li class='page-item'><a class='page-link' href='" + request.getRequestURL() + "" + cont + "&current_page=" + nbPage +"'><span aria-hidden='true'>&raquo;</span></a></li>";
+ 		res += "</ul>";
+		return res;
+	}
 }
