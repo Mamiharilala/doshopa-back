@@ -20,7 +20,7 @@
                             </div>
                             <div class="col-md-4 col-lg-5 d-flex align-items-center">
                                 <div class="card-body p-3 p-lg-4 text-black">
-                                    <form action="" method="post">
+                                    <form action="${pageContext.request.contextPath}/login" method="post">
                                         <center>
                                             <div class="align-items-center mb-3 pb-1">
                                                 <span class="h1 fw-bold mb-0">Doshopa</span>

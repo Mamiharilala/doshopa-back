@@ -3,22 +3,12 @@
 <%@ page import="system.*"%>
 <%@ page import="doshopa.*"%>
 <% try{ 
-	Categorie cat = new Categorie();
-	cat.setCompleteTableName("article_categorie");
-	Categorie[]articleCategorie =(Categorie[])Generalize.getListObject(cat, null);
-//boutique catgeorie boutique
-	cat.setCompleteTableName("boutique_categorie_boutique");
-	Categorie[]boutique_categorie_boutique =(Categorie[])Generalize.getListObject(cat, null);
-//4 first Boutique 
-	Boutique boutique = new Boutique();
-	boutique.setCompleteTableName("boutique_and_categorie_4first");
-	Boutique[]arrayBoutique =(Boutique[])Generalize.getListObject(boutique, null);
-	String image ="";
-//4 first Boutique 
-	Blog blog = new Blog();
-	blog.setCompleteTableName("boutique_blog_4first");
-	Blog[]arrayBlog =(Blog[])Generalize.getListObject(blog, null);
-%>
+	Blog[]arrayBlog = (Blog[])request.getAttribute("arrayBlog");
+ 	Boutique[]arrayBoutique= (Boutique[])request.getAttribute("arrayBoutique");
+ 	Categorie[]boutique_categorie_boutique= (Categorie[])request.getAttribute("boutique_categorie_boutique");
+ 	Categorie[]articleCategorie= (Categorie[])request.getAttribute("articleCategorie");
+ 	String image= "";
+ %>
 <jsp:include page='../incs/header_common.jsp' />
 <section class="container">
     <form action="" method="post">
@@ -67,7 +57,7 @@
                                         </div>
                                         </p>
                                         <a class="btn btn-dark"
-                                            href="">Voir
+                                            href="${pageContext.request.contextPath}/boutiques?ref=<%=arrayBoutique[i].getId() %>">Voir
                                             la boutique</a>
                                     </div>
                                 </div>
@@ -128,7 +118,7 @@
                     <h4 class="fst-italic" id="apropos"></h4>
                     <p class="mb-0 text-dark">Vous souhaitez acheter des produits ou des services sans avoir à vous rendre dans un magasin physique ? 
 Doshopa le rend possible pour vous ! Avec notre plateforme e-commerce, 
-vous pouvez acheter dans les boutiques ce que vous voulez de n'importe où en toute sécurité, facilement et rapidement.</p>
+vous pouvez acheter dans les boutiques ce que vous voulez de n'importe où, en toute sécurité, facilement et rapidement.</p>
                 </div>
             </div>
         </div>
@@ -180,7 +170,7 @@ vous pouvez acheter dans les boutiques ce que vous voulez de n'importe où en tou
     </div>
 </section><br>
 <jsp:include page='../incs/footer_common.jsp' />
-<% }catch(Exception e){%>
+<% }catch(Exception e){e.printStackTrace();%>
 <script language="JavaScript">
     alert('<%=e.getMessage()%>');
     history.back();
