@@ -15,7 +15,7 @@
 
 <!-- horizontal Basic Forms Start -->
 <div class="pd-20 card-box mb-30">
-	<form action="${pageContext.request.contextPath}/container.jsp?content=boutique/tableau_bord_global_read.jsp" method="POST">	
+	<form action="${pageContext.request.contextPath}/oadmin/container.jsp?content=boutique/dashboard_global_read.jsp" method="POST">	
 		 <%
 			 	PageSearch ps = new PageSearch(dashboard);
 		 		//ps.setVisibleEntry("id", false);
@@ -33,7 +33,7 @@
 		<table class="table table-striped">
 			<% 
  				ps.setColDisplay(new String[]{"boutique_id", "boutique_denomination", "commande_en_cours", "quantite_vente", "chiffre_affaires", "total_views", "total_articles", "total_promotions", "total_blog"});
-				ps.setColRenameDisplay(new String[]{"boutique_id", "boutique_denomination", "commande_en_cours", "quantite_vente", "chiffre_affaires", "total_views", "total_articles", "total_promotions", "total_blog"});
+				ps.setColRenameDisplay(new String[]{"Identification", "Dénomination", "Commande en cours", "Vente totales", "Chiffre d'Affaires", "Vues", "Articles", "Promotions", "Blogs"});
  				// field to redirect
 				HashMap<String,String>map = new HashMap<String,String>();
  				map.put("boutique_id","boutique_id");
