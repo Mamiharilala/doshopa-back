@@ -13,7 +13,7 @@ public class Boutique extends MapModelStateful{
 	String nif;
 	String stat;
 	String type_id;
-	String categorielib;
+	String categorielib,note,information,apropos;
 	int views;
  
 	public Boutique(){
@@ -33,12 +33,38 @@ public class Boutique extends MapModelStateful{
 	public String getSiege() {
 		return siege;
 	}
+	
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
 	public void setSiege(String siege) {
 		this.siege = siege;
 	}
 	public String getCategorie_id() {
 		return categorie_id;
 	}
+	
+	public String getInformation() {
+		return information;
+	}
+
+	public void setInformation(String information) {
+		this.information = information;
+	}
+
+	public String getApropos() {
+		return apropos;
+	}
+
+	public void setApropos(String apropos) {
+		this.apropos = apropos;
+	}
+
 	public void setCategorie_id(String categorie_id) {
 		this.categorie_id = categorie_id;
 	}

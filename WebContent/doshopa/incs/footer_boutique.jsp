@@ -7,8 +7,8 @@
   </p>
 </footer>
 </body>
-<?php $this->load->view('js'); ?>
 </html>
+<jsp:include page='../incs/js.jsp' />
 <style>
 .blog-footer {
   padding: 2.5rem 0;

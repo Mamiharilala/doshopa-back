@@ -21,7 +21,7 @@
                 <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Produit</a></li>
                 <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Recherche</a></li>
                 <li class="nav-item"><a href="#" class="nav-link link-dark px-2">A propos</a></li>
-                <li class="nav-item"><a href="" class="nav-link px-2 link-dark">Mon panier <i class="fa-solid fa-cart-shopping fa-lg mt-1"></i></a></li>
+                <li class="nav-item"><a href="" class="nav-link px-2 link-dark">Panier <i class="fa-solid fa-cart-shopping fa-lg mt-1"></i></a></li>
 
             </ul>
             <ul class="nav">

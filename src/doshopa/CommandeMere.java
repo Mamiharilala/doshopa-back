@@ -17,6 +17,8 @@ public class CommandeMere extends MapModelStateful{
 	String utilisateur_id,remarque;
 	public CommandeMere() {
 		this.setTableName("commande_mere");
+		this.setSequenceName("seq_commandemere");
+		this.setSequencePrefixe("CM");
 		this.setCompleteTableName("commande_mere");
 		this.setSchema("public");
 	}

@@ -4,7 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import doshopa.Article;
 import doshopa.Boutique;
+import doshopa.CommandeFille;
+import doshopa.CommandeMere;
+import util.Constant;
 import util.DBConnect;
 
 public class Utilisateur extends MapModel {
@@ -168,5 +172,52 @@ public class Utilisateur extends MapModel {
 	public void setEtat(int etat) {
 		this.etat = etat;
 	}
-	
+	public boolean acheterArticle(String idArticle) throws Exception{
+		boolean val = false;
+		Connection c = null;
+		try {
+			c = new DBConnect().getConnection();
+			c.setAutoCommit(false);
+			Article tempArticle = new Article();
+		 	tempArticle.setId(idArticle);
+		 	Article art = (Article)Generalize.getById(tempArticle, c);
+		 	if(art==null) {
+		 		throw new Exception("Produit introuvable!");
+		 	}
+		 	String where = " and utilisateur_id like '"+this.getId()+"' and etat=1";
+		 	CommandeMere commande = null;
+		 	CommandeMere[]mere = (CommandeMere[])Generalize.getListObjectWithWhere(new CommandeMere(), where, c);
+		 	if(mere.length==0) {
+		 		commande = new CommandeMere();
+		 		commande.setId(c);
+		 		commande.setEtat(Constant.createdState);
+		 		commande.setUtilisateur_id(this.getId());	
+		 		commande.setDate_mere(util.Utility.currentSQLDate());
+		 		commande.insertIntoTable(c);
+		 	}else {
+		 		commande = mere[0];
+		 	}
+		 	CommandeFille commandeFille = new CommandeFille();
+		 	commandeFille.setId(c);
+		 	commandeFille.setMere(commande.getId());
+		 	commandeFille.setArticle_id(art.getId());
+		 	commandeFille.setEtat(Constant.createdState);
+		 	commandeFille.setQuantite(1);
+		 	commandeFille.setPu(art.getPrix());
+		 	commandeFille.setCommande_type("COMMANDE");
+		 	commandeFille.setDate_fille(util.Utility.currentSQLDate());
+		 	commandeFille.insertIntoTable(c);
+		 	c.commit();
+		 	c.setAutoCommit(true);
+		 	val = true;
+		}catch(Exception e) {
+			val = false;
+			throw e;
+		}finally {
+			if(c!=null) {
+				c.close();
+			}
+		} 
+		return val;
+	}
 }
