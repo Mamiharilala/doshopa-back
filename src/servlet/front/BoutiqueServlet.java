@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
+// import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
 
 import doshopa.Article;
 import doshopa.Boutique;

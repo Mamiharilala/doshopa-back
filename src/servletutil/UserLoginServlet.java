@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class UserLoginServlet
  */
-@WebServlet("/user")
+@WebServlet("/user/*")
 public class UserLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -28,12 +28,15 @@ public class UserLoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String action = request.getParameter("action");
+		String action = "";
+		action += request.getParameter("action");
 		HttpSession session = request.getSession();
-		if (action != null && action.equals("logout")) {
+		if (action.compareTo("logout") == 0) {
 			session.removeAttribute("user");
 			session.invalidate();
-			response.sendRedirect("oadmin/auth/login.jsp");
+			response.sendRedirect(request.getContextPath() + "/index");
+		}else {
+			request.getRequestDispatcher(request.getContextPath() + "/auth/login.jsp").forward(request, response);
 		}
 	}
 

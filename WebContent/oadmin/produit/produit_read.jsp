@@ -35,7 +35,7 @@ p.setCompleteTableName("article_libcomplet");
 		<table class="table table-striped">
 			<% 
 				ps.setColDisplay(new String[]{"designation","reference","prix","devise_id","quantite","observation","categorie_id","boutique_denomination"});
-				ps.setColRenameDisplay(new String[]{"designation","reference","prix","devise_id","quantite","observation","categorie_id","boutique"});
+				ps.setColRenameDisplay(new String[]{"Désignation","Référence","Prix","Devise","Quantité","Observation","Catégorie","Boutique"});
 				HashMap<String,String>map = new HashMap<String,String>();
   				ps.setColRedirection(map);
  				// Href of redirect
