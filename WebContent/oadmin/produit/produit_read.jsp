@@ -5,15 +5,26 @@
 <%@ page import="front.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.sql.Date"%>
+<%@ page import="system.*"%>
 <% 
 Article p = new Article();
 p.setCompleteTableName("article_libcomplet");
+
+String boutiqueID = "and 1<2";
+Utilisateur u = (Utilisateur) session.getAttribute("user");
+if (u != null){
+	if (u.getBoutique_id() != null){
+		boutiqueID = " and boutique_id = '" + u.getBoutique_id() + "'";		
+	}
+}
+
 %>
 <!-- horizontal Basic Forms Start -->
 <div class="pd-20 card-box mb-30">
 	<form action="${pageContext.request.contextPath}/container.jsp?content=produit/produit_read.jsp" method="POST">	
 		 <%
 			 	PageSearch ps = new PageSearch(p);
+		 		ps.setWhere(boutiqueID);
 		 		ps.setVisibleEntry("id", false);
 		 		ps.setVisibleEntry("etat", false);
 		 		ps.setVisibleEntry("image", false);

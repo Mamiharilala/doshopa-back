@@ -4,8 +4,18 @@
 <%@ page import="front.*"%>
 <%@ page import="java.sql.Date"%>
 <%@ page import="java.util.*"%>
+<%@ page import="system.*"%>
 <%
 	Promotion p = new Promotion();
+	p.setCompleteTableName("promotion_article_boutique");
+	
+	String boutiqueID = "and 1<2";
+	Utilisateur u = (Utilisateur) session.getAttribute("user");
+	if (u != null){
+		if (u.getBoutique_id() != null){
+			boutiqueID = " and boutique_id = '" + u.getBoutique_id() + "'";		
+		}
+	}
 %>
 <!-- horizontal Basic Forms Start -->
 <form
@@ -15,6 +25,7 @@
 
 		<%
 			PageSearch ps = new PageSearch(p);
+			ps.setWhere(boutiqueID);
 			ps.setVisibleEntry("id", false);
 			ps.setVisibleEntry("etat", false);
 			ps.setNameDisplay("quantite", "Quantit&eacute;");
