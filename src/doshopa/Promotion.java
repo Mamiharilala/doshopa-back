@@ -5,7 +5,7 @@ import java.sql.Date;
 import system.MapModel;
 import system.MapModelStateful;
 
-public class Promotion extends MapModelStateful{
+public class Promotion extends Article{
 	double prix_avant;
 	double prix_actuel;
 	Date date_debut;

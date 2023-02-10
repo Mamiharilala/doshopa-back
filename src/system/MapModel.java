@@ -67,7 +67,7 @@ public class MapModel {
 	}
 	public String generateId(Connection c) throws Exception {
 		String sql = "select nextval(?) as sequence";
-		PreparedStatement pstmt = null;
+ 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String val ="";
 		boolean isConnNull = false; 
@@ -151,7 +151,7 @@ public class MapModel {
 				simpleName = listFieldName[i].getType().getSimpleName().toUpperCase();
 				listFieldName[i].setAccessible(true);
 				sql +=  listFieldName[i].getName()+",";
-				val+= Generalize.valStringQuery(simpleName,listFieldName[i].get(this));
+				val+= Generalize.valStringQuery(simpleName,listFieldName[i].get(this))+",";
 			}
 			sql = sql.substring(0, sql.length()-1)+")";
 			val = val.substring(0, val.length()-1)+")";

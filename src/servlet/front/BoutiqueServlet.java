@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
 
 import doshopa.Article;
+import doshopa.Blog;
 import doshopa.Boutique;
+import doshopa.Promotion;
 import front.Page;
 import system.Generalize;
 import system.MapModel;
@@ -67,10 +69,23 @@ public class BoutiqueServlet extends HttpServlet {
 			Article[]arrayArticle = (Article[])Generalize.getListObjectWithWhere(tempArticle, where, c);	
 			request.setAttribute("arrayArticle", arrayArticle);
 			request.setAttribute("boutique", boutique);
-			
+			//pagination article
 			String paginationArticle = Page.getpagination(request,Generalize.getCountTable(tempArticle," AND boutique_id like '"
 					+request.getParameter("ref")+ "' ", c),totalRowInPage);
 			request.setAttribute("paginationArticle", paginationArticle);
+			// 6 first promotion
+			Promotion tempPromotion = new Promotion();
+			tempPromotion.setCompleteTableName("v_article_promotion");			
+			where = " and boutique_id like  '"+request.getParameter("ref")+"' order by date_fin desc limit 6";
+			Promotion[]arrayPromotion = (Promotion[])Generalize.getListObjectWithWhere(tempPromotion, where, c);
+			request.setAttribute("arrayPromotion", arrayPromotion);
+			//6 first blog
+			Blog tempBlog = new Blog();
+			tempBlog.setCompleteTableName("boutique_blog_valider");			
+			where = " and boutique_id like  '"+request.getParameter("ref")+"' order by views desc limit 6";
+			Blog[]arrayBlog = (Blog[])Generalize.getListObjectWithWhere(tempBlog, where, c);
+			request.setAttribute("arrayBlog", arrayBlog);
+			//display view
 			RequestDispatcher view = request.getRequestDispatcher("doshopa/pages/boutique.jsp");
 			view.forward(request, response);
 		}catch(Exception e) {

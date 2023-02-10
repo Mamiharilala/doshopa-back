@@ -29,4 +29,7 @@ public class Utility {
 	public static String setStartWithUppercase(String name) {
 		return name.substring(0,1).toUpperCase()+name.substring(1);
 	}
+	public static Date currentSQLDate() {
+		return new java.sql.Date(Calendar.getInstance().getTime().getTime());
+	}
 }

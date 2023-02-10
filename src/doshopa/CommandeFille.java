@@ -10,6 +10,8 @@ public class CommandeFille extends MapModelStateful{
 	Date date_fille;
 	boolean est_payer;
 	public CommandeFille() {
+		this.setSequenceName("seq_commandefille");
+		this.setSequencePrefixe("CMF");
 		this.setTableName("commande_fille");
 		this.setCompleteTableName("commande_fille");
 		this.setSchema("public");

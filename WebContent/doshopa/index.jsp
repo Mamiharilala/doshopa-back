@@ -2,5 +2,5 @@
     pageEncoding="ISO-8859-1"%>
 
 <%
-	response.sendRedirect("pages/one_page.jsp");
+	response.sendRedirect(request.getContextPath()+"/accueil");
 %>
