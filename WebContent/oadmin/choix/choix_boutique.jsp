@@ -36,6 +36,7 @@ Boutique boutique = new Boutique();
  				out.println(pc.getResultDisplay());
 			%>
 		</table>
+		<%=pc.getFooter(request)%>
 	</div>
 </div>
 <!-- Responsive tables End -->

@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="doshopa.Boutique"%>
+<%@ page import="system.*"%>
+<%@ page import="doshopa.*"%>
 <%@ page import="front.*"%>
 <%@ page import="java.sql.Date"%>
 
 <%
- 
+Categorie cat = new Categorie();
+cat.setCompleteTableName("boutique_type");
+Categorie[]offre =(Categorie[])Generalize.getListObject(cat, null);
 Boutique boutique = new Boutique();
  %>
 <div class="page-header">
@@ -21,7 +24,7 @@ Boutique boutique = new Boutique();
 	</div>
 </div>
 <div class="pd-20 card-box mb-30">
-	<form action="${pageContext.request.contextPath}/treat.jsp"
+	<form action="${pageContext.request.contextPath}/oadmin/treat.jsp"
 		method="POST">
 		<%
 			PageCreate pv = new PageCreate(boutique);
@@ -31,6 +34,9 @@ Boutique boutique = new Boutique();
  			pv.setHtml("categorie_id", "readonly");
 			pv.setLink("categorie_id", request.getContextPath() + "/oadmin/container.jsp?content=choix/choix_boutique_categorie.jsp");
  			pv.setType("categorie_id", "popup");
+ 			pv.setType("type_id", "SELECT");
+ 			pv.setMutilpleKeyValue("type_id","id","description");
+ 			pv.setMutilpleData("type_id", offre);
 			pv.setNameDisplay("type_id", "Type");
  			pv.chargeForm();
 			out.println(pv.getLineForm());

@@ -37,6 +37,7 @@
  				out.println(ps.getResultDisplay());
 			%>
 		</table>
+		<%=ps.getFooter(request)%>
 	</div>
 </div>
 <!-- Responsive tables End -->
