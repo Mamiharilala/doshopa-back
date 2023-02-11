@@ -6,7 +6,7 @@ public class Blog  extends MapModelStateful{
 	String titre, body,boutique_id; 
 	Date date_insert;
 	int views;
-	String image ;
+	String image,boutiquelib ;
 	public Blog() {
 		this.setTableName("boutique_blog");
 		this.setCompleteTableName("boutique_blog");
@@ -28,6 +28,13 @@ public class Blog  extends MapModelStateful{
 	}
 	public String getBoutique_id() {
 		return boutique_id;
+	}
+	
+	public String getBoutiquelib() {
+		return boutiquelib;
+	}
+	public void setBoutiquelib(String boutiquelib) {
+		this.boutiquelib = boutiquelib;
 	}
 	public void setBoutique_id(String boutique_id) {
 		this.boutique_id = boutique_id;
