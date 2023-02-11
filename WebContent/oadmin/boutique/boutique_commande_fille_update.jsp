@@ -39,7 +39,7 @@
 	</div>
 </div>
 <div class="pd-20 card-box mb-30">
-	<form action="${pageContext.request.contextPath}/treat.jsp"
+	<form action="${pageContext.request.contextPath}/oadmin/treat.jsp"
 		method="POST">
 		<%
 			PageUpdate pv = new PageUpdate(cf);
@@ -68,9 +68,9 @@
 		<input type="hidden" class="form-control" value="update" name="mode">
 		<input type="hidden" class="form-control" value="<%=request.getParameter("id")%>" name="id">
 		<input type="hidden" class="form-control"
-			value="${pageContext.request.contextPath}/container.jsp?content=boutique/boutique_commande_fille_update.jsp&id=<%=request.getParameter("id")%>"
+			value="${pageContext.request.contextPath}/oadmin/container.jsp?content=boutique/boutique_commande_fille_update.jsp&id=<%=request.getParameter("id")%>"
 			name="after"> <input type="hidden" class="form-control"
-			name="class" value="oadmin.CommandeFille">
+			name="class" value="doshopa.CommandeFille">
 		<div class="nav justify-content-center">
 			<button type="submit"
 				class="btn btn-success btn-lg col-xs-4  col-sm-4">Modifier</button>
@@ -78,7 +78,7 @@
 		</div>
 		<br>
 		<div class="nav justify-content-center">
-			<a href="${pageContext.request.contextPath}/container.jsp?content=boutique/boutique_commande_fille_detail.jsp&id=<%=request.getParameter("id")%>"><button type="button" class="btn btn-danger">Voir détail</button>
+			<a href="${pageContext.request.contextPath}/oadmin/container.jsp?content=boutique/boutique_commande_fille_detail.jsp&id=<%=request.getParameter("id")%>"><button type="button" class="btn btn-danger">Voir détail</button>
 		</div>
 
 	</form>

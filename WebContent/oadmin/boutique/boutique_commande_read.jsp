@@ -15,7 +15,7 @@ Categorie[]etat =(Categorie[])Generalize.getListObject(cat, null);
 %>
 <!-- horizontal Basic Forms Start -->
 <div class="pd-20 card-box mb-30">
-	<form action="${pageContext.request.contextPath}/container.jsp?content=boutique/boutique_commande_read.jsp" method="POST">	
+	<form action="${pageContext.request.contextPath}/oadmin/container.jsp?content=boutique/boutique_commande_read.jsp" method="POST">	
 		 <%
 			 	PageSearch ps = new PageSearch(commande);
 		 		ps.setVisibleEntry("id", false);

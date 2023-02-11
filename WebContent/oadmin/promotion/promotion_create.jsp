@@ -23,7 +23,7 @@
 	</div>
 </div>
 <div class="pd-20 card-box mb-30">
-	<form action="${pageContext.request.contextPath}/treat.jsp"
+	<form action="${pageContext.request.contextPath}/oadmin/treat.jsp"
 		method="POST">
 		<%
 			PageCreate pv = new PageCreate(p);
@@ -31,7 +31,7 @@
 			pv.setVisibleEntry("etat", false);
 			pv.setType("article_id", "popup");
 			pv.setHtml("article_id", "readonly");
-			pv.setLink("article_id", request.getContextPath() + "/container.jsp?content=choix/choix_article.jsp");
+			pv.setLink("article_id", request.getContextPath() + "/oadmin/container.jsp?content=choix/choix_article.jsp");
 			pv.setNameDisplay("quantite", "Quantit&eacute;");
 			pv.setNameDisplay("prix_actuel", "Prix de promotion");
 			pv.setNameDisplay("prix_avant", "Prix avant");
@@ -44,8 +44,8 @@
 			out.println(pv.getLineForm());
 		%>
 		<input type="hidden" class="form-control" value="insert" name="mode">
-		<input type="hidden" class="form-control" value="${pageContext.request.contextPath}/container.jsp?content=promotion/promotion_read.jsp" name="after">
-		<input type="hidden" class="form-control" name="class" value="oadmin.Promotion">
+		<input type="hidden" class="form-control" value="${pageContext.request.contextPath}/oadmin/container.jsp?content=promotion/promotion_read.jsp" name="after">
+		<input type="hidden" class="form-control" name="class" value="doshopa.Promotion">
 		<button type="submit" class="btn btn-success btn-lg btn-block">Enregistrer</button>
 	</form>
  	<br>
