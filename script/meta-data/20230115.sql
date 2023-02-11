@@ -195,7 +195,6 @@ AS SELECT *
    FROM commandeliste
   WHERE commandeliste.etat >= 10;
 
-
 --  commandeliste_cree source
 
 CREATE OR REPLACE VIEW  commandeliste_cree

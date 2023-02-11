@@ -6,9 +6,20 @@
 <%@ page import="system.*"%>
 <%@ page import="java.util.*"%>
 <% 
-Utilisateur u = (Utilisateur)session.getAttribute("user");
+
+String boutiqueID = "";
+Utilisateur u = (Utilisateur) session.getAttribute("user");
+
 BoutiqueCommande commande = new BoutiqueCommande();
-commande.setCompleteTableName("commandeliste_boutique");
+commande.setCompleteTableName("commandeliste");
+
+if (u != null){
+	if (u.getBoutique_id() != null){
+		boutiqueID = " and boutique_id = '" + u.getBoutique_id() + "'";	
+		commande.setCompleteTableName("commandeliste_boutique");
+	}
+}
+
 Categorie cat = new Categorie();
 cat.setCompleteTableName("etat_commande");
 Categorie[]etat =(Categorie[])Generalize.getListObject(cat, null);
@@ -18,6 +29,7 @@ Categorie[]etat =(Categorie[])Generalize.getListObject(cat, null);
 	<form action="${pageContext.request.contextPath}/oadmin/container.jsp?content=boutique/boutique_commande_read.jsp" method="POST">	
 		 <%
 			 	PageSearch ps = new PageSearch(commande);
+		 		ps.setWhere(boutiqueID);
 		 		ps.setVisibleEntry("id", false);
 		 		ps.setType("etat", "SELECT");
 		 		ps.setMutilpleKeyValue("etat","code","description");
@@ -36,7 +48,7 @@ Categorie[]etat =(Categorie[])Generalize.getListObject(cat, null);
 		<table class="table table-striped">
 			<% 
  				ps.setColDisplay(new String[]{"idmere","designation","quantite","pu","montant","code_collecter","date_fille","etatlib"});
-				ps.setColRenameDisplay(new String[]{"Numéro de commande","Designation","quantité","pu","montant","code_collecter","Date","Etat"});
+				ps.setColRenameDisplay(new String[]{"Numéro de commande","Désignation","Quantité","P.U","Montant","Code_collecter","Date","Etat"});
  				// field to redirect
 				HashMap<String,String>map = new HashMap<String,String>();
  				map.put("designation","id");
