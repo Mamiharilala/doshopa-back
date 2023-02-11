@@ -169,7 +169,7 @@
 							class="dw dw-user1"></i> Profile</a> <a class="dropdown-item"
 							href="profile.html"><i class="dw dw-settings2"></i> Paramètres</a> <a
 							class="dropdown-item" href="faq.html"><i class="dw dw-help"></i>
-							Aide</a> <a class="dropdown-item" href="<%= request.getContextPath() %>/user?action=logout"><i
+							Aide</a> <a class="dropdown-item" href="${pageContext.request.contextPath}/doshopa/pages/treat.jsp?mode=logout&after=${pageContext.request.contextPath}/oadmin"><i
 							class="dw dw-logout"></i> Se déconnecter</a>
 					</div>
 				</div>
