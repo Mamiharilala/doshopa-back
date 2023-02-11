@@ -10,26 +10,6 @@
  	String image= "";
  %>
 <jsp:include page='../incs/header_common.jsp' />
-<section class="container">
-    <form action="" method="post">
-        <div class="mt-4">
-            <div class="mb-3 row">
-                <div class="mt-4 col-xs-1 col-sm-1"></div>
-                <label class="mt-4 col-xs-2 col-sm-2 col-form-label">Nom de produit</label>
-                <div class="mt-4 col-xs-2 col-sm-2"><input type="text" value="" placeholder="Taper ici le nom" class="form-control" name="key_product"></div>
-                <div class="mt-4 col-xs-3 col-sm-3">
-                    <select class="form-select" aria-label="" name="categorie_ref">
-                        <option value="%">Tous</option>
-                        <%for (int cb = 0; cb <articleCategorie.length; cb++){%>
-                        <option class="p-5" value="<%= articleCategorie[cb].getId()%>"><%= articleCategorie[cb].getDescription()%></option>
-                        <% } %>
-                    </select>
-                </div>
-                <div class="mt-4 col-xs-3 col-sm-3"><button type="submit" class="btn btn-dark">Chercher</button></div>
-            </div>
-        </div>
-    </form>
-</section>
 <section>
     <div class="">
         <div class="site-section mb-1">
@@ -43,10 +23,7 @@
                                 <div class="card shadow">
                                     <div class="card-body text-center">
                                         <% 
-                                        	image = request.getContextPath()+"/doshopa/assets/uploads/bg-boutique1.png";
-                                        	if(util.Utility.stringWithoutNull(arrayBoutique[i].getLogo()).compareTo("")!=0){
-                                                image = arrayBoutique[i].getLogo(); 
-                                            }
+                                        	image = request.getContextPath()+arrayBoutique[i].getLogo(); 
                                         %>
                                         <img src="<%=image%>" alt="">
                                         <h5 class="card-title text-center"><%=arrayBoutique[i].getDenomination()%> 
@@ -101,7 +78,7 @@
                         <!-- Text -->
                         <p class="card-text text-dark mb-4"><%= boutique_categorie_boutique[i].getDescription()%></p>
                         <!-- Link -->
-                        <a href=""
+                        <a href="${pageContext.request.contextPath}/galerie?categorie_ref=<%=boutique_categorie_boutique[i].getId()%>"
                             class="text-dark d-flex justify-content-end text-decoration-none">
                             <h5>Voir tous <i class="fas fa-angle-double-right"></i></h5>
                         </a>
@@ -155,7 +132,7 @@ vous pouvez acheter dans les boutiques ce que vous voulez de n'importe où, en to
                                 <p class="card-text text-dark text-truncate" style="height: 96px;">
                                     <%= arrayBlog[i].getBody() %></p>
                                 <!-- Button -->
-                                <a href=""
+                                <a href="${pageContext.request.contextPath}/blog?ref=<%=arrayBlog[i].getId() %>"
                                     class="btn btn-dark shadow-lg">Lire la suite</a>
 
                             </div>
