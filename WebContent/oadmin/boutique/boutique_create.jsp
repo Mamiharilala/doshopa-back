@@ -29,15 +29,15 @@ Boutique boutique = new Boutique();
 			pv.setVisibleEntry("etat", false);
 			pv.setVisibleEntry("views", false);
  			pv.setHtml("categorie_id", "readonly");
-			pv.setLink("categorie_id", request.getContextPath() + "/container.jsp?content=choix/choix_boutique_categorie.jsp");
+			pv.setLink("categorie_id", request.getContextPath() + "/oadmin/container.jsp?content=choix/choix_boutique_categorie.jsp");
  			pv.setType("categorie_id", "popup");
 			pv.setNameDisplay("type_id", "Type");
  			pv.chargeForm();
 			out.println(pv.getLineForm());
  		%>
 		<input type="hidden" class="form-control" value="insert" name="mode">
-		<input type="hidden" class="form-control" value="${pageContext.request.contextPath}/container.jsp?content=boutique/boutique_read.jsp" name="after">
-		<input type="hidden" class="form-control" name="class" value="oadmin.Boutique">
+		<input type="hidden" class="form-control" value="${pageContext.request.contextPath}/oadmin/container.jsp?content=boutique/boutique_read.jsp" name="after">
+		<input type="hidden" class="form-control" name="class" value="doshopa.Boutique">
 		<button type="submit" class="btn btn-success btn-lg btn-block">Enregistrer</button>
 	</form>
  	<br>

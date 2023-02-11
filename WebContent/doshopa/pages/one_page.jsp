@@ -48,7 +48,7 @@
     </div>
 </section><br><br>
 <section class="text-center">
-    <a href="" class="text-decoration-none"><button
+    <a href="${pageContext.request.contextPath}/galerie" class="text-decoration-none"><button
             class="btn btn-outline-dark btn-sm">Voir toutes les boutiques</button></a>
 </section>
 <br>

@@ -33,6 +33,10 @@
 		if(request.getParameter("mode").compareTo("validate_all_order")==0){
 			u.validerTousCommandeFille();   
  	 	}
+		if(request.getParameter("mode").compareTo("logout")==0){
+			session.removeAttribute("user");
+			session.invalidate();
+ 	 	}
 	}
 	
 %>

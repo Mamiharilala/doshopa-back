@@ -8,7 +8,7 @@ Devise devise = new Devise();
 %>
 <!-- horizontal Basic Forms Start -->
 <div class="pd-20 card-box mb-30">
-	<form action="${pageContext.request.contextPath}/container.jsp?content=choix/choix_devise.jsp" method="POST">	
+	<form action="${pageContext.request.contextPath}/oadmin/container.jsp?content=choix/choix_devise.jsp" method="POST">	
 		 <%
 			 	PageChoice pc = new PageChoice(devise,"code");
 		 		pc.setVisibleEntry("id", false);

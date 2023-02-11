@@ -8,7 +8,7 @@ Boutique boutique = new Boutique();
 %>
 <!-- horizontal Basic Forms Start -->
 <div class="pd-20 card-box mb-30">
-	<form action="${pageContext.request.contextPath}/container.jsp?content=choix/choix_boutique.jsp" method="POST">	
+	<form action="${pageContext.request.contextPath}/oadmin/container.jsp?content=choix/choix_boutique.jsp" method="POST">	
 		 <%
 			 	PageChoice pc = new PageChoice(boutique,"denomination");
 		 		pc.setVisibleEntry("id", false);

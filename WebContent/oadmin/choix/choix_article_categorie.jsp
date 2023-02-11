@@ -8,7 +8,7 @@
 %>
 <!-- horizontal Basic Forms Start -->
 <div class="pd-20 card-box mb-30">
-	<form action="${pageContext.request.contextPath}/container.jsp?content=choix/choix_article_categorie.jsp" method="POST">	
+	<form action="${pageContext.request.contextPath}/oadmin/container.jsp?content=choix/choix_article_categorie.jsp" method="POST">	
 		 <%
 			 	PageChoice pc = new PageChoice(categorie,"code");
 		 		pc.setVisibleEntry("id", false);

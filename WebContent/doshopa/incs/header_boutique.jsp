@@ -24,10 +24,10 @@
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/panier" class="nav-link px-2 link-dark">Panier <i class="fa-solid fa-cart-shopping fa-lg mt-1"></i></a></li>
 
             </ul>
-            <%if(u==null){%>
+            <%if(u!=null){%>
             <ul class="nav">
                 <li>
-                    <a href=""><button type="button"
+                    <a href="${pageContext.request.contextPath}/doshopa/pages/treat.jsp?mode=logout&after=${pageContext.request.contextPath}/accueil"><button type="button"
                             class="btn btn-outline-dark me-2">Se déconnecter</button></a>
                 </li>
             </ul>
