@@ -77,3 +77,18 @@ AS SELECT boutique_blog.id,
     boutique.denomination as boutiquelib
    FROM boutique_blog join boutique on boutique_blog.boutique_id = boutique.id 
   WHERE boutique_blog.etat >= 11;
+
+  CREATE OR REPLACE VIEW promotion_article_boutique
+AS SELECT a.id,
+    a.prix_avant,
+    a.prix_actuel,
+    a.date_debut,
+    a.date_fin,
+    a.etat,
+    a.article_id,
+    a.quantite,
+    ab.boutique_id,
+    ab.boutique_denomination,
+    ab.designation 
+   FROM article_promotion a
+     LEFT JOIN article_and_boutique ab ON a.article_id::text = ab.id::text;

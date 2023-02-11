@@ -21,7 +21,7 @@
 	</div>
 </div>
 <div class="pd-20 card-box mb-30">
-	<form action="${pageContext.request.contextPath}/treat.jsp"
+	<form action="${pageContext.request.contextPath}/oadmin/treat.jsp"
 		method="POST">
 		<%
 			PageCreate pv = new PageCreate(article);
@@ -33,9 +33,9 @@
 			pv.setType("categorie_id", "popup");
 			pv.setHtml("devise_id", "readonly");
 			pv.setHtml("categorie_id", "readonly");
-			pv.setLink("devise_id", request.getContextPath() + "/container.jsp?content=choix/choix_devise.jsp");
-			pv.setLink("boutique_id", request.getContextPath() + "/container.jsp?content=choix/choix_boutique.jsp");
-			pv.setLink("categorie_id", request.getContextPath() + "/container.jsp?content=choix/choix_article_categorie.jsp");
+			pv.setLink("devise_id", request.getContextPath() + "/oadmin/container.jsp?content=choix/choix_devise.jsp");
+			pv.setLink("boutique_id", request.getContextPath() + "/oadmin/container.jsp?content=choix/choix_boutique.jsp");
+			pv.setLink("categorie_id", request.getContextPath() + "/oadmin/container.jsp?content=choix/choix_article_categorie.jsp");
 			pv.setNameDisplay("boutique_id", "Boutique");
 			pv.setNameDisplay("categorie_id", "Catégorie");
 			pv.setNameDisplay("devise_id", "Devise");
@@ -47,8 +47,8 @@
 			out.println(pv.getLineForm());
 		%>
 		<input type="hidden" class="form-control" value="insert" name="mode">
-		<input type="hidden" class="form-control" value="${pageContext.request.contextPath}/container.jsp?content=product/produit_read.jsp" name="after">
-		<input type="hidden" class="form-control" name="class" value="oadmin.Article">
+		<input type="hidden" class="form-control" value="${pageContext.request.contextPath}/oadmin/container.jsp?content=produit/produit_read.jsp" name="after">
+		<input type="hidden" class="form-control" name="class" value="doshopa.Article">
 		<button type="submit" class="btn btn-success btn-lg btn-block">Enregistrer</button>
 	</form>
  	<br>

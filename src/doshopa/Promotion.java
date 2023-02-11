@@ -11,7 +11,6 @@ public class Promotion extends Article{
 	Date date_debut;
 	Date date_fin;
 	String article_id;
-	double quantite;
 	public Promotion(){
 		super();
 		setTableName("article_promotion");

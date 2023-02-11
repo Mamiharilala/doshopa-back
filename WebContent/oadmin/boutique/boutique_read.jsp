@@ -9,7 +9,7 @@ Boutique boutique = new Boutique();
 %>
 <!-- horizontal Basic Forms Start -->
 <div class="pd-20 card-box mb-30">
-	<form action="${pageContext.request.contextPath}/container.jsp?content=boutique/boutique_read.jsp" method="POST">	
+	<form action="${pageContext.request.contextPath}/oadmin/container.jsp?content=boutique/boutique_read.jsp" method="POST">	
 		 <%
 			 	PageSearch ps = new PageSearch(boutique);
 		 		ps.setVisibleEntry("id", false);

@@ -45,7 +45,7 @@ public class PageUpdate extends Page {
 					} else if (typeSimpleName.compareTo("FLOAT") == 0) {
 						sql += " " + fieldName + " = " + Float.parseFloat(request.getParameter(fieldName)) + ",";
 					} else if (typeSimpleName.compareTo("DATE") == 0) {
-						sql += " " + fieldName + " = " + Date.valueOf(request.getParameter(fieldName))+",";
+						sql += " " + fieldName + " = '" + Date.valueOf(request.getParameter(fieldName))+"',";
 					} else if (typeSimpleName.compareTo("INT") == 0 || typeSimpleName.compareTo("INTEGER") == 0) {
 						sql += " " + fieldName + " = " + Integer.parseInt(request.getParameter(fieldName))+",";
 					} else if (typeSimpleName.compareTo("BOOLEAN") == 0) {

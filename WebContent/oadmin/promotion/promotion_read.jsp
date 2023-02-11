@@ -19,7 +19,7 @@
 %>
 <!-- horizontal Basic Forms Start -->
 <form
-	action="${pageContext.request.contextPath}/container.jsp?content=promotion/promotion_read.jsp"
+	action="${pageContext.request.contextPath}/oadmin/container.jsp?content=promotion/promotion_read.jsp"
 	method="POST">
 	<div class="pd-20 card-box mb-30">
 
@@ -49,8 +49,8 @@
 		<div class="table-responsive">
 			<table class="table table-striped">
 				<%
-					ps.setColDisplay(new String[] { "id", "article_id", "quantite" });
-					ps.setColRenameDisplay(new String[] { "id", "Article", "quantite" });
+					ps.setColDisplay(new String[] { "id", "article_id", "designation" });
+					ps.setColRenameDisplay(new String[] { "id", "Article", "designation" });
 					HashMap<String, String> map = new HashMap<String, String>();
 					ps.setColRedirection(map);
 					// Href of redirect

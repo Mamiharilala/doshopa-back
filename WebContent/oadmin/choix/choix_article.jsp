@@ -1,21 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="doshopa.Promotion"%>
-<%@ page import="doshopa.Promotion"%>
+<%@ page import="doshopa.*"%>
 <%@ page import="front.*"%>
 <%@ page import="java.sql.Date"%>
 <% 
-	Promotion p = new Promotion();
+	Article p = new Article();
 %>
 <!-- horizontal Basic Forms Start -->
 <div class="pd-20 card-box mb-30">
 	<form action="${pageContext.request.contextPath}/oadmin/container.jsp?content=choix/choix_article.jsp" method="POST">	
 		 <%
-			 	PageChoice ps = new PageChoice(p,"quantite");
+			 	PageChoice ps = new PageChoice(p,"designation");
 		 		ps.setVisibleEntry("id", false);
 		 		ps.setVisibleEntry("etat", false);
-		 		ps.setNameDisplay("quantite", "Quantit&eacute;");
-		 		ps.setIntervalle("quantite");
+		 		ps.setIntervalle("views");
 		 		ps.chargeForm();
 			 	out.println(ps.getSearchForm());
 			 	ps.loadResult(request);
@@ -30,13 +28,13 @@
 	<div class="table-responsive">
 		<table class="table table-striped">
 			<% 
-				ps.setColDisplay(new String[]{"id","article_id","quantite"});
-				ps.setColRenameDisplay(new String[]{"id","Article","quantite"});
-				ps.setChampUser("article_id");
+				ps.setColDisplay(new String[]{"id","designation","reference"});
+				ps.setColRenameDisplay(new String[]{"id","Designation","r&eacute;f&eacute;rence"});
 				ps.prepareData(request);
  				out.println(ps.getResultDisplay());
 			%>
 		</table>
+		<%=ps.getFooter(request)%>
 	</div>
 </div>
 <!-- Responsive tables End -->

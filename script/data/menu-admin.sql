@@ -43,3 +43,6 @@ VALUES('UP'||(select nextval('seq_user_privilege')), 'UTL0001', 'MENU5', 11);
 INSERT INTO utilisateur_privilege
 (id, utilisateur_id, menu_id, etat)
 VALUES('UP'||(select nextval('seq_user_privilege')), 'UTL0001', 'MENU20', 11);
+INSERT INTO public.utilisateur_privilege
+(id, utilisateur_id, menu_id, etat)
+VALUES('UP'||(select nextval('seq_user_privilege')), 'UTL0001', 'MENU8', 11);

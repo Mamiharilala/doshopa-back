@@ -7,17 +7,17 @@
 <%@ page import="java.sql.Date"%>
 <%@ page import="system.*"%>
 <% 
+try{
 Article p = new Article();
 p.setCompleteTableName("article_libcomplet");
 
-String boutiqueID = "and 1<2";
+String boutiqueID = "";
 Utilisateur u = (Utilisateur) session.getAttribute("user");
 if (u != null){
 	if (u.getBoutique_id() != null){
-		boutiqueID = " and boutique_id = '" + u.getBoutique_id() + "'";		
+		boutiqueID = " and boutique_id = '" + u.getBoutique_id() + "'";	
 	}
 }
-
 %>
 <!-- horizontal Basic Forms Start -->
 <div class="pd-20 card-box mb-30">
@@ -59,4 +59,11 @@ if (u != null){
 		<%=ps.getFooter(request)%>	
 	</div>
 </div>
- 
+<% }catch(Exception e){%>
+<script language="JavaScript"> 
+	alert("<%=e.getMessage()%>");
+    history.back();
+</script>
+<%
+	}
+%>

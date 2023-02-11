@@ -7,7 +7,7 @@
 		<p class="mb-30">jQuery Step wizard</p>
 	</div>
 	<div class="wizard-content">
-		<form class="tab-wizard wizard-circle wizard vertical" action="${pageContext.request.contextPath}/boutique/treat/treatBoutique.jsp">
+		<form class="tab-wizard wizard-circle wizard vertical" action="${pageContext.request.contextPath}/oadmin/boutique/treat/treatBoutique.jsp">
 			<h5>Personal Info</h5>
 			<section>
 				<div class="row">
@@ -24,8 +24,8 @@
 			</section>	
 			<div class="nav justify-content-center"><button type="submit" class="btn btn-success btn-lg">Collecter</button></div>
 			<input type="hidden" class="form-control" value="collecter" name="mode">
-			<input type="hidden" class="form-control" value="${pageContext.request.contextPath}/container.jsp?content=boutique/boutique_collecter.jsp" name="after">
-			<input type="hidden" class="form-control" name="class" value="oadmin.CommandeMere">
+			<input type="hidden" class="form-control" value="${pageContext.request.contextPath}/oadmin/container.jsp?content=boutique/boutique_collecter.jsp" name="after">
+			<input type="hidden" class="form-control" name="class" value="doshopa.CommandeMere">
 		</form>
 	</div>
 </div>
