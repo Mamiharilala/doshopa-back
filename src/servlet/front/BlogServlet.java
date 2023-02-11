@@ -1,8 +1,7 @@
 package servlet.front;
 
 import java.io.IOException;
-import java.sql.Connection;
-import system.*;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,19 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import system.MapModel;
+import doshopa.Blog;
+import doshopa.Boutique;
+import system.Generalize;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class Blog
  */
-@WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/blog")
+public class BlogServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public BlogServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,8 +32,25 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-  	    RequestDispatcher view=request.getRequestDispatcher("doshopa/pages/login.jsp");
-	    view.forward(request,response);
+		try {
+			Blog tempBlog = new Blog();
+			tempBlog.setCompleteTableName("boutique_blog_valider");
+			tempBlog.setId(request.getParameter("ref"));
+ 			Blog blog = (Blog)Generalize.getById(tempBlog, null);
+			request.setAttribute("blog", blog);
+			//boutique
+			Boutique tempBoutique = new Boutique();
+ 			tempBoutique.setCompleteTableName("boutique_libcomplet");
+			tempBoutique.setId(blog.getBoutique_id());
+			Boutique boutique = (Boutique)Generalize.getById(tempBoutique, null);
+			request.setAttribute("boutique", boutique);
+			//display view
+			RequestDispatcher view = request.getRequestDispatcher("doshopa/pages/blog.jsp");
+			view.forward(request, response);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	/**
@@ -40,20 +58,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
- 		try {
-			Utilisateur u = new Utilisateur();
- 			boolean val = u.treatLogin(request.getParameter("login"), request.getParameter("mot_passe"));
- 			request.getSession().setAttribute("user", u);
- 			if (val) {
-				response.sendRedirect("/doshopa/accueil");
-			}else {
-				response.sendRedirect("/doshopa/login");
-			}
- 			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		doGet(request, response);
 	}
 
 }

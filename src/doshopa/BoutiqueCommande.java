@@ -3,7 +3,7 @@ import java.sql.Date;
 import system.MapModelStateful;
 
 public class BoutiqueCommande extends MapModelStateful{
-	String idmere,article_id,designation,commande_type,utilisateur_id,remarque,code_collecter;
+	String idmere,article_id,designation,commande_type,utilisateur_id,remarque,code_collecter,devise_id;
 	Date date_mere,date_fille;
 	double pu,quantite,montant;
 	public BoutiqueCommande(){
@@ -82,6 +82,12 @@ public class BoutiqueCommande extends MapModelStateful{
 	}
 	public void setMontant(double montant) {
 		this.montant = montant;
+	}
+	public String getDevise_id() {
+		return devise_id;
+	}
+	public void setDevise_id(String devise_id) {
+		this.devise_id = devise_id;
 	}
 	
 }

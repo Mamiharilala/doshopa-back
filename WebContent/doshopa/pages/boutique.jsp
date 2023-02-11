@@ -17,11 +17,11 @@
 <section class="py-1 text-center container">
 	<div class="row py-lg-4">
 		<div class="col-lg-6 col-md-8 mx-auto">
-			<h1 class="fw-light">Chercher un produit</h1>
+			<h1 class="fw-light" id="search">Chercher un produit</h1>
 			<p class="lead text-muted">Nous offrons des produits de marque et
 				moins chère</p>
 			<p>
-			<form action="<?php echo base_url('boutique/index')?>" method="get">
+			<form action="${pageContext.request.contextPath}/boutiques?ref=<%=boutique.getId()%>" method="post">
 				<div class="btn my-2">
 					<input type="search" class="form-control"
 						placeholder="Nom de produit..." name="key_src" aria-label="Search">
@@ -34,7 +34,7 @@
 </section><br>
 <section>
 	<div class="album py-5">
-		<div class="container">
+		<div class="container" id="product">
  			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 				<%for(int i=0;i<arrayArticle.length;i++){%>
 				<div class="col">
@@ -204,7 +204,7 @@
 	</div>
 </section>
 <br>
-<section id="" class="mt-4 bg-dark text-white">
+<section class="mt-4 bg-dark text-white" id="about">
 	<div class="container p-5">
 		<div class="row">
 			<div class="col-xs-6 col-sm-4">

@@ -14,8 +14,7 @@ public class Utility {
 		return str;
 	}
  
-	public static String format(Object nb) {
-		
+	public static String format(Object nb) {	
 		NumberFormat formatter = null;
 		formatter = java.text.NumberFormat.getInstance(java.util.Locale.FRENCH);
 		formatter = new DecimalFormat("##,###.##");

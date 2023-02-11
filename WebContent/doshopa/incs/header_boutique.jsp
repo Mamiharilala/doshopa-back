@@ -4,6 +4,7 @@
 <%@ page import="doshopa.*"%>
 <% 
 	Boutique boutique = (Boutique)request.getAttribute("boutique");
+	Utilisateur u = (Utilisateur) request.getSession().getAttribute("user");
 %>
 <html>
 <head>
@@ -18,25 +19,26 @@
                         class="nav-link link-dark px-2 active"
                         aria-current="page"><%=boutique.getDenomination() %></a>
                 </li>
-                <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Produit</a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Recherche</a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-dark px-2">A propos</a></li>
-                <li class="nav-item"><a href="" class="nav-link px-2 link-dark">Panier <i class="fa-solid fa-cart-shopping fa-lg mt-1"></i></a></li>
+                <li class="nav-item"><a href="${pageContext.request.contextPath}/boutiques?ref=<%=request.getParameter("ref")%>#search" class="nav-link link-dark px-2">Produit</a></li>
+                <li class="nav-item"><a href="${pageContext.request.contextPath}/boutiques?ref=<%=request.getParameter("ref")%>#about" class="nav-link link-dark px-2">A propos</a></li>
+                <li class="nav-item"><a href="${pageContext.request.contextPath}/panier" class="nav-link px-2 link-dark">Panier <i class="fa-solid fa-cart-shopping fa-lg mt-1"></i></a></li>
 
             </ul>
+            <%if(u==null){%>
             <ul class="nav">
                 <li>
                     <a href=""><button type="button"
                             class="btn btn-outline-dark me-2">Se déconnecter</button></a>
                 </li>
             </ul>
+            <%}else{%>      
              <ul class="nav">
                 <li class="nav-item"><a href="" class="nav-link link-dark px-2">Se
                         connecter</a></li>
                 <li class="nav-item"><a href=" "
                         class="nav-link link-dark px-2">S'inscrire</a></li>
             </ul>
- 
+ 			<%}%>
         </div>
     </nav>
     <div class="nav-scroller py-1 mb-2">

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.servlet.http.HttpServletRequest;
+
 import doshopa.Article;
 import doshopa.Boutique;
 import doshopa.CommandeFille;
@@ -12,7 +14,7 @@ import util.Constant;
 import util.DBConnect;
 
 public class Utilisateur extends MapModel {
-	String nom, prenom, mail, telephone, mot_passe, adresse, sexe, role_id, login,boutique_id;
+	String nom, prenom, mail, telephone, mot_passe, adresse, sexe, role_id, login, boutique_id;
 	int etat;
 
 	public Utilisateur() {
@@ -34,7 +36,7 @@ public class Utilisateur extends MapModel {
 			c = new DBConnect().getConnection();
 			pstmt = c.prepareStatement(sql);
 			pstmt.setString(1, login);
-			pstmt.setString(2,pwd);
+			pstmt.setString(2, pwd);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				this.setId(rs.getString("id"));
@@ -46,7 +48,7 @@ public class Utilisateur extends MapModel {
 				this.setNom(rs.getString("nom"));
 				this.setPrenom(rs.getString("prenom"));
 				this.setBoutique_id(rs.getString("boutique_id"));
-			}else {
+			} else {
 				return false;
 			}
 			return true;
@@ -63,7 +65,7 @@ public class Utilisateur extends MapModel {
 				c.close();
 			}
 		}
-		
+
 	}
 
 	public String getNom() {
@@ -73,26 +75,28 @@ public class Utilisateur extends MapModel {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+
 	public boolean isBoutique() {
- 		if(this.getBoutique_id()!=null&&this.getBoutique_id()!=""&&this.getBoutique_id()!="null") {
+		if (this.getBoutique_id() != null && this.getBoutique_id() != "" && this.getBoutique_id() != "null") {
 			return true;
 		}
 		return false;
 	}
-	public Boutique getBoutique()throws Exception {
+
+	public Boutique getBoutique() throws Exception {
 		try {
-			if(!isBoutique()) {
-				throw new Exception ("Utilisateur n'a pas de boutique!");
+			if (!isBoutique()) {
+				throw new Exception("Utilisateur n'a pas de boutique!");
 			}
 			Boutique m = new Boutique();
 			m.setId(this.getBoutique_id());
-			return (Boutique)Generalize.getById(m, null);
- 		}catch(Exception e) {
+			return (Boutique) Generalize.getById(m, null);
+		} catch (Exception e) {
 			throw e;
 		}
-		 
+
 	}
-	
+
 	public String getBoutique_id() {
 		return boutique_id;
 	}
@@ -172,52 +176,141 @@ public class Utilisateur extends MapModel {
 	public void setEtat(int etat) {
 		this.etat = etat;
 	}
-	public boolean acheterArticle(String idArticle) throws Exception{
+
+	public boolean acheterArticle(String idArticle) throws Exception {
 		boolean val = false;
 		Connection c = null;
 		try {
 			c = new DBConnect().getConnection();
 			c.setAutoCommit(false);
 			Article tempArticle = new Article();
-		 	tempArticle.setId(idArticle);
-		 	Article art = (Article)Generalize.getById(tempArticle, c);
-		 	if(art==null) {
-		 		throw new Exception("Produit introuvable!");
-		 	}
-		 	String where = " and utilisateur_id like '"+this.getId()+"' and etat=1";
-		 	CommandeMere commande = null;
-		 	CommandeMere[]mere = (CommandeMere[])Generalize.getListObjectWithWhere(new CommandeMere(), where, c);
-		 	if(mere.length==0) {
-		 		commande = new CommandeMere();
-		 		commande.setId(c);
-		 		commande.setEtat(Constant.createdState);
-		 		commande.setUtilisateur_id(this.getId());	
-		 		commande.setDate_mere(util.Utility.currentSQLDate());
-		 		commande.insertIntoTable(c);
-		 	}else {
-		 		commande = mere[0];
-		 	}
-		 	CommandeFille commandeFille = new CommandeFille();
-		 	commandeFille.setId(c);
-		 	commandeFille.setMere(commande.getId());
-		 	commandeFille.setArticle_id(art.getId());
-		 	commandeFille.setEtat(Constant.createdState);
-		 	commandeFille.setQuantite(1);
-		 	commandeFille.setPu(art.getPrix());
-		 	commandeFille.setCommande_type("COMMANDE");
-		 	commandeFille.setDate_fille(util.Utility.currentSQLDate());
-		 	commandeFille.insertIntoTable(c);
-		 	c.commit();
-		 	c.setAutoCommit(true);
-		 	val = true;
-		}catch(Exception e) {
+			tempArticle.setId(idArticle);
+			Article art = (Article) Generalize.getById(tempArticle, c);
+			if (art == null) {
+				throw new Exception("Produit introuvable!");
+			}
+			String idMere = getIdCommandeMere(c);
+			CommandeFille commandeFille = new CommandeFille();
+			commandeFille.setId(c);
+			commandeFille.setMere(idMere);
+			commandeFille.setArticle_id(art.getId());
+			commandeFille.setEtat(Constant.createdState);
+			commandeFille.setQuantite(1);
+			commandeFille.setPu(art.getPrix());
+			commandeFille.setCommande_type("COMMANDE");
+			commandeFille.setDate_fille(util.Utility.currentSQLDate());
+			commandeFille.insertIntoTable(c);
+			c.commit();
+			c.setAutoCommit(true);
+			val = true;
+		} catch (Exception e) {
 			val = false;
 			throw e;
-		}finally {
-			if(c!=null) {
+		} finally {
+			if (c != null) {
 				c.close();
 			}
-		} 
+		}
 		return val;
+	}
+
+	public String getIdCommandeMere(Connection c) throws Exception {
+		String val = "";
+		boolean estNull = false;
+		try {
+			if (c == null) {
+				c = new DBConnect().getConnection();
+				estNull = true;
+			}
+			String where = " and utilisateur_id like '" + this.getId() + "' and etat=1";
+			CommandeMere commande = null;
+			CommandeMere[] mere = (CommandeMere[]) Generalize.getListObjectWithWhere(new CommandeMere(), where, c);
+			if (mere.length == 0) {
+				commande = new CommandeMere();
+				commande.setId(c);
+				commande.setEtat(Constant.createdState);
+				commande.setUtilisateur_id(this.getId());
+				commande.setDate_mere(util.Utility.currentSQLDate());
+				commande.insertIntoTable(c);
+			} else {
+				commande = mere[0];
+			}
+			val = commande.getId();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (estNull && c != null) {
+				c.close();
+			}
+		}
+		return val;
+	}
+
+	public void changeCommandeFille(String idPanier, double quantiteApres) throws Exception {
+		PreparedStatement pstmt = null;
+		Connection c = null;
+		try {
+			String sql = "";
+			c = new DBConnect().getConnection();
+			// Update fille
+			sql = "UPDATE commande_fille SET quantite=? WHERE etat = ? and id =?";
+			pstmt = c.prepareStatement(sql);
+			pstmt.setDouble(1, quantiteApres);
+			pstmt.setInt(2, Constant.createdState);
+			pstmt.setString(3, idPanier);
+			pstmt.executeUpdate();
+			// Update fille fin
+
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (c != null) {
+				c.close();
+			}
+		}
+	}
+	public void validerCommandeFille(String idPanier) throws Exception {
+		PreparedStatement pstmt = null;
+		Connection c = null;
+		try {
+			String sql = "";
+			c = new DBConnect().getConnection();
+			// Update fille
+			sql = "UPDATE commande_fille SET etat=? WHERE etat = ? and id=?";
+			pstmt = c.prepareStatement(sql);
+			pstmt.setDouble(1, Constant.waitingValidatedState);
+			pstmt.setInt(2, Constant.createdState);
+			pstmt.setString(3,idPanier);
+			pstmt.executeUpdate();
+			// Update fille fin
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (c != null) {
+				c.close();
+			}
+		}
+	}
+	public void validerTousCommandeFille() throws Exception {
+		PreparedStatement pstmt = null;
+		Connection c = null;
+		try {
+			String sql = "";
+			c = new DBConnect().getConnection();
+			// Update fille
+			sql = "UPDATE commande_fille SET etat=? WHERE etat = ?";
+			pstmt = c.prepareStatement(sql);
+			pstmt.setDouble(1, Constant.waitingValidatedState);
+			pstmt.setInt(2, Constant.createdState);
+ 			pstmt.executeUpdate();
+			// Update fille fin
+
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (c != null) {
+				c.close();
+			}
+		}
 	}
 }

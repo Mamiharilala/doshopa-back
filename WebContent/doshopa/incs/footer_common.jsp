@@ -66,8 +66,7 @@ Nous facilitons les ventes de manière simple et rapide.
 
         <!-- Copyright -->
         <div class="text-center p-3">
-            © 2023 Copyright:
-            <a class="text-warning" href="http://doshopa.com/">doshopa.com</a>
+           
         </div>
         <!-- Copyright -->
     </footer>
@@ -75,7 +74,7 @@ Nous facilitons les ventes de manière simple et rapide.
 <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom bg-dark text-white">
     <!-- Left -->
     <div class="me-5 d-none d-lg-block">
-        <span>Vous pouvez nous contacter et nous suivre sur :</span>
+        <span> © 2023 Doshopa</span>
     </div>
     <!-- Left -->
 

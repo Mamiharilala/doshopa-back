@@ -64,7 +64,11 @@ public class BoutiqueServlet extends HttpServlet {
 						+ (Integer.parseInt(currentPage) - 1) * totalRowInPage;
 			}
 			tempArticle.setCompleteTableName("article_libcomplet_valider"); 
-			String where =" AND boutique_id like '"
+			String where = "";
+			if(util.Utility.stringWithoutNull(request.getParameter("key_src")).compareTo("")!=0) {
+				where += " AND designation like '%"+request.getParameter("key_src")+"%'";	
+			}			
+			where +=" AND boutique_id like '"
 					+request.getParameter("ref")+ "' "+sql;
 			Article[]arrayArticle = (Article[])Generalize.getListObjectWithWhere(tempArticle, where, c);	
 			request.setAttribute("arrayArticle", arrayArticle);

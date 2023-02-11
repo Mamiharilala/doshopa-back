@@ -131,7 +131,6 @@ public class MapModel {
 	}
 	public void insertIntoTable(Connection c) throws Exception {	
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;	
 		boolean isConnNull = false; 
 		try {
 			Method m = this.getClass().getMethod("setEtat", new Class[] {int.class});
@@ -161,9 +160,6 @@ public class MapModel {
 			e.printStackTrace();
 			throw e;
 		}finally {
-			if (rs != null) {
-				rs.close();
-			}
 			if (pstmt != null) {
 				pstmt.close();
 			}
