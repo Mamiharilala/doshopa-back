@@ -3,9 +3,19 @@
 <%@ page import="doshopa.Article"%>
  <%@ page import="front.*"%>
 <%@ page import="java.sql.Date"%>
+<%@ page import="system.*"%>
 
 <%
-	Article article = new Article();
+
+Article article = new Article();
+
+boolean isBoutique = false;
+Utilisateur u = (Utilisateur) session.getAttribute("user");
+if (u != null){
+	if (u.getBoutique_id() != null){
+		isBoutique = true;
+	}
+}
 	 
 %>
 <div class="page-header">
@@ -41,6 +51,9 @@
 			pv.setNameDisplay("devise_id", "Devise");
 			pv.setNameDisplay("quantite", "Quantit&eacute;");
 			pv.setVisibleEntry("image", false);
+			if (isBoutique){
+				pv.setVisibleEntry("boutique_id", false);
+			}
  			pv.setType("observation", "textarea");
  			pv.setNameDisplay("reference", "R&eacute;f&eacute;rence");
 			pv.chargeForm();
@@ -49,6 +62,14 @@
 		<input type="hidden" class="form-control" value="insert" name="mode">
 		<input type="hidden" class="form-control" value="${pageContext.request.contextPath}/oadmin/container.jsp?content=produit/produit_read.jsp" name="after">
 		<input type="hidden" class="form-control" name="class" value="doshopa.Article">
+		<%
+			if (isBoutique){
+				
+		%>
+			<input type="hidden" class="form-control" value="<% out.print(u.getBoutique_id()); %>" name="boutique_id">
+		<%
+			}
+		%>
 		<button type="submit" class="btn btn-success btn-lg btn-block">Enregistrer</button>
 	</form>
  	<br>
