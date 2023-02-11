@@ -2,5 +2,5 @@
     pageEncoding="ISO-8859-1"%>
 
 <%
-	response.sendRedirect(request.getContextPath()+"/oadmin/auth/login.jsp");
+	response.sendRedirect(request.getContextPath() + "/index");
 %>
