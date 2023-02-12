@@ -28,7 +28,15 @@
 			ps.setWhere(boutiqueID);
 			ps.setVisibleEntry("id", false);
 			ps.setVisibleEntry("etat", false);
+			ps.setNameDisplay("article_id", "ID Article");
+			ps.setNameDisplay("boutique_id", "ID Boutique");
+			ps.setNameDisplay("date_debut", "Date début");
+			ps.setNameDisplay("date_fin", "Date fin");
+			ps.setNameDisplay("prix_avant", "Prix avant");
+			ps.setNameDisplay("prix_actuel", "Prix de promotion");
 			ps.setNameDisplay("quantite", "Quantit&eacute;");
+			ps.setNameDisplay("designation", "D&eacute;signation");
+			ps.setNameDisplay("boutique_denomination", "D&eacute;nomination Boutique");
 			ps.setIntervalle("quantite");
 			ps.chargeForm();
 			out.println(ps.getSearchForm());
@@ -50,7 +58,7 @@
 			<table class="table table-striped">
 				<%
 					ps.setColDisplay(new String[] { "id", "article_id", "designation" });
-					ps.setColRenameDisplay(new String[] { "id", "Article", "designation" });
+					ps.setColRenameDisplay(new String[] { "id", "Article", "D&eacute;signation" });
 					HashMap<String, String> map = new HashMap<String, String>();
 					ps.setColRedirection(map);
 					// Href of redirect

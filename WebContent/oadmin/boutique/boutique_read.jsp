@@ -14,6 +14,13 @@ Boutique boutique = new Boutique();
 			 	PageSearch ps = new PageSearch(boutique);
 		 		ps.setVisibleEntry("id", false);
 		 		ps.setVisibleEntry("etat", false);
+		 		ps.setNameDisplay("mail", "Email");
+		 		ps.setNameDisplay("type_id", "Type (ID)");
+		 		ps.setNameDisplay("telephone", "T&eacute;l&eacute;phone");
+		 		ps.setNameDisplay("categorie_id", "Cat&eacute;gorie (ID)");
+		 		ps.setNameDisplay("denomination", "D&eacute;nomination");
+		 		ps.setNameDisplay("apropos", "A propos");
+		 		ps.setNameDisplay("views", "Vues");
  		 		ps.chargeForm();
 			 	out.println(ps.getSearchForm());
 			 	ps.loadResult(request);
@@ -28,7 +35,7 @@ Boutique boutique = new Boutique();
 		<table class="table table-striped">
 			<% 
 				ps.setColDisplay(new String[]{"denomination","siege","categorie_id","logo","mail","telephone","type_id","views","remarque"});
-				ps.setColRenameDisplay(new String[]{"denomination","siege","categorie_id","logo","mail","telephone","type_id","views","remarque"});
+				ps.setColRenameDisplay(new String[]{"D&eacute;nomination","Siege","ID Cat&eacute;gorie","Logo","Email","T&eacute;l&eacute;phone","Type (ID)","Vues","Remarque"});
 				HashMap<String,String>map = new HashMap<String,String>();
  				ps.setColRedirection(map);
  				// Href of redirect

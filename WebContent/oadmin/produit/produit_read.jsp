@@ -28,8 +28,16 @@ if (u != null){
 		 		ps.setVisibleEntry("id", false);
 		 		ps.setVisibleEntry("etat", false);
 		 		ps.setVisibleEntry("image", false);
+		 		if (boutiqueID.compareTo("") != 0){
+		 			ps.setVisibleEntry("boutique_id", false);
+			 		ps.setVisibleEntry("boutique_denomination", false);
+		 		}
 		 		ps.setNameDisplay("quantite", "Quantit&eacute;");
 		 		ps.setNameDisplay("reference", "R&eacute;f&eacute;rence");
+		 		ps.setNameDisplay("boutique_denomination", "D&eacute;nomination Boutique");
+		 		ps.setNameDisplay("devise_id", "Devise (ID)");
+		 		ps.setNameDisplay("designation", "D&eacute;signation");
+		 		ps.setNameDisplay("categorie_id", "Cat&eacute;gorie (ID)");
 		 		ps.chargeForm();
 			 	out.println(ps.getSearchForm());
 			 	ps.loadResult(request);

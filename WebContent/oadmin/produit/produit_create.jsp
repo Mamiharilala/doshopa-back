@@ -47,6 +47,7 @@ if (u != null){
 			pv.setLink("boutique_id", request.getContextPath() + "/oadmin/container.jsp?content=choix/choix_boutique.jsp");
 			pv.setLink("categorie_id", request.getContextPath() + "/oadmin/container.jsp?content=choix/choix_article_categorie.jsp");
 			pv.setNameDisplay("boutique_id", "Boutique");
+			pv.setNameDisplay("designation", "D&eacute;signation");
 			pv.setNameDisplay("categorie_id", "Catégorie");
 			pv.setNameDisplay("devise_id", "Devise");
 			pv.setNameDisplay("quantite", "Quantit&eacute;");

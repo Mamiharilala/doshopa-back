@@ -16,7 +16,7 @@ Boutique boutique = new Boutique();
 		<div class="col-md-6 col-sm-12">
 			<nav aria-label="breadcrumb" role="navigation">
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="index.html">Boutique</a></li>
+					<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/oadmin/container.jsp?content=boutique/boutique_read.jsp">Boutique</a></li>
 					<li class="breadcrumb-item active" aria-current="page">Création</li>
 				</ol>
 			</nav>
@@ -38,6 +38,11 @@ Boutique boutique = new Boutique();
  			pv.setMutilpleKeyValue("type_id","id","description");
  			pv.setMutilpleData("type_id", offre);
 			pv.setNameDisplay("type_id", "Type");
+			pv.setNameDisplay("mail", "Email");
+			pv.setNameDisplay("telephone", "T&eacute;l&eacute;phone");
+			pv.setNameDisplay("denomination", "D&eacute;nomination");
+			pv.setNameDisplay("apropos", "A propos");
+			pv.setNameDisplay("categorie_id", "Cat&eacute;gorie");
  			pv.chargeForm();
 			out.println(pv.getLineForm());
  		%>

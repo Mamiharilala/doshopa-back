@@ -19,6 +19,16 @@
 		 <%
 			 	PageSearch ps = new PageSearch(dashboard);
 		 		//ps.setVisibleEntry("id", false);
+		 		ps.setNameDisplay("total_blog", "Total des blogs");
+		 		ps.setNameDisplay("utilisateur_id", "Utilisateur (ID)");
+		 		ps.setNameDisplay("boutique_id", "Boutique (ID)");
+		 		ps.setNameDisplay("boutique_denomination", "D&eacute;nomination Boutique");
+		 		ps.setNameDisplay("quantite_vente", "Quantit&eacute; de ventes");
+		 		ps.setNameDisplay("chiffre_affaires", "Chiffre d'affaires");
+		 		ps.setNameDisplay("total_promotions", "Total des promotions");
+		 		ps.setNameDisplay("total_views", "Total des vues");
+		 		ps.setNameDisplay("commande_en_cours", "Commande en cours");
+		 		ps.setNameDisplay("total_articles", "Total des articles");
  		 		ps.chargeForm();
 			 	out.println(ps.getSearchForm());
 			 	ps.loadResult(request);
