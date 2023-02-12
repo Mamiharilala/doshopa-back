@@ -23,7 +23,7 @@ if (u != null){
 		<div class="col-md-6 col-sm-12">
 			<nav aria-label="breadcrumb" role="navigation">
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="index.html">Produit</a></li>
+					<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/oadmin/container.jsp?content=produit/produit_read.jsp">Produit</a></li>
 					<li class="breadcrumb-item active" aria-current="page">Création</li>
 				</ol>
 			</nav>

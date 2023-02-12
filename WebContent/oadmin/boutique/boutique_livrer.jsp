@@ -4,7 +4,7 @@
 <div class="pd-20 card-box mb-30">
 	<div class="clearfix">
 		<h4 class="text-blue h4">R&eacute;cup&eacute;ration par <b>client</b></h4>
-		<p class="mb-30">Taper ici le code de r&eacute;cup&eacute;tion</p>
+		<p class="mb-30">Taper ici le code de r&eacute;cup&eacute;ration</p>
 	</div>
 	<div class="wizard-content">
 		<form class="tab-wizard wizard-circle wizard vertical" action="${pageContext.request.contextPath}/oadmin/boutique/treat/treatBoutique.jsp">

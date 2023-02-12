@@ -77,6 +77,7 @@
 					</a>
 					<div class="dropdown-menu dropdown-menu-right">
 						<div class="notification-list mx-h-350 customscroll">
+						<!--  
 							<ul>
 								<li><a href="#"> <img
 										src="${pageContext.request.contextPath}/vendors/images/img.jpg"
@@ -121,6 +122,7 @@
 											elit, sed...</p>
 								</a></li>
 							</ul>
+						-->
 						</div>
 					</div>
 				</div>
