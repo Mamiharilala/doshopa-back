@@ -3,15 +3,14 @@
 <%@ page import="doshopa.*"%>
 <div class="pd-20 card-box mb-30">
 	<div class="clearfix">
-		<h4 class="text-blue h4">Step wizard vertical</h4>
-		<p class="mb-30">jQuery Step wizard</p>
+		<h4 class="text-blue h4">R&eacute;cup&eacute;ration des commandes par <b>livreur</b></h4>
+		<p class="mb-30">Taper ici le code pour collecter la commande</p>
 	</div>
 	<div class="wizard-content">
 		<form class="tab-wizard wizard-circle wizard vertical" action="${pageContext.request.contextPath}/oadmin/boutique/treat/treatBoutique.jsp">
-			<h5>Personal Info</h5>
-			<section>
+ 			<section>
 				<div class="row">
-					<div class="col-md-2"></div>
+					<div class="col-md-4"></div>
 					<div class="col-md-4">
 						<div class="form-group">
 							<label>Code collecter :</label> <input type="text" value=""

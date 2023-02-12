@@ -3,12 +3,12 @@
 <%@ page import="doshopa.*"%>
 <div class="pd-20 card-box mb-30">
 	<div class="clearfix">
-		<h4 class="text-blue h4">Step wizard vertical</h4>
-		<p class="mb-30">jQuery Step wizard</p>
+		<h4 class="text-blue h4">Planning livraison commande par la boutique</h4>
+		<p class="mb-30">Mettre le code g&eacute;n&eacute;rer dans les produits ayant le code que vous allez taper</p>
 	</div>
 	<div class="wizard-content">
 		<form class="tab-wizard wizard-circle wizard vertical" action="${pageContext.request.contextPath}/oadmin/boutique/treat/treatBoutique.jsp">
-			<h5>Personal Info</h5>
+			<h5>Affectation code</h5>
 			<section>
 				<div class="row">
 					<div class="col-md-2"></div>
