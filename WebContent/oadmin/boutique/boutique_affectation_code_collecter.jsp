@@ -3,7 +3,7 @@
 <%@ page import="doshopa.*"%>
 <div class="pd-20 card-box mb-30">
 	<div class="clearfix">
-		<h4 class="text-blue h4">Planning livraison commande</h4>
+		<h4 class="text-blue h4">Planning livraison commande par la boutique</h4>
 		<p class="mb-30">Mettre le code g&eacute;n&eacute;rer dans les produits ayant le code que vous allez taper</p>
 	</div>
 	<div class="wizard-content">

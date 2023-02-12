@@ -3,7 +3,7 @@
 <%@ page import="doshopa.*"%>
 <div class="pd-20 card-box mb-30">
 	<div class="clearfix">
-		<h4 class="text-blue h4">R&eacute;cup&eacute;ration des commandes</h4>
+		<h4 class="text-blue h4">R&eacute;cup&eacute;ration des commandes par <b>livreur</b></h4>
 		<p class="mb-30">Taper ici le code pour collecter la commande</p>
 	</div>
 	<div class="wizard-content">
