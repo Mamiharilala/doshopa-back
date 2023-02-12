@@ -20,7 +20,7 @@
 	%>
 	<div class="nav justify-content-center">
 		<a
-			href="${pageContext.request.contextPath}/container.jsp?content=profil/user_update.jsp"><button
+			href="${pageContext.request.contextPath}/oadmin/container.jsp?content=profil/user_update.jsp"><button
 				type="submit" class="btn btn-success btn-lg">Modifier</button></a>
 	</div>
 </div>

@@ -26,7 +26,7 @@
 	</div>
 </div>
 <div class="pd-20 card-box mb-30">
-	<form action="${pageContext.request.contextPath}/treat.jsp"
+	<form action="${pageContext.request.contextPath}/oadmin/treat.jsp"
 		method="POST">
 		<%
 			PageUpdate pv = new PageUpdate(boutique);
@@ -41,7 +41,7 @@
 		<input type="hidden" class="form-control" value="update" name="mode">
 		<input type="hidden" class="form-control" value="<%=boutique.getId()%>" name="id">
 		<input type="hidden" class="form-control"
-			value="${pageContext.request.contextPath}/container.jsp?content=profil/boutique_detail.jsp"
+			value="${pageContext.request.contextPath}/oadmin/container.jsp?content=profil/boutique_detail.jsp"
 			name="after"> <input type="hidden" class="form-control"
 			name="class" value="oadmin.Boutique">
 		<div class="nav justify-content-center">
@@ -51,7 +51,7 @@
 		</div>
 		<br>
 		<div class="nav justify-content-center">
-			<a href="${pageContext.request.contextPath}/container.jsp?content=profil/boutique_detail.jsp&id=<%=boutique.getId()%>"><button type="button" class="btn btn-warning">Voir détail</button>
+			<a href="${pageContext.request.contextPath}/oadmin/container.jsp?content=profil/boutique_detail.jsp&id=<%=boutique.getId()%>"><button type="button" class="btn btn-warning">Voir détail</button>
 		</div>
 
 	</form>
