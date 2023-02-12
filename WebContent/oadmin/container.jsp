@@ -158,9 +158,7 @@
 			<div class="user-info-dropdown">
 				<div class="dropdown">
 					<a class="dropdown-toggle" href="#" role="button"
-						data-toggle="dropdown"> <span class="user-icon"> <img
-							src="${pageContext.request.contextPath}/vendors/images/photo1.jpg"
-							alt="" />
+						data-toggle="dropdown"> <span class="user-icon"> <i class="icon-copy fa fa-user-circle" aria-hidden="true"></i>
 					</span> <span class="user-name"><%=u.getLogin()%></span>
 					</a>
 					<div

@@ -5,7 +5,7 @@
 <head>
 <!-- Basic Page Info -->
 <meta charset="utf-8" />
-<title>Doshopa.com</title>
+<title>Doshopa</title>
 
 <!-- Site favicon -->
 <link rel="apple-touch-icon" sizes="180x180"
@@ -75,7 +75,7 @@
 				<div class="col-md-6 col-lg-5">
 					<div class="login-box bg-white box-shadow border-radius-10">
 						<div class="login-title">
-							<h2 class="text-center text-primary">Bienvenue</h2>
+							<h2 class="text-center text-dark">Bienvenue</h2>
 						</div>
 						<form
 							action="${pageContext.request.contextPath}/oadmin/auth/treat_login.jsp"
@@ -117,7 +117,7 @@
 								<div class="col-sm-12">
 									<div class="input-group mb-0">
 
-										<input class="btn btn-primary btn-lg btn-block" type="submit"
+										<input class="btn btn-dark btn-lg btn-block" type="submit"
 											value="Se connecter">
 
 									</div>
