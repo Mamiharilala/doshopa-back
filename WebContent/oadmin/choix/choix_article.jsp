@@ -3,14 +3,24 @@
 <%@ page import="doshopa.*"%>
 <%@ page import="front.*"%>
 <%@ page import="java.sql.Date"%>
+<%@ page import="system.*"%>
 <% 
 	Article p = new Article();
+	
+	String boutiqueID = "";
+	Utilisateur u = (Utilisateur) session.getAttribute("user");
+	if (u != null){
+		if (u.getBoutique_id() != null){
+			boutiqueID = " and boutique_id = '" + u.getBoutique_id() + "'";	
+		}
+	}
 %>
 <!-- horizontal Basic Forms Start -->
 <div class="pd-20 card-box mb-30">
 	<form action="${pageContext.request.contextPath}/oadmin/container.jsp?content=choix/choix_article.jsp" method="POST">	
 		 <%
 			 	PageChoice ps = new PageChoice(p,"designation");
+		 		ps.setWhere(boutiqueID);
 		 		ps.setVisibleEntry("id", false);
 		 		ps.setVisibleEntry("etat", false);
 		 		ps.setIntervalle("views");
@@ -29,7 +39,7 @@
 		<table class="table table-striped">
 			<% 
 				ps.setColDisplay(new String[]{"id","designation","reference"});
-				ps.setColRenameDisplay(new String[]{"id","Designation","r&eacute;f&eacute;rence"});
+				ps.setColRenameDisplay(new String[]{"id","Designation","R&eacute;f&eacute;rence"});
 				ps.prepareData(request);
  				out.println(ps.getResultDisplay());
 			%>

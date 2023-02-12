@@ -9,7 +9,7 @@
 	Promotion p = new Promotion();
 	p.setCompleteTableName("promotion_article_boutique");
 	
-	String boutiqueID = "and 1<2";
+	String boutiqueID = "";
 	Utilisateur u = (Utilisateur) session.getAttribute("user");
 	if (u != null){
 		if (u.getBoutique_id() != null){
