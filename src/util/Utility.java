@@ -36,9 +36,7 @@ public class Utility {
 	}
 	public static String encrypt(String object,Connection c) throws Exception {
 		String sql = "select sha1(?::bytea) as encrypt";
-		System.out.println(object);
-		System.out.println("select sha1("+object+"::bytea) as encrypt");
- 		PreparedStatement pstmt = null;
+   		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String val ="";
 		boolean isConnNull = false; 
