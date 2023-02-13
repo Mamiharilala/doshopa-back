@@ -46,7 +46,7 @@
                                         </div>
                                         <a class="small text-muted" href="#!">Mot de passe oublier?</a>
                                         <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a
-                                                href="<?php echo base_url('auth/inscription');?>" style="color: #393f81;">S'inscrire</a></p>
+                                                href="${pageContext.request.contextPath}/inscription" style="color: #393f81;">S'inscrire</a></p>
                                         <a href="#!" class="small text-muted">Terms of use.</a>
                                         <a href="#!" class="small text-muted">Privacy policy</a>
                                     </form>

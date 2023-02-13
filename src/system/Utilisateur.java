@@ -12,6 +12,7 @@ import doshopa.CommandeFille;
 import doshopa.CommandeMere;
 import util.Constant;
 import util.DBConnect;
+import util.Utility;
 
 public class Utilisateur extends MapModel {
 	String nom, prenom, mail, telephone, mot_passe, adresse, sexe, role_id, login, boutique_id;
@@ -25,7 +26,23 @@ public class Utilisateur extends MapModel {
 		setSchema("public");
 		setCompleteTableName("utilisateur");
 	}
-
+	public void controlInsert() throws Exception{
+		if(Utility.stringWithoutNull(this.getNom()).compareTo("")==0) {
+			throw new Exception("Votre nom est invalid!");
+		}
+		if(Utility.stringWithoutNull(this.getPrenom()).compareTo("")==0) {
+			throw new Exception("Votre prenom est invalid!");
+		}
+		if(Utility.stringWithoutNull(this.getMot_passe()).compareTo("")==0) {
+			throw new Exception("Votre mot de passe est invalid!");
+		}
+		if(Utility.stringWithoutNull(this.getMot_passe()).compareTo("")==0) {
+			throw new Exception("Votre adresse est invalid!");
+		}
+		if(Utility.stringWithoutNull(this.getLogin()).compareTo("")==0) {
+			throw new Exception("Votre login est invalid!");
+		}
+	}
 	public boolean treatLogin(String login, String pwd) throws Exception {
 		String sql = "SELECT * FROM utilisateur where login like ? AND mot_passe like sha1(?::bytea) and etat > 1";
 		PreparedStatement pstmt = null;

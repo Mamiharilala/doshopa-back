@@ -7,6 +7,7 @@
 <%@ page import="doshopa.*"%>
 <%@ page import="util.*"%>
 <% 
+	try{
 	Utilisateur u = (Utilisateur)session.getAttribute("user");
 	if(u==null){
 		response.sendRedirect(request.getContextPath()+"/login");
@@ -36,8 +37,19 @@
 		if(request.getParameter("mode").compareTo("logout")==0){
 			session.removeAttribute("user");
 			session.invalidate();
- 	 	}
+ 	 	} 
 	}
 	
 %>
 <script>window.location.replace('<%=request.getParameter("after")%>');</script>
+<%
+} catch (Exception e) {
+		e.printStackTrace();
+%>
+<script language="JavaScript"> 
+	alert("<%=e.getMessage()%>");
+    history.back();
+</script>
+<%
+	}
+%>

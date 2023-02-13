@@ -1,6 +1,9 @@
 package util;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -30,5 +33,40 @@ public class Utility {
 	}
 	public static Date currentSQLDate() {
 		return new java.sql.Date(Calendar.getInstance().getTime().getTime());
+	}
+	public static String encrypt(String object,Connection c) throws Exception {
+		String sql = "select sha1(?::bytea) as encrypt";
+		System.out.println(object);
+		System.out.println("select sha1("+object+"::bytea) as encrypt");
+ 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String val ="";
+		boolean isConnNull = false; 
+		try {
+			if(c==null) {
+				c = new DBConnect().getConnection();
+				isConnNull = true;
+			}
+			pstmt = c.prepareStatement(sql);
+			pstmt.setString(1,object);
+			rs = pstmt.executeQuery();
+			System.out.println(pstmt.toString());
+			while (rs.next()) {
+				val = rs.getString("encrypt");
+			}
+		}catch(Exception e) {
+			throw e;
+		}finally {
+			if (rs != null) {
+				rs.close();
+			}
+			if (pstmt != null) {
+				pstmt.close();
+			}
+			if(isConnNull&&c!=null) {
+				c.close();
+			}
+		}
+		return val;
 	}
 }

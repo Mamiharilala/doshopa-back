@@ -155,6 +155,7 @@ public class MapModel {
 			sql = sql.substring(0, sql.length()-1)+")";
 			val = val.substring(0, val.length()-1)+")";
  			pstmt = c.prepareStatement(sql+val);
+ 			//System.out.println(sql+val);
 			pstmt.executeUpdate();			 
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -260,5 +261,16 @@ public class MapModel {
 	public void setSequencePrefixe(String sequencePrefixe) {
 		this.sequencePrefixe = sequencePrefixe;
 	}
-	
+	public void controlInsert() throws Exception{
+		
+	}
+	public void controlUpdate() throws Exception{
+		
+	}
+	public void controlDelete() throws Exception{
+		
+	}
+	public void controlSelect() throws Exception{
+		
+	}
 }
