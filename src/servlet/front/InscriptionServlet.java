@@ -1,6 +1,8 @@
 package servlet.front;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,12 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import doshopa.Boutique;
+import doshopa.Token;
 import front.PageCreate;
 import system.Categorie;
 import system.Generalize;
 import system.MapModel;
 import system.Utilisateur;
 import util.Constant;
+import util.DBConnect;
+import util.Mail;
 import util.Utility;
 
 /**
@@ -56,28 +61,48 @@ public class InscriptionServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		Connection c = null;
+		String uri = request.getScheme() + "://" +   // "http" + "://
+		             request.getServerName()+"?ref=";
 		try {
+			c = new DBConnect().getConnection();
 			PageCreate pv = new PageCreate(new MapModel());
 			pv.completeAllField(request);
 			Utilisateur u = (Utilisateur)pv.getMapModel();
-			u.setRole_id("public");
-			
+			u.setRole_id("public");		
 			String pwd = u.getMot_passe();
 			u.controlInsert();
 			u.setMot_passe(Utility.encrypt(u.getMot_passe(),null));
-			u.insertIntoTable(null);
+			u.insertIntoTable(c);
 			u.setEtat(Constant.validatedState);
 			u.updateIntoTable(null);
- 			boolean val = u.treatLogin(u.getLogin(), pwd);
+  			boolean val = u.treatLogin(u.getLogin(), pwd);
  			request.getSession().setAttribute("user", u);
   			if (val) {
-				response.sendRedirect("/doshopa/accueil");
+  				Token token = new Token();
+  				token.setToken(Utility.encrypt(String.valueOf(new java.util.Date().getTime()),c));
+  				token.setUtilisateur_id(u.getId());
+  				token.setLast_update(Utility.currentSQLDate());
+  				token.insertIntoTable(c);
+  				uri = uri+token.getToken();
+   				
+  				response.sendRedirect("/doshopa/accueil");				
 			}else {
 				throw new Exception("Echec d\'authentification");
 			}
+        	Mail.sentMailSubscribe(u.getMail(),u.getNom()+" "+u.getPrenom(), uri, "+261 38 05 878 43");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			if(c!=null) {
+				try {
+					c.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 

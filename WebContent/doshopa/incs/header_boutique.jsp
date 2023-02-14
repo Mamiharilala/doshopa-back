@@ -50,9 +50,9 @@
 				} else {
 			%>
 			<ul class="nav">
-				<li class="nav-item"><a href="" class="nav-link link-dark px-2">Se
+				<li class="nav-item"><a href="${pageContext.request.contextPath}/login" class="nav-link link-dark px-2">Se
 						connecter</a></li>
-				<li class="nav-item"><a href=" "
+				<li class="nav-item"><a href="${pageContext.request.contextPath}/inscription"
 					class="nav-link link-dark px-2">S'inscrire</a></li>
 			</ul>
 			<%

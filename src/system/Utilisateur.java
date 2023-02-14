@@ -45,7 +45,8 @@ public class Utilisateur extends MapModel {
 	}
 	public boolean treatLogin(String login, String pwd) throws Exception {
 		String sql = "SELECT * FROM utilisateur where login like ? AND mot_passe like sha1(?::bytea) and etat > 1";
-		PreparedStatement pstmt = null;
+		System.out.println(login+" "+pwd);
+ 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String val = "";
 		Connection c = null;
@@ -298,6 +299,26 @@ public class Utilisateur extends MapModel {
 			pstmt.setDouble(1, Constant.waitingValidatedState);
 			pstmt.setInt(2, Constant.createdState);
 			pstmt.setString(3,idPanier);
+			pstmt.executeUpdate();
+			// Update fille fin
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (c != null) {
+				c.close();
+			}
+		}
+	}
+	public static void validEmail(String token) throws Exception{
+		PreparedStatement pstmt = null;
+		Connection c = null;
+		try {
+			String sql = "";
+			c = new DBConnect().getConnection();
+			sql = "UPDATE utilisateur SET has_valid_mail=? WHERE id = (select id from utilisateur_token where token like ?)";
+			pstmt = c.prepareStatement(sql);
+			pstmt.setBoolean(1, true);
+			pstmt.setString(2, token);
 			pstmt.executeUpdate();
 			// Update fille fin
 		} catch (Exception e) {

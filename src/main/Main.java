@@ -18,6 +18,7 @@ import javax.mail.internet.MimeMessage;
 import front.PageDetail;
 import system.Generalize;
 import system.MapModel;
+import system.Utilisateur;
 import util.DBConnect;
 import util.Mail;
 
@@ -25,8 +26,9 @@ public class Main {
 	public static void main(String []args) {
 		 
         try {
-        	Mail.sendMailTo("mamiharilalajacques@gmail.com", "mail", "test mail Java!");
-        	System.out.println();
+        	System.out.println(Mail.sentMailSubscribe("mamiharilalajacques@gmail.com","Mamiharilala Jacques", "doshopa/confirmation", "+261 33 00 908 01"));
+        	//Utilisateur.validEmail("da4b9237bacccdf19c0760cab7aec4a8359010b0");
+        	System.out.println("terminated");
         } catch (Exception mex) {
             mex.printStackTrace();
         }

@@ -131,9 +131,14 @@ public class MapModel {
 	}
 	public void insertIntoTable(Connection c) throws Exception {	
 		PreparedStatement pstmt = null;
-		boolean isConnNull = false; 
+		boolean isConnNull = false;
+		Method m = null;
 		try {
-			Method m = this.getClass().getMethod("setEtat", new Class[] {int.class});
+			try {
+				m = this.getClass().getMethod("setEtat", new Class[] {int.class});	
+			}catch(NoSuchMethodException e) {
+				
+			}
 			if(m!=null) {
 				m.invoke(this, Constant.createdState);
 			}
@@ -155,7 +160,7 @@ public class MapModel {
 			sql = sql.substring(0, sql.length()-1)+")";
 			val = val.substring(0, val.length()-1)+")";
  			pstmt = c.prepareStatement(sql+val);
- 			//System.out.println(sql+val);
+ 			System.out.println(sql+val);
 			pstmt.executeUpdate();			 
 		}catch(Exception e) {
 			e.printStackTrace();

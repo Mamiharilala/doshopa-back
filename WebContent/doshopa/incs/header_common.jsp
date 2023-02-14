@@ -49,10 +49,10 @@
 				%>
 				<div>
 					<a
-						href="${pageContext.request.contextPath}/doshopa/pages/login.jsp"><button
+						href="${pageContext.request.contextPath}/login"><button
 							type="button" class="btn btn-outline-dark me-2">Se
 							connecter</button></a> <a
-						href="${pageContext.request.contextPath}/doshopa/pages/inscription.jsp"><button
+						href="${pageContext.request.contextPath}/inscription"><button
 							type="button" class="btn btn-dark">S'inscrire</button></a>
 				</div>
 				<%

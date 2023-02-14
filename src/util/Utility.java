@@ -48,8 +48,7 @@ public class Utility {
 			pstmt = c.prepareStatement(sql);
 			pstmt.setString(1,object);
 			rs = pstmt.executeQuery();
-			System.out.println(pstmt.toString());
-			while (rs.next()) {
+ 			while (rs.next()) {
 				val = rs.getString("encrypt");
 			}
 		}catch(Exception e) {
