@@ -85,12 +85,12 @@ public class InscriptionServlet extends HttpServlet {
   				token.setLast_update(Utility.currentSQLDate());
   				token.insertIntoTable(c);
   				uri = uri+token.getToken();
-   				
-  				response.sendRedirect("/doshopa/accueil");				
+  				Mail.sentMailSubscribe(u.getMail(),u.getNom()+" "+u.getPrenom(), uri, "+261 38 05 878 43");
+  				response.sendRedirect("/accueil");				
 			}else {
 				throw new Exception("Echec d\'authentification");
 			}
-        	Mail.sentMailSubscribe(u.getMail(),u.getNom()+" "+u.getPrenom(), uri, "+261 38 05 878 43");
+        	
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -45,7 +45,7 @@ public class PanierServlet extends HttpServlet {
 			c = new DBConnect().getConnection();
 			Utilisateur u = (Utilisateur) request.getSession().getAttribute("user");
 			if(u==null) {
-				response.sendRedirect("/doshopa/login");
+				response.sendRedirect("/login");
 			}else {
 				String idCommande = u.getIdCommandeMere(c);
 				request.setAttribute("idCommande", idCommande);

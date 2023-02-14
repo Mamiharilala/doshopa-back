@@ -45,9 +45,9 @@ public class LoginServlet extends HttpServlet {
  			boolean val = u.treatLogin(request.getParameter("login"), request.getParameter("mot_passe"));
  			request.getSession().setAttribute("user", u);
  			if (val) {
-				response.sendRedirect("/doshopa/accueil");
+				response.sendRedirect("/accueil");
 			}else {
-				response.sendRedirect("/doshopa/login");
+				response.sendRedirect("/login");
 			}
  			
 		} catch (Exception e) {

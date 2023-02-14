@@ -31,10 +31,10 @@ public class ConfirmationMailServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		try {
 			Utilisateur.validEmail(request.getParameter("ref"));
-			response.sendRedirect("/doshopa/accueil");
+			response.sendRedirect("/accueil");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			response.sendRedirect("/doshopa/accueil");
+			response.sendRedirect("/accueil");
 		}
 	}
 
