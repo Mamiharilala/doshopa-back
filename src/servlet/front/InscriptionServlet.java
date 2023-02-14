@@ -17,6 +17,7 @@ import front.PageCreate;
 import system.Categorie;
 import system.Generalize;
 import system.MapModel;
+import system.MessageException;
 import system.Utilisateur;
 import util.Constant;
 import util.DBConnect;
@@ -63,12 +64,13 @@ public class InscriptionServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		Connection c = null;
 		String uri = request.getScheme() + "://" +   // "http" + "://
-		             request.getServerName()+"?ref=";
+		             request.getServerName()+"/confirmationmail?ref=";
+		Utilisateur u = null;
 		try {
 			c = new DBConnect().getConnection();
 			PageCreate pv = new PageCreate(new MapModel());
 			pv.completeAllField(request);
-			Utilisateur u = (Utilisateur)pv.getMapModel();
+			u = (Utilisateur)pv.getMapModel();
 			u.setRole_id("public");		
 			String pwd = u.getMot_passe();
 			u.controlInsert();
@@ -92,7 +94,16 @@ public class InscriptionServlet extends HttpServlet {
 			}
         	
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			MessageException me = new MessageException();
+			me.setDescription("Inscription nouveau utilisateur");
+			if(u!=null) {
+				me.setUtilisateur_id(u.getId());
+			}
+			me.setMessage(e.getMessage());
+			try {
+				me.insertIntoTable(null);
+			} catch (Exception e1) { 
+			}
 			e.printStackTrace();
 		}finally {
 			if(c!=null) {

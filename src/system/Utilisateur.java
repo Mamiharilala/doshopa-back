@@ -45,7 +45,7 @@ public class Utilisateur extends MapModel {
 	}
 	public boolean treatLogin(String login, String pwd) throws Exception {
 		String sql = "SELECT * FROM utilisateur where login like ? AND mot_passe like sha1(?::bytea) and etat > 1";
-		System.out.println(login+" "+pwd);
+		//System.out.println(login+" "+pwd);
  		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String val = "";
