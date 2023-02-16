@@ -28,7 +28,7 @@ public class PageUpdate extends Page {
 			MapModel temp = this.getMapModel();
 			this.setMapModel((MapModel) t.newInstance());
 			this.getMapModel().setId(temp.getId());
-			Field[] fields = this.getMapModel().getClass().getDeclaredFields();
+			Field[] fields = Generalize.getCommonField(this.getMapModel(), null);
 			PreparedStatement pstmt = null;
 			String fieldName = "";
 			String typeSimpleName = "";

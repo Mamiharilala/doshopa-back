@@ -11,16 +11,9 @@
 	promotion.setCompleteTableName("v_article_promotion");
 	promotion.setId(request.getParameter("id"));
 	// Validation
-	ObjectType[] etat = new ObjectType[3];
-	etat[0] = new ObjectType();
-	etat[0].setCode(Constant.deletedState);
-	etat[0].setDescription("Annuler");
-	etat[1] = new ObjectType();
-	etat[1].setCode(Constant.validatedState);
-	etat[1].setDescription("Valider");
-	etat[2] = new ObjectType();
-	etat[2].setCode(Constant.waitingValidatedState);
-	etat[2].setDescription("Non valider");
+	Categorie etatCat = new Categorie();
+	etatCat.setCompleteTableName("etat");
+	Categorie[] etat = (Categorie[]) Generalize.getListObject(etatCat, null);
 %>
 <div class="page-header">
 	<div class="row">
