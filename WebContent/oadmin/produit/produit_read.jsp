@@ -19,9 +19,10 @@ if (u != null){
 	}
 }
 %>
+<form action="${pageContext.request.contextPath}/container.jsp?content=produit/produit_read.jsp" method="POST">	
 <!-- horizontal Basic Forms Start -->
 <div class="pd-20 card-box mb-30">
-	<form action="${pageContext.request.contextPath}/container.jsp?content=produit/produit_read.jsp" method="POST">	
+	
 		 <%
 			 	PageSearch ps = new PageSearch(p);
 		 		ps.setWhere(boutiqueID);
@@ -43,11 +44,15 @@ if (u != null){
 			 	ps.loadResult(request);
 			 %>	
 		<input type="hidden" class="form-control" value="search" name="mode">
- 		<button type="submit" class="btn btn-success btn-lg btn-block">Chercher</button>
-	</form>
+
 </div>
 <!-- horizontal Basic Forms End -->
- 
+ <!-- horizontal Basic Forms End -->
+	<div class="nav justify-content-center">
+		<div class="col-xs-3  col-sm-3">
+			<button type="submit" class="btn btn-success btn-lg btn-block">Chercher</button>
+		</div>
+	</div>
 <!-- Responsive tables Start -->
 <div class="pd-20 mb-30"> 
 	<div class="table-responsive">
@@ -67,6 +72,7 @@ if (u != null){
 		<%=ps.getFooter(request)%>	
 	</div>
 </div>
+</form>
 <% }catch(Exception e){%>
 <script language="JavaScript"> 
 	alert("<%=e.getMessage()%>");

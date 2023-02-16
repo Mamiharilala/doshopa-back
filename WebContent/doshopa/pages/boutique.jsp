@@ -120,13 +120,17 @@
 							<p class="card-text">
 								<%= Utility.stringWithoutNull(arrayPromotion[i].getObservation()) %>
 							</p>
+ 
 							<div class="d-flex justify-content-between align-items-center">
+								<form action="${pageContext.request.contextPath}/doshopa/pages/treat.jsp" method="POST">
+								<input type="hidden" value="<%=arrayPromotion[i].getId()%>" name="ref_object">
+								<input type="hidden" class="form-control" value="purchache_promotion" name="mode">
+								<input type="hidden" class="form-control" value="${pageContext.request.contextPath}/panier" name="after">		
 								<div class="btn-group">
-									<a
-										href=""><button
-											type="button" class="btn btn-sm btn-warning text-white">Acheter</button></a>
+									 <button
+											type="submit" class="btn btn-sm btn-warning text-white">Acheter</button>
 								</div>
-
+								</form>
 							</div>
 						</div>
 					</div>

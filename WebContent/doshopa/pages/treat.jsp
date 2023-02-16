@@ -15,6 +15,9 @@
 		if(request.getParameter("mode").compareTo("purchache_product")==0){
  		 	u.acheterArticle(request.getParameter("ref_object"));
 	 	}
+		if(request.getParameter("mode").compareTo("purchache_promotion")==0){
+ 		 	u.acheterPromotion(request.getParameter("ref_object"));
+	 	}
 		if(request.getParameter("mode").compareTo("update_order")==0){
  			String[]numero = request.getParameterValues("numero");
    	        for(int i=0;i<numero.length;i++){

@@ -7,7 +7,7 @@
 <%@ page import="system.*"%>
 <%
 	Promotion p = new Promotion();
-	p.setCompleteTableName("promotion_article_boutique");
+	p.setCompleteTableName("v_article_promotion");
 	
 	String boutiqueID = "";
 	Utilisateur u = (Utilisateur) session.getAttribute("user");
@@ -22,7 +22,6 @@
 	action="${pageContext.request.contextPath}/oadmin/container.jsp?content=promotion/promotion_read.jsp"
 	method="POST">
 	<div class="pd-20 card-box mb-30">
-
 		<%
 			PageSearch ps = new PageSearch(p);
 			ps.setWhere(boutiqueID);
@@ -57,14 +56,18 @@
 		<div class="table-responsive">
 			<table class="table table-striped">
 				<%
-					ps.setColDisplay(new String[] { "id", "article_id", "designation" });
-					ps.setColRenameDisplay(new String[] { "id", "Article", "D&eacute;signation" });
-					HashMap<String, String> map = new HashMap<String, String>();
-					ps.setColRedirection(map);
-					// Href of redirect
-					map = new HashMap<String, String>();
-					ps.setColRedirectionHref(map);
-					ps.prepareData(request);
+					ps.setColDisplay(new String[] { "article_id", "designation","prix_avant","prix_actuel","date_fin" });
+					ps.setColRenameDisplay(new String[] {"Article", "D&eacute;signation","Prix avant","Prix actuel","Date fin" });
+					// field to redirect
+					HashMap<String,String>map = new HashMap<String,String>();
+	 				map.put("designation","id");
+	 				map.put("article_id","article_id");
+	 				ps.setColRedirection(map);
+	 				// Href of redirect
+	 				map = new HashMap<String,String>();
+	 				map.put("designation","container.jsp?content=promotion/promotion_detail.jsp&id=");
+	 				map.put("article_id","container.jsp?content=produit/produit_detail.jsp&id=");
+ 					ps.setColRedirectionHref(map);
 					ps.prepareData(request);
 					out.println(ps.getResultDisplay());
 				%>

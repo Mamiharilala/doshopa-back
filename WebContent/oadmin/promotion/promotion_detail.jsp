@@ -9,9 +9,7 @@
 	p.setId(request.getParameter("id"));
 %>
 <!-- horizontal Basic Forms Start -->
-<form
-	action="${pageContext.request.contextPath}/oadmin/container.jsp?content=promotion/promotion_read.jsp"
-	method="POST">
+ 
 	<div class="pd-20 card-box mb-30">		
 		<%
 			PageDetail ps = new PageDetail(p);
@@ -21,6 +19,10 @@
 			ps.chargeForm();
 			out.println(ps.getLineForm());
  		%>
-		<button type="submit" class="btn btn-success btn-lg btn-block">Chercher</button>
+ 	</div>
+	<div class="nav justify-content-center">
+		<div class="col-xs-3  col-sm-3">
+			<a href="${pageContext.request.contextPath}/oadmin/container.jsp?content=promotion/promotion_update.jsp&id=<%=request.getParameter("id")%>"><button type="submit" class="btn btn-warning btn-lg text-light btn-block">Modifier</button></a>
+		</div>
 	</div>
-</form>
+ 

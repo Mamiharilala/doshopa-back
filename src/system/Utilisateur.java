@@ -10,6 +10,7 @@ import doshopa.Article;
 import doshopa.Boutique;
 import doshopa.CommandeFille;
 import doshopa.CommandeMere;
+import doshopa.Promotion;
 import util.Constant;
 import util.DBConnect;
 import util.Utility;
@@ -231,6 +232,44 @@ public class Utilisateur extends MapModel {
 		}
 		return val;
 	}
+	public boolean acheterPromotion(String idPromotion) throws Exception {
+		boolean val = false;
+		Connection c = null;
+		try {
+			c = new DBConnect().getConnection();
+			c.setAutoCommit(false);
+			Promotion tempPromotion = new Promotion();
+			tempPromotion.setId(idPromotion);
+			System.out.println("====="+idPromotion);
+			Promotion art = (Promotion) Generalize.getById(tempPromotion, c);
+			if (art == null) {
+				throw new Exception("Stock epuisé");
+			}
+			String idMere = getIdCommandeMere(c);
+			CommandeFille commandeFille = new CommandeFille();
+			commandeFille.setId(c);
+			commandeFille.setMere(idMere);
+			commandeFille.setArticle_id(art.getArticle_id());
+			commandeFille.setEtat(Constant.createdState);
+			commandeFille.setQuantite(1);
+			commandeFille.setPu(art.getPrix_actuel());
+			commandeFille.setRemarque("promotion");
+			commandeFille.setCommande_type("COMMANDE");
+			commandeFille.setDate_fille(util.Utility.currentSQLDate());
+			commandeFille.insertIntoTable(c);
+			c.commit();
+			c.setAutoCommit(true);
+			val = true;
+		} catch (Exception e) {
+			val = false;
+			throw e;
+		} finally {
+			if (c != null) {
+				c.close();
+			}
+		}
+		return val;
+	}
 
 	public String getIdCommandeMere(Connection c) throws Exception {
 		String val = "";
@@ -350,5 +389,8 @@ public class Utilisateur extends MapModel {
 				c.close();
 			}
 		}
+	}
+	public boolean isAdmin() {
+		return Utility.stringWithoutNull(this.getRole_id()).compareTo(Constant.idAdmin)==0;
 	}
 }

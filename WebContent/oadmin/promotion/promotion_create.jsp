@@ -15,23 +15,27 @@
 		<div class="col-md-6 col-sm-12">
 			<nav aria-label="breadcrumb" role="navigation">
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/oadmin/container.jsp?content=promotion/promotion_read.jsp">Promotion</a></li>
+					<li class="breadcrumb-item"><a
+						href="${pageContext.request.contextPath}/oadmin/container.jsp?content=promotion/promotion_read.jsp">Promotion</a></li>
 					<li class="breadcrumb-item active" aria-current="page">Création</li>
 				</ol>
 			</nav>
 		</div>
 	</div>
 </div>
-<div class="pd-20 card-box mb-30">
-	<form action="${pageContext.request.contextPath}/oadmin/treat.jsp"
-		method="POST">
+<form action="${pageContext.request.contextPath}/oadmin/treat.jsp"
+	method="POST">
+	<div class="pd-20 card-box mb-30">
+
 		<%
 			PageCreate pv = new PageCreate(p);
 			pv.setVisibleEntry("id", false);
 			pv.setVisibleEntry("etat", false);
 			pv.setType("article_id", "popup");
 			pv.setHtml("article_id", "readonly");
-			pv.setLink("article_id", request.getContextPath() + "/oadmin/container.jsp?content=choix/choix_article.jsp");
+			pv.setNameDisplay("article_id", "Article");
+			pv.setLink("article_id",
+					request.getContextPath() + "/oadmin/container.jsp?content=choix/choix_article.jsp");
 			pv.setNameDisplay("quantite", "Quantit&eacute;");
 			pv.setNameDisplay("prix_actuel", "Prix de promotion");
 			pv.setNameDisplay("prix_avant", "Prix avant");
@@ -44,12 +48,20 @@
 			out.println(pv.getLineForm());
 		%>
 		<input type="hidden" class="form-control" value="insert" name="mode">
-		<input type="hidden" class="form-control" value="${pageContext.request.contextPath}/oadmin/container.jsp?content=promotion/promotion_read.jsp" name="after">
-		<input type="hidden" class="form-control" name="class" value="doshopa.Promotion">
-		<button type="submit" class="btn btn-success btn-lg btn-block">Enregistrer</button>
-	</form>
- 	<br>
-</div>
+		<input type="hidden" class="form-control"
+			value="${pageContext.request.contextPath}/oadmin/container.jsp?content=promotion/promotion_read.jsp"
+			name="after"> <input type="hidden" class="form-control"
+			name="class" value="doshopa.Promotion">
+		<div class="nav justify-content-center">
+			<div class="col-xs-3  col-sm-3">
+				<button type="submit" class="btn btn-success btn-lg btn-block">Enregistrer</button>
+			</div>
+		</div>
+
+		<br>
+	</div>
+
+</form>
 <script>
 	
 </script>

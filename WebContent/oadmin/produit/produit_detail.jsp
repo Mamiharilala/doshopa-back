@@ -19,6 +19,10 @@
 			pd.chargeForm();
 			out.println(pd.getLineForm());
  		%>
-		<button type="submit" class="btn btn-success btn-lg btn-block">Chercher</button>
+ 	</div>
+	<div class="nav justify-content-center">
+		<div class="col-xs-3  col-sm-3">
+			<button type="submit" class="btn btn-success btn-lg btn-block">Chercher</button>
+		</div>
 	</div>
 </form>

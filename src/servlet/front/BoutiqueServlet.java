@@ -79,7 +79,7 @@ public class BoutiqueServlet extends HttpServlet {
 			request.setAttribute("paginationArticle", paginationArticle);
 			// 6 first promotion
 			Promotion tempPromotion = new Promotion();
-			tempPromotion.setCompleteTableName("v_article_promotion");			
+			tempPromotion.setCompleteTableName("promotion_valider");			
 			where = " and boutique_id like  '"+request.getParameter("ref")+"' order by date_fin desc limit 6";
 			Promotion[]arrayPromotion = (Promotion[])Generalize.getListObjectWithWhere(tempPromotion, where, c);
 			request.setAttribute("arrayPromotion", arrayPromotion);
