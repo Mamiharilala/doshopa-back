@@ -105,13 +105,13 @@
 
 										</div>
 										<p class="mb-1 pb-lg-2" style="color: #393f81;">
-											Déjà fait une inscription? <a
+											Connectez-vous pour acc&eacute;der à votre compte <a
 												href="${pageContext.request.contextPath}/login"
 												style="color: #393f81;">Se connecter</a>
 										</p>
-										<a href="#!" class="small text-muted">Terms of use.</a> <a
-											href="#!" class="small text-muted">Privacy policy</a>
-										<div class="d-flex justify-content-end pt-2">
+										<a href="#!" class="small text-muted">Conditions d'utilisation</a> <a
+											href="#!" class="small text-muted">Politique de confidentialit&eacute;</a>
+										<div class="d-flex justify-content-end pt-1">
 											<button type="submit" class="btn btn-dark btn-lg ms-2 btn-sm">S'inscrire</button>
 										</div>
 									</div>
