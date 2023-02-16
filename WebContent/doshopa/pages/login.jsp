@@ -34,22 +34,22 @@
                                             <input type="text" name="login" id="form2Example18"
                                                 class="btn-sm form-control form-control-lg" />
                                         </div>
-                                        <div class="form-outline mb-4">
+                                        <div class="form-outline mb-3">
                                             <label class="form-label" for="form2Example27">Mot de passe</label>
                                             <input name="mot_passe" type="password" id="form2Example27"
                                                 class="btn-sm form-control form-control-lg" />
                                         </div>
-                                        <div class="pt-1 mb-4">
+                                        <div class="pt-1 mb-2">
                                             <div class="d-grid gap-2">
                                                 <button class="btn btn-dark" type="submit">Se connecter</button>
                                             </div>
                                         </div>
                                         <a class="small text-muted" href="#!">Mot de passe oublier?</a>
-                                        <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a
+                                        <p class="mb-5 pb-lg-2" style="color: #393f81;">Vous n'avez pas de compte ? Inscrivez-vous d&agrave;s maintenant pour acc&eacute;der aux boutiques et recevoir des offres sp&eacute;ciales. <a
                                                 href="${pageContext.request.contextPath}/inscription" style="color: #393f81;">S'inscrire</a></p>
-                                        <a href="#!" class="small text-muted">Terms of use.</a>
-                                        <a href="#!" class="small text-muted">Privacy policy</a>
-                                    </form>
+                                        <a href="#!" class="small text-muted">Conditions d'utilisation</a>
+                                        <a href="#!" class="small text-muted">Politique de confidentialit&eacute;</a>
+                                     </form>
                                 </div>
                             </div>
                         </div>
