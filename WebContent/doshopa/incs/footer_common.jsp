@@ -15,47 +15,26 @@ Nous facilitons les ventes de manière simple et rapide.
                     </p>
                 </div>
                 <!--Grid column-->
-
+				
                 <!--Grid column-->
                 <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                     <h5 class="text-uppercase">Liens</h5>
 
                     <ul class="list-unstyled mb-0">
                         <li>
-                            <a href="" class="text-dark">Galerie
+                            <a href="${pageContext.request.contextPath}/galerie" class="text-dark">Galerie
                                 commerciale</a>
                         </li>
                         <li>
-                            <a href="" class="text-dark">One page</a>
+                            <a href="${pageContext.request.contextPath}/accueil" class="text-dark">One page</a>
                         </li>
                         <li>
-                            <a href="" class="text-dark">S'inscrire</a>
+                            <a href="${pageContext.request.contextPath}/inscription" class="text-dark">S'inscrire</a>
                         </li>
                         <li>
-                            <a href="" class="text-dark">Se connecter</a>
+                            <a href="${pageContext.request.contextPath}/login" class="text-dark">Se connecter</a>
                         </li>
 
-                    </ul>
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <h5 class="text-uppercase mb-0">Links</h5>
-
-                    <ul class="list-unstyled text-dark">
-                        <li>
-                            <a href="#!" class="text-dark">Link 1</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-dark">Link 2</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-dark">Link 3</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-dark">Link 4</a>
-                        </li>
                     </ul>
                 </div>
                 <!--Grid column-->
@@ -80,17 +59,11 @@ Nous facilitons les ventes de manière simple et rapide.
 
     <!-- Right -->
     <div>
-        <a href="" class="me-4 link-light">
+        <a href="https://www.facebook.com/profile.php?id=100089675814054" class="me-4 link-light">
             <i class="fab fa-facebook-f"></i>
         </a>
-        <a href="" class="me-4 link-light">
+        <a href="https://www.instagram.com/doshopa/" class="me-4 link-light">
             <i class="fab fa-instagram"></i>
-        </a>
-        <a href="" class="me-4 link-light">
-            <i class="fab fa-twitter"></i>
-        </a>
-        <a href="" class="me-4 link-light">
-            <i class="fab fa-linkedin"></i>
         </a>
     </div>
     <!-- Right -->
