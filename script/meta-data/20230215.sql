@@ -2,6 +2,7 @@
 ALTER TABLE boutique
 ADD COLUMN date_expired DATE not null default CURRENT_DATE;
 
+drop view v_article_promotion;
 CREATE OR REPLACE VIEW v_article_promotion
 AS SELECT 
 	promotion.id,
@@ -14,13 +15,16 @@ AS SELECT
     article.categorie_id,
     article.boutique_id,
     article.devise_id,
+	promotion.prix_avant,
     promotion.prix_actuel,
     promotion.date_debut,
     promotion.date_fin,
     promotion.quantite,
     promotion.etat,
+	etat.description as etatlib,
     article.devise,
     promotion."views" 
-   FROM article_and_devise article
-     JOIN article_promotion promotion ON article.id::text = promotion.article_id::text;
+   FROM article_and_devise article 
+     JOIN article_promotion promotion ON article.id::text = promotion.article_id::text 
+     join etat on etat.id = promotion.etat ;
 create or replace view promotion_valider as select * from v_article_promotion where etat >=11
