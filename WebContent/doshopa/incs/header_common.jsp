@@ -15,6 +15,7 @@
 <link rel="icon" type="image/png" sizes="16x16"
 	href="${pageContext.request.contextPath}/vendors/images/Doshopa16x16.png" />
 </head>
+<jsp:include page='../incs/notification.jsp' />
 <body class="body ">
 	<section>
 		<div class="container">
