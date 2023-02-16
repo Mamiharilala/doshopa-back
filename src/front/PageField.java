@@ -15,6 +15,7 @@ public class PageField {
 	MapModel[]multipleData;
 	String multipleKey;
 	String multipleValue;
+	String format;
 	public String getType() {
 		return type;
 	}
@@ -81,6 +82,14 @@ public class PageField {
 
 	public MapModel[] getMultipleData() {
 		return multipleData;
+	}
+
+	public String getFormat() {
+		return format;
+	}
+
+	public void setFormat(String format) {
+		this.format = format;
 	}
 
 	public void setMultipleData(MapModel[] multipleData) {

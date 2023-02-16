@@ -269,11 +269,11 @@ public class PageSearch extends Page {
 					ref = this.getColRedirectionHref().get(name[j])+""+ref;
 					methodName = "get" + (name[j].charAt(0) + "").toUpperCase() + (name[j].substring(1));
 					m = this.getMapModel().getClass().getMethod(methodName, null);
-					body += "<td><a href='"+ref+"' style='color:#1b00ff;'>" + m.invoke(data[i], null) + "</a></td>";
+					body += "<td><a href='"+ref+"' style='color:#1b00ff;'>" + getValueWithFormat(name[j],m.invoke(data[i], null)) + "</a></td>";
 				}else {
 					methodName = "get" + (name[j].charAt(0) + "").toUpperCase() + (name[j].substring(1));
 					m = this.getMapModel().getClass().getMethod(methodName, null);
-					body += "<td>"+ m.invoke(data[i], null) + "</td>";
+					body += "<td>"+ getValueWithFormat(name[j],m.invoke(data[i], null)) + "</td>";
 				}
 			}
 			body += "</tr>";

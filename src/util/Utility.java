@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -28,6 +29,11 @@ public class Utility {
 	    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
 	    return formatter.format(date);  
 	}
+	public static String getFormatDate(Date date) {
+		java.util.Date utilDate = new java.util.Date(date.getTime());
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return dateFormat.format(utilDate);
+ 	}
 	public static String setStartWithUppercase(String name) {
 		return name.substring(0,1).toUpperCase()+name.substring(1);
 	}

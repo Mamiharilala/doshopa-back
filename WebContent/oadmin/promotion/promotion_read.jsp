@@ -31,6 +31,9 @@
 			ps.setNameDisplay("boutique_id", "ID Boutique");
 			ps.setNameDisplay("date_debut", "Date début");
 			ps.setNameDisplay("date_fin", "Date fin");
+			ps.setFormatEntry("date_fin", "date");
+			ps.setFormatEntry("prix_actuel", "money");
+			ps.setFormatEntry("prix_avant", "money");
 			ps.setNameDisplay("prix_avant", "Prix avant");
 			ps.setNameDisplay("prix_actuel", "Prix de promotion");
 			ps.setNameDisplay("quantite", "Quantit&eacute;");

@@ -45,6 +45,13 @@ public class Page {
 			this.getPageField().put(fieldName, pf);
  		}
 	} 
+	public void setFormatEntry(String fieldName,String format) {
+		PageField pf =pageField.get(fieldName);
+ 		if(pf!=null) {
+ 			pf.setFormat(format);
+			this.getPageField().put(fieldName, pf);
+ 		}
+	} 
 	public void setMutilpleKeyValue(String fieldName,String key,String value) {
 		PageField pf =pageField.get(fieldName);
  		if(pf!=null) {
@@ -213,5 +220,14 @@ public class Page {
 		res += "<li class='page-item'><a class='page-link' href='" + request.getRequestURL() + "" + cont + "&current_page=" + nbPage +"'><span aria-hidden='true'>&raquo;</span></a></li>";
  		res += "</ul>";
 		return res;
+	}
+	public Object getValueWithFormat(String nameField,Object o) {
+		if(Utility.stringWithoutNull(this.getPageField().get(nameField).getFormat()).compareTo("money")==0) {
+			return Utility.format(o);
+		}
+		if(Utility.stringWithoutNull(this.getPageField().get(nameField).getFormat()).compareTo("date")==0) {
+			return Utility.getFormatDate((java.sql.Date)o);
+		}
+		return o;
 	}
 }
