@@ -11,7 +11,7 @@ import java.util.Calendar;
 
 public class Utility {
 	public static String stringWithoutNull(String str) {
-		if (str == null || str.trim().compareTo("null") == 0) {
+		if (str == null || str.trim().compareTo("null") == 0|| str.trim().compareTo("") == 0) {
 			str = "";
 		}
 		return str;

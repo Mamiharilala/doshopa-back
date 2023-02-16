@@ -3,6 +3,7 @@
 <%@ page import="system.*"%>
 <!DOCTYPE html>
 <% 
+	try{
 	Categorie[]sexe= (Categorie[])request.getAttribute("sexe");
  %>
 <html>
@@ -126,3 +127,14 @@
 </body>
 <jsp:include page='../incs/js.jsp' />
 </html>
+<%
+} catch (Exception e) {
+		e.printStackTrace();
+%>
+<script language="JavaScript"> 
+	alert("<%=e.getMessage()%>");
+    history.back();
+</script>
+<%
+	}
+%>

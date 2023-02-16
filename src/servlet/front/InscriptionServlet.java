@@ -17,7 +17,6 @@ import front.PageCreate;
 import system.Categorie;
 import system.Generalize;
 import system.MapModel;
-import system.MessageException;
 import system.Utilisateur;
 import util.Constant;
 import util.DBConnect;
@@ -93,17 +92,7 @@ public class InscriptionServlet extends HttpServlet {
 				throw new Exception("Echec d\'authentification");
 			}
         	
-		} catch (Exception e) {
-			MessageException me = new MessageException();
-			me.setDescription("Inscription nouveau utilisateur");
-			if(u!=null) {
-				me.setUtilisateur_id(u.getId());
-			}
-			me.setMessage(e.getMessage());
-			try {
-				me.insertIntoTable(null);
-			} catch (Exception e1) { 
-			}
+		} catch (Exception e) {	 
 			e.printStackTrace();
 		}finally {
 			if(c!=null) {
