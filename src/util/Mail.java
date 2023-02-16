@@ -61,7 +61,10 @@ public class Mail {
 			properties.put("mail.smtp.host", host);
 			properties.put("mail.smtp.port", port);
 			properties.put("mail.smtp.ssl.enable", "true");
+			properties.put("mail.smtp.ssl.protocols", "TLSv1.2");
+			properties.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
 			properties.put("mail.smtp.auth", "true");
+			properties.put("mail.smtp.starttls.enable","true");
 			// Get the Session object.// and pass username and password
 			Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
 				protected PasswordAuthentication getPasswordAuthentication() {
@@ -84,6 +87,7 @@ public class Mail {
 			message.setText(detail);
 			// Send message
 			Transport.send(message);
+			System.out.println("Finish  ==="+subject);
 			sentMessage = true;
 		} catch (Exception mex) {
 			mex.printStackTrace();
