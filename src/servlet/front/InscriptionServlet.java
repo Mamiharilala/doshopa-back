@@ -88,7 +88,7 @@ public class InscriptionServlet extends HttpServlet {
   				token.insertIntoTable(c);
   				uri = uri+token.getToken();
   				Mail.sentMailSubscribe(u.getMail(),u.getNom()+" "+u.getPrenom(), uri, "+261 38 05 878 43");
-  				response.sendRedirect("/accueil");				
+  				response.sendRedirect(request.getContextPath()+"/accueil");				
 			}else {
 				throw new Exception("Echec d\'authentification");
 			}

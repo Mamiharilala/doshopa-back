@@ -12,21 +12,21 @@
 	Article[]arrayArticle = (Article[])request.getAttribute("arrayArticle");
 	Promotion[]arrayPromotion = (Promotion[])request.getAttribute("arrayPromotion");
 	Blog[]arrayBlog = (Blog[])request.getAttribute("arrayBlog");
+	String paginationPromotion = (String) request.getAttribute("paginationPromotion");
 	String image = "";
 %>
 <section class="py-1 text-center container">
 	<div class="row py-lg-4">
 		<div class="col-lg-6 col-md-8 mx-auto">
-			<h1 class="fw-light" id="search">Chercher un produit</h1>
-			<p class="lead text-muted">Nous offrons des produits de marque et
-				moins chère</p>
+			<h1 class="fw-light" id="search">Bienvenue sur notre boutique !</h1>
+			<p class="lead text-muted">Nous sommes heureux de vous accueillir ici et nous espérons que vous trouverez tout ce que vous cherchez.</p>
 			<p>
 			<form action="${pageContext.request.contextPath}/boutiques?ref=<%=boutique.getId()%>" method="post">
 				<div class="btn my-2">
 					<input type="search" class="form-control"
 						placeholder="Nom de produit..." name="key_src" aria-label="Search">
 				</div>
-				<button type="submit" class="btn btn-secondary my-2">Rechercher</button>
+				<button type="submit" class="btn btn-secondary my-2"><i class="fa-solid fa-magnifying-glass"></i></button>
 			</form>
 			</p>
 		</div>
@@ -78,25 +78,19 @@
 				</div>
 				<% } %>
 			</div>
+			<%if(arrayArticle.length>0){%>
 			<div class="mt-4 container">
 				<div class="text-center">
 					<div><%=paginationArticle%></div>
 				</div>
 			</div>
-		</div>
-	</div>
-</section>
-
-<section class="mt-2">
-	<div class="text-center">
-		<div>
-			<button type="button" class="btn btn-outline-dark">Voir plus</button>
+			<%}%>
 		</div>
 	</div>
 </section>
 <section>
 	<div class="album py-5">
-		<div class="container">
+		<div class="container" id="promotion">
 			<% if(arrayPromotion.length>0){%>
 			<h4 class="fst-italic text-center py-3 text-center">Promotions</h4>
 			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -140,13 +134,13 @@
 				<%} %>
 			</div>
 			<%} %>
-		</div>
-	</div>
-</section>
-<section class="mt-2">
-	<div class="text-center">
-		<div>
-			<button type="button" class="btn btn-outline-dark">Voir plus</button>
+			<%if(arrayPromotion.length>0){%>
+			<div class="mt-4 container">
+				<div class="text-center">
+					<div><%=paginationPromotion%></div>
+				</div>
+			</div>
+			<%}%>
 		</div>
 	</div>
 </section>
