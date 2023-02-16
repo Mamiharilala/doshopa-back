@@ -10,6 +10,14 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Inscription sur Doshopa</title>
+<!-- Site favicon -->
+<link rel="site-brand-icon" sizes="180x180"
+	href="${pageContext.request.contextPath}/vendors/images/Doshopa180x180.png" />
+<link rel="icon" type="image/png" sizes="32x32"
+	href="${pageContext.request.contextPath}/vendors/images/Doshopa32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16"
+	href="${pageContext.request.contextPath}/vendors/images/Doshopa16x16.png" />
+<jsp:include page='../incs/css.jsp' />
 <jsp:include page='../incs/css.jsp' />
 </head>
 <body>
