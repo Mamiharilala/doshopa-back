@@ -57,7 +57,7 @@
 										<div class="row">
 											<div class="col-md-6 mb-4">
 												<div class="form-outline">
-													<label class="form-label" for="form3Example1n1">Pseudo/Identifiant</label>
+													<label class="form-label" for="form3Example1n1">Identifiant</label>
 													<input name="login" type="text" id="form3Example1n1"
 														class="form-control form-control-lg btn-sm" />
 												</div>
