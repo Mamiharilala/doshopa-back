@@ -63,7 +63,10 @@
 		<div
 			class="container-fluid d-flex justify-content-between align-items-center">
 			<div class="brand-logo">
-				<a href="#" class="text-dark"> Doshopa </a>
+				<a href="${pageContext.request.contextPath}"
+					class="d-flex align-items-center col-md-2 mb-2 mb-md-0 text-dark text-decoration-none">
+					<img src="${pageContext.request.contextPath}/vendors/images/Doshopa_150x36.png" alt="Doshopa" width="150" height="36" >
+				</a>
 			</div>
 		</div>
 	</div>

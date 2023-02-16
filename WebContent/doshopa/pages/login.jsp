@@ -23,7 +23,7 @@
                                     <form action="${pageContext.request.contextPath}/login" method="post">
                                         <center>
                                             <div class="align-items-center mb-3 pb-1">
-                                                <span class="h1 fw-bold mb-0">Doshopa</span>
+                                                <img src="${pageContext.request.contextPath}/vendors/images/Doshopa_150x36.png" alt="Doshopa" width="158" height="38" >
                                             </div>
                                             <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">                   
                                                 Identification
@@ -44,8 +44,8 @@
                                                 <button class="btn btn-dark" type="submit">Se connecter</button>
                                             </div>
                                         </div>
-                                        <a class="small text-muted" href="#!">Mot de passe oublier?</a>
-                                        <p class="mb-5 pb-lg-2" style="color: #393f81;">Vous n'avez pas de compte ? Inscrivez-vous d&agrave;s maintenant pour acc&eacute;der aux boutiques et recevoir des offres sp&eacute;ciales. <a
+                                        <a class="small text-muted" href="#!">Mot de passe oubli&eacute;?</a>
+                                        <p class="mb-5 pb-lg-2" style="color: #393f81;">Vous n'avez pas de compte ? Inscrivez-vous d&egrave;s maintenant pour acc&eacute;der aux boutiques et recevoir des offres sp&eacute;ciales. <a
                                                 href="${pageContext.request.contextPath}/inscription" style="color: #393f81;">S'inscrire</a></p>
                                         <a href="#!" class="small text-muted">Conditions d'utilisation</a>
                                         <a href="#!" class="small text-muted">Politique de confidentialit&eacute;</a>

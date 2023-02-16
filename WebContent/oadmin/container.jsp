@@ -246,8 +246,8 @@
 	<div class="left-side-bar">
 		<div class="brand-logo">
 			<a href="#">
-				<div class="dark-logo" style="color: black;">Doshopa</div>
-				<div class="light-logo">doshopa.com</div>
+				<img class="dark-logo" src="${pageContext.request.contextPath}/vendors/images/Doshopa_150x36.png" alt="Doshopa" width="150" height="36" >
+				<img class="light-logo" src="${pageContext.request.contextPath}/vendors/images/Doshopa180x180.png" alt="Doshopa" width="36" height="36" >
 			</a>
 			<div class="close-sidebar" data-toggle="left-sidebar-close">
 				<i class="ion-close-round"></i>
