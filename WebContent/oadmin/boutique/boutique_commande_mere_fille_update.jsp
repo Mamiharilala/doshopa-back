@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="doshopa.Promotion"%>
+<%@ page import="doshopa.*"%>
 <%@ page import="front.*"%>
 <%@ page import="java.sql.Date"%>
-<%@ page import="doshopa.*"%>
+<%@ page import="system.*"%>
 <%
+	String boutiqueID = "";
+	Utilisateur u = (Utilisateur) session.getAttribute("user");
 	CommandeMere p = new CommandeMere();
 	p.setId(request.getParameter("idMere"));
 %>
@@ -28,12 +30,16 @@
 			CommandeFille fille = new CommandeFille();
 			fille.setCompleteTableName("commande_fille");
 			PageUpdateMultiple pv = new PageUpdateMultiple(p, fille, "mere");
-			pv.setVisibleEntry("etat", false);
+ 			pv.setVisibleEntry("etat", false);
+			pv.setVisibleEntry("remarque", false);
 			pv.setVisibleEntry("remarque", false);
 			pv.setHtml("date_mere", "readonly");
 			pv.setHtml("id", "readonly");
 			pv.setHtml("utilisateur_id", "readonly");
 			pv.setNameDisplay("id", "Numéro de commande");
+			pv.setFormatEntryFille("pu", "money");
+			pv.setFormatEntryFille("quantite", "money");
+			pv.setFormatEntryFille("date_fille", "date");
 			pv.setAfterPageFille("container.jsp?content=boutique/boutique_commande_fille_update.jsp&mode=update");
 			pv.chargeForm();
 			out.println(pv.getLineForm());

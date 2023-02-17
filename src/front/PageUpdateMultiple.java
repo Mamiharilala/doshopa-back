@@ -37,8 +37,26 @@ public class PageUpdateMultiple extends PageUpdate {
 		this.setClassFille(fille);
 		this.setWhere(" AND " + this.getFieldMere() + " = '" + this.getMapModel().getId() + "'");
 		this.setPageFieldFille(new HashMap<String,PageField>());
+		loadFille();
 	}
-
+	public void loadFille() throws Exception {
+		Field[]fields = new Generalize().getCommonField(this.getClassFille(),null);
+ 		PageField pf = null;
+		String methodName = "";
+		for(int i=0;i<fields.length;i++) {
+			if (   fields[i].getName().toUpperCase().compareTo("SCHEMA") != 0 && fields[i].getName().toUpperCase().compareTo("TABLENAME") != 0
+					&& fields[i].getName().toUpperCase().compareTo("SEQUENCEPREFIXE") != 0
+					&& fields[i].getName().toUpperCase().compareTo("SEQUENCENAME") != 0
+					&& fields[i].getName().toUpperCase().compareTo("COMPLETETABLENAME") != 0) {
+				pf = new PageField();
+				pf.setNameDisplay(fields[i].getName());
+				pf.setVisible(true);
+				pf.setField(fields[i]);
+				pf.setType("text");
+				pageFieldFille.put(fields[i].getName(), pf);
+			}
+		}
+	}
 	public void loadResult(HttpServletRequest request) throws Exception {
 		String sql = "SELECT *";
 		sql = sql + " FROM " + this.getClassFille().getCompleteTableName() + " where 1<2 " + this.getWhere();
@@ -84,7 +102,7 @@ public class PageUpdateMultiple extends PageUpdate {
 			for (int j = 0; j < name.length; j++) {
 				methodName = "get" + (name[j].charAt(0) + "").toUpperCase() + (name[j].substring(1));
 				m = this.getClassFille().getClass().getMethod(methodName, null);
-				body += "<td>" + m.invoke(data[i], null) + "</td>";
+				body += "<td>" +this.getValueWithFormat(name[j], m.invoke(data[i], null))  + "</td>";
 			}
 			body += "</tr>";
 		}
@@ -236,5 +254,20 @@ public class PageUpdateMultiple extends PageUpdate {
 	public void setAfterPageFille(String afterPageFille) {
 		this.afterPageFille = afterPageFille;
 	}
-	
+	public Object getValueWithFormat(String nameField,Object o) {
+		if(this.getPageFieldFille().get(nameField)!=null&&Utility.stringWithoutNull(this.getPageFieldFille().get(nameField).getFormat()).compareTo("money")==0) {
+			return Utility.format(o);
+		}
+		if(this.getPageFieldFille().get(nameField)!=null&&Utility.stringWithoutNull(this.getPageFieldFille().get(nameField).getFormat()).compareTo("date")==0) {
+			return Utility.getFormatDate((java.sql.Date)o);
+		}
+		return o;
+	}
+	public void setFormatEntryFille(String fieldName,String format) {
+		PageField pf = getPageFieldFille().get(fieldName);
+ 		if(pf!=null) {
+ 			pf.setFormat(format);
+			this.getPageFieldFille().put(fieldName, pf);
+ 		}
+	}
 }
