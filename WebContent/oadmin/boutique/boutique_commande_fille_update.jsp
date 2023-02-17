@@ -1,3 +1,4 @@
+<%@page import="util.Constant"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="doshopa.*"%>
@@ -17,13 +18,9 @@
 	paiement[1].setCode(false);
 	paiement[1].setDescription("Non");
 	// Validation
-	ObjectType[] etat = new ObjectType[2];
-	etat[0] = new ObjectType();
-	etat[0].setCode("0");
-	etat[0].setDescription("Annuler");
-	etat[1] = new ObjectType();
-	etat[1].setCode("11");
-	etat[1].setDescription("Valider");
+	Categorie cat = new Categorie();
+	cat.setCompleteTableName("etat_commande");
+	Categorie[] etat = (Categorie[]) Generalize.getListObject(cat, null);
 %>
 <div class="page-header">
 	<div class="row">
@@ -43,10 +40,16 @@
 		method="POST">
 		<%
 			PageUpdate pv = new PageUpdate(cf);
+			cf = (CommandeFille)pv.getMapModel();
+			if(cf.isEst_payer()==true){
+				pv.setHtml("est_payer", " disabled ");
+			}
 			pv.setVisibleEntry("id", false);
 			pv.setVisibleEntry("commande_type", false);
+			pv.setVisibleEntry("code_livrer", false);
 			pv.setType("remarque", "textarea");
 			pv.setNameDisplay("quantite", "Quantité");
+			pv.setVisibleEntry("code_collecter", false);
 			pv.setNameDisplay("code_collecter", "Code collecter");
 			pv.setNameDisplay("code_livrer", "Code livrer");
 			pv.setNameDisplay("est_payer", "Payé");
@@ -55,6 +58,7 @@
 			pv.setNameDisplay("article_id", "ID Produit");
 			pv.setType("date_fille", "date");
 			pv.setHtml("date_fille", "readonly");
+			pv.setHtml("article_id", "readonly");
 			pv.setNameDisplay("date_fille", "Date d'achat");
 			pv.setType("est_payer", "SELECT");
 			pv.setMutilpleKeyValue("est_payer", "code", "description");
@@ -62,6 +66,7 @@
 			pv.setType("etat", "SELECT");
 			pv.setMutilpleKeyValue("etat", "code", "description");
 			pv.setMutilpleData("etat", etat);
+			
 			pv.chargeForm();
 			out.println(pv.getLineForm());
 		%>
