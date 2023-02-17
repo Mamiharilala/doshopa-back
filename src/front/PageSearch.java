@@ -56,6 +56,9 @@ public class PageSearch extends Page {
 									+ "<optgroup label='" + pageField.get(key).getNameDisplay() + "'>");
 					String methodName = "";
 					Method m = null;
+					// key
+ 					val += "<option value=''>Tous"; 
+ 					val += "</option>";
 					for (int i = 0; i < this.pageField.get(key).getMultipleData().length; i++) {
 						// key
 						methodName = this.pageField.get(key).getMultipleKey();
@@ -136,7 +139,7 @@ public class PageSearch extends Page {
 					&& request.getParameter(key + "1") != "" && request.getParameter(key + "2") != "") {
 				where += " AND " + key + " >= '" + request.getParameter(key + "1") + "'";
 				where += " AND " + key + " <= '" + request.getParameter(key + "2") + "'";
-			} else if (request.getParameter(key) != null && request.getParameter(key).trim() != "") {
+			} else if (request.getParameter(key) != null && Utility.stringWithoutNull(request.getParameter(key).trim()).compareTo("")!=0) {
 				where += " AND " + key + " = '" + request.getParameter(key) + "'";
 			}
 			if (fields[i].getName().toUpperCase().compareTo("SCHEMA") != 0
@@ -157,7 +160,7 @@ public class PageSearch extends Page {
 			sql += " LIMIT " + this.getTotalRow() + " OFFSET "
 					+ (Integer.parseInt(request.getParameter("currPage")) - 1) * this.getTotalRow();
 		}
-		// System.out.println(sql);
+		//System.out.println(sql);
 		this.setRequest(sql);
 		retrieveResult(request);
 	}

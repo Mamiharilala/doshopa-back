@@ -5,7 +5,7 @@ import java.sql.Date;
 import system.MapModelStateful;
 
 public class Article extends MapModelStateful{
-	String designation,reference,image,observation,categorie_id,boutique_id,devise_id,boutique_denomination;
+	String designation,reference,image,observation,categorie_id,boutique_id,devise_id,boutique_denomination,categorielib;
 	double prix,quantite;
  	public Article(){
 		super();
@@ -75,5 +75,12 @@ public class Article extends MapModelStateful{
 	}
 	public void setQuantite(double quantite) {
 		this.quantite = quantite;
+	}
+	public String getCategorielib() {
+		return categorielib;
+	}
+	public void setCategorielib(String catagorielib) {
+		this.categorielib = catagorielib;
 	}	
+	
 }
