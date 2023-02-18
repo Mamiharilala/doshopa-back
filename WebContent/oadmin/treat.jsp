@@ -12,11 +12,14 @@
 			pv.getMapModel().insertIntoTable(null);
 		}
 		if (request.getParameter("mode").compareTo("update") == 0) {
-			MapModel model = new MapModel();
+			String classPath = request.getParameter("class");
+			Class <?> t = Class.forName(classPath);
+			MapModel model = (MapModel)t.newInstance();
 			model.setId(request.getParameter("id"));
 			PageUpdate pv = new PageUpdate();
 			pv.setMapModel(model);
-			pv.updateIntoTable(request);
+			pv.completeAllField(request);
+			pv.getMapModel().updateIntoTable(null);
 		}
 		if (request.getParameter("mode").compareTo("delete") == 0) {
 			MapModel map = new MapModel();
@@ -32,6 +35,5 @@
 </script>
 <%
 	}
-%>
 %>
 <script>window.location.replace('<%=request.getParameter("after")%>');</script>

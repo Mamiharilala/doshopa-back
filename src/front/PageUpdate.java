@@ -22,6 +22,7 @@ public class PageUpdate extends Page {
 	}
 
 	public void updateIntoTable(HttpServletRequest request) throws Exception {
+		Connection c = null;
 		try {
 			String classPath = request.getParameter("class");
 			Class<?> t = Class.forName(classPath);
@@ -56,11 +57,15 @@ public class PageUpdate extends Page {
 			sql = sql.substring(0,sql.length()-1);
 			sql+= " where id like '"+this.getMapModel().getId()+"'";
 			// Fin loop data
-			Connection c = new DBConnect().getConnection();
+			c = new DBConnect().getConnection();
 			pstmt = c.prepareStatement(sql);
 			pstmt.execute();
 		} catch (Exception e) {
 			throw e;
+		}finally {
+			if(c!=null) {
+				c.close();
+			}
 		}
 	}
 
@@ -126,5 +131,38 @@ public class PageUpdate extends Page {
 			}
 		}
 
+	}
+	
+	public void completeAllField(HttpServletRequest request) throws Exception {
+		String classPath = request.getParameter("class");
+ 		Class <?> t = Class.forName(classPath);
+  		this.setMapModel((MapModel)Class.forName(classPath).cast(Generalize.getById(this.getMapModel(), null)));
+		Field[]fields = this.getMapModel().getAllFields();
+		String fieldName = "";
+		String typeSimpleName = "";
+		String methodName = "";
+		Method m = null;
+		for(int i=0;i<fields.length;i++){
+			fieldName = fields[i].getName();
+			typeSimpleName = fields[i].getType().getSimpleName().toUpperCase();
+			methodName = "set" + (fieldName.charAt(0) + "").toUpperCase() + (fieldName.substring(1));
+			m = this.getMapModel().getClass().getMethod(methodName, new Class[] { fields[i].getType() });
+			if(request.getParameter(fieldName)!=null&&Utility.stringWithoutNull(request.getParameter(fieldName)).compareTo("") != 0){
+				if (typeSimpleName.compareTo("STRING") == 0) {
+					m.invoke(getMapModel(), request.getParameter(fieldName));
+				} else if (typeSimpleName.compareTo("DOUBLE") == 0) {
+					m.invoke(getMapModel(), Double.parseDouble(request.getParameter(fieldName)));
+				} else if (typeSimpleName.compareTo("FLOAT") == 0) {
+					m.invoke(getMapModel(), Float.parseFloat(request.getParameter(fieldName)));
+				} else if (typeSimpleName.compareTo("DATE") == 0) {
+					//System.out.println("   "+request.getParameter(fieldName));
+					m.invoke(getMapModel(), Date.valueOf(request.getParameter(fieldName)));
+				}else if (typeSimpleName.compareTo("INT") == 0||typeSimpleName.compareTo("INTEGER") == 0) {
+					m.invoke(getMapModel(), Integer.parseInt(request.getParameter(fieldName)));
+				}else if (typeSimpleName.compareTo("BOOLEAN") == 0) {
+					m.invoke(getMapModel(), Boolean.parseBoolean(request.getParameter(fieldName)));
+				}
+			}
+		}
 	}
 }

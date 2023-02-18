@@ -176,7 +176,7 @@ public class MapModel {
 				c = new DBConnect().getConnection();
 				isConnNull = true;
 			}
-			this.updateIntoTable(c);
+			this.controlUpdate(c);;
 			String sql = "UPDATE "+this.getCompleteTableName()+" SET ";
 			Field[] listFieldName = new Generalize().getCommonField(this, c);
 			String simpleName = "";

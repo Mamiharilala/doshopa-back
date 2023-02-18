@@ -6,13 +6,19 @@
 <%@ page import="java.sql.Date"%>
 
 <%
-	Utilisateur user = new Utilisateur();
-	Categorie tempRole = new Categorie();
-	tempRole.setCompleteTableName("roles");
-	Categorie[] roles = (Categorie[])Generalize.getListObjectWithWhere(tempRole," order by description desc", null);
-	Categorie tempSexe = new Categorie();
-	tempSexe.setCompleteTableName("sexe");
-	Categorie[] sexes = (Categorie[])Generalize.getListObject(tempSexe, null);
+	try {
+		Utilisateur u = (Utilisateur) session.getAttribute("user");
+		if (u == null || !u.isAdmin()) {
+			throw new Exception("Veuillez contacter l\'administrateur!");
+		}
+		Utilisateur user = new Utilisateur();
+		Categorie tempRole = new Categorie();
+		tempRole.setCompleteTableName("roles");
+		Categorie[] roles = (Categorie[]) Generalize.getListObjectWithWhere(tempRole,
+				" order by description desc", null);
+		Categorie tempSexe = new Categorie();
+		tempSexe.setCompleteTableName("sexe");
+		Categorie[] sexes = (Categorie[]) Generalize.getListObject(tempSexe, null);
 %>
 <div class="page-header">
 	<div class="row">
@@ -33,25 +39,26 @@
 
 		<%
 			PageCreate pv = new PageCreate(user);
-			pv.setVisibleEntry("id", false);
-			pv.setVisibleEntry("etat", false);
-			pv.setType("boutique_id", "popup");
-			pv.setHtml("boutique_id", "readonly");
-			pv.setNameDisplay("boutique_id", "Boutique");
-			pv.setNameDisplay("prenom", "Pr&eacute;nom");
-			pv.setNameDisplay("telephone", "t&eacute;l&eacute;phone");
-			pv.setNameDisplay("mail", "Adresse e-mail");
-			pv.setNameDisplay("role_id", "Role");
-			pv.setType("role_id", "SELECT");
- 			pv.setMutilpleKeyValue("role_id","id","description");
- 			pv.setMutilpleData("role_id", roles);
- 			pv.setType("sexe", "SELECT");
- 			pv.setMutilpleKeyValue("sexe","id","description");
- 			pv.setMutilpleData("sexe", sexes);
-			pv.setNameDisplay("mot_passe", "Mot de passe");
-			pv.setLink("boutique_id",request.getContextPath() + "/oadmin/container.jsp?content=choix/choix_boutique.jsp");
-			pv.chargeForm();
-			out.println(pv.getLineForm());
+				pv.setVisibleEntry("id", false);
+				pv.setVisibleEntry("etat", false);
+				pv.setType("boutique_id", "popup");
+				pv.setHtml("boutique_id", "readonly");
+				pv.setNameDisplay("boutique_id", "Boutique");
+				pv.setNameDisplay("prenom", "Pr&eacute;nom");
+				pv.setNameDisplay("telephone", "t&eacute;l&eacute;phone");
+				pv.setNameDisplay("mail", "Adresse e-mail");
+				pv.setNameDisplay("role_id", "Role");
+				pv.setType("role_id", "SELECT");
+				pv.setMutilpleKeyValue("role_id", "id", "description");
+				pv.setMutilpleData("role_id", roles);
+				pv.setType("sexe", "SELECT");
+				pv.setMutilpleKeyValue("sexe", "id", "description");
+				pv.setMutilpleData("sexe", sexes);
+				pv.setNameDisplay("mot_passe", "Mot de passe");
+				pv.setLink("boutique_id",
+						request.getContextPath() + "/oadmin/container.jsp?content=choix/choix_boutique.jsp");
+				pv.chargeForm();
+				out.println(pv.getLineForm());
 		%>
 		<input type="hidden" class="form-control" value="insert" name="mode">
 		<input type="hidden" class="form-control"
@@ -68,6 +75,16 @@
 	</div>
 
 </form>
-<script>
+<%
+	} catch (Exception e) {
+		e.printStackTrace();
+%>
+<script language="JavaScript"> 
+	alert("<%=e.getMessage()%>");
+	history.back();
+</script>
+<%
+	}
+%><script>
 	
 </script>
