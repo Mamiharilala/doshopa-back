@@ -43,3 +43,14 @@ CREATE SEQUENCE seq_notification INCREMENT BY 1 MINVALUE 1 START 1 CACHE 1 NO CY
 
 create or replace view etat_categorie as
 SELECT * FROM ETAT e where id in ('11','0','1');
+
+
+drop table commande_type;
+ CREATE TABLE commande_type (
+	id varchar(50) NOT NULL,
+	code varchar(100) NOT NULL,
+	description varchar(100) NOT NULL,
+	CONSTRAINT commande_type_pkey PRIMARY KEY (id)
+);
+
+
