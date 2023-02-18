@@ -59,3 +59,14 @@ AS SELECT boutique.id AS boutique_id,
     article,
     commandeliste
   WHERE boutique.id::text = article.boutique_id::text AND article.id::text = commandeliste.article_id::text AND commandeliste.etat >= 10;
+  
+CREATE TABLE menu_roles (
+	id varchar(50) NOT NULL,
+	role_id varchar(100) NOT NULL,
+	menu_id varchar(100) NOT NULL,
+	CONSTRAINT menu_roles_pkey PRIMARY KEY (id)
+);
+CREATE SEQUENCE seq_menu_roles INCREMENT BY 1 MINVALUE 1 START 1 CACHE 1 NO CYCLE;
+ALTER TABLE menu_roles
+ADD CONSTRAINT constraint_menu_roles
+UNIQUE(role_id,menu_id);

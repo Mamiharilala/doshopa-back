@@ -153,6 +153,7 @@ public class PageSearch extends Page {
 		where += Utility.stringWithoutNull(this.getWhere());
 		sql = sql.substring(0, sql.length() - 1);
 		sql = sql + " FROM " + this.getMapModel().getCompleteTableName() + where;
+		this.setLenData(Generalize.getCountSQL(this.getMapModel(), sql, null));
 		if (request.getParameter("currPage") == null || request.getParameter("currPage").compareTo("null") == 0
 				|| request.getParameter("currPage").compareTo("") == 0) {
 			sql += " LIMIT " + this.getTotalRow() + " OFFSET 0 ";
@@ -160,6 +161,7 @@ public class PageSearch extends Page {
 			sql += " LIMIT " + this.getTotalRow() + " OFFSET "
 					+ (Integer.parseInt(request.getParameter("currPage")) - 1) * this.getTotalRow();
 		}
+		
 		//System.out.println(sql);
 		this.setRequest(sql);
 		retrieveResult(request);
@@ -215,7 +217,6 @@ public class PageSearch extends Page {
 	public void retrieveResult(HttpServletRequest request) throws Exception {
 		Connection c = new DBConnect().getConnection();
 		MapModel[] d = (MapModel[]) Generalize.getListObject(this.getMapModel(), this.getRequest(), c);
-		this.setLenData(Generalize.getCountTable(this.getMapModel(), this.getWhere(), c));
 		if (c != null) {
 			c.close();
 		}

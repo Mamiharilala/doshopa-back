@@ -131,19 +131,48 @@ public class Generalize {
 		int len = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		Method m = null;
-		boolean isNullConn = false;
+ 		boolean isNullConn = false;
 		try {
 			if (c == null) {
 				c = new DBConnect().getConnection();
 				isNullConn = true;
 			}
 			String sql = "select count(*) from " + mm.getCompleteTableName()+" WHERE 1<2 " +where;
-			Field[] listFieldName = getCommonField(mm, c);
-			pstmt = c.prepareStatement(sql);
+ 			pstmt = c.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			String simpleName = "";
-			while (rs.next()) {
+ 			while (rs.next()) {
+				len = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (rs != null) {
+				rs.close();
+			}
+			if (pstmt != null) {
+				pstmt.close();
+			}
+			if (c != null && isNullConn) {
+				c.close();
+			}
+		}
+		return len;
+	}
+	
+	public static int getCountSQL(MapModel mm,String sql, Connection c) throws Exception {
+		int len = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+ 		boolean isNullConn = false;
+		try {
+			if (c == null) {
+				c = new DBConnect().getConnection();
+				isNullConn = true;
+			}
+			sql = "select count(*) from (" + sql+") as t";
+ 			pstmt = c.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+ 			while (rs.next()) {
 				len = rs.getInt(1);
 			}
 		} catch (Exception e) {
@@ -176,6 +205,7 @@ public class Generalize {
 				c = new DBConnect().getConnection();
 				isNullConn = true;
 			}
+			mm.controlSelect(c);
 			Field[] listFieldName = Generalize.getCommonField(mm, c);
 			pstmt = c.prepareStatement(sql);
 			rs = pstmt.executeQuery();

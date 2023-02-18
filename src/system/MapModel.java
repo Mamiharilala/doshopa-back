@@ -134,18 +134,11 @@ public class MapModel {
 		boolean isConnNull = false;
 		Method m = null;
 		try {
-			try {
-				m = this.getClass().getMethod("setEtat", new Class[] {int.class});	
-			}catch(NoSuchMethodException e) {
-				
-			}
-			if(m!=null) {
-				m.invoke(this, Constant.createdState);
-			}
 			if(c==null) {
 				c = new DBConnect().getConnection();
 				isConnNull = true;
 			}
+			this.controlInsert(c);
 			this.setId(c);
 			String sql = "INSERT INTO "+this.getCompleteTableName()+" (";
 			String val ="VALUES(";
@@ -160,7 +153,6 @@ public class MapModel {
 			sql = sql.substring(0, sql.length()-1)+")";
 			val = val.substring(0, val.length()-1)+")";
  			pstmt = c.prepareStatement(sql+val);
- 			System.out.println(sql+val);
 			pstmt.executeUpdate();			 
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -184,6 +176,7 @@ public class MapModel {
 				c = new DBConnect().getConnection();
 				isConnNull = true;
 			}
+			this.updateIntoTable(c);
 			String sql = "UPDATE "+this.getCompleteTableName()+" SET ";
 			Field[] listFieldName = new Generalize().getCommonField(this, c);
 			String simpleName = "";
@@ -224,6 +217,7 @@ public class MapModel {
 				c = new DBConnect().getConnection();
 				isConnNull = true;
 			}
+			this.controlUpdate(c);
 			String sql = "DELETE FROM "+this.getCompleteTableName();
 			sql += " WHERE ID= ?";
  			pstmt = c.prepareStatement(sql);
@@ -269,13 +263,25 @@ public class MapModel {
 	public void controlInsert() throws Exception{
 		
 	}
+	public void controlInsert(Connection c) throws Exception{
+		
+	}
 	public void controlUpdate() throws Exception{
+		
+	}
+	public void controlUpdate(Connection c) throws Exception{
 		
 	}
 	public void controlDelete() throws Exception{
 		
 	}
+	public void controlDelete(Connection c) throws Exception{
+		
+	}
 	public void controlSelect() throws Exception{
+		
+	}
+	public void controlSelect(Connection c) throws Exception{
 		
 	}
 }

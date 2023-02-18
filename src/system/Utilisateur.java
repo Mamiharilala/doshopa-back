@@ -11,6 +11,8 @@ import doshopa.Boutique;
 import doshopa.CommandeFille;
 import doshopa.CommandeMere;
 import doshopa.Promotion;
+import front.MenuRole;
+import front.UtilisateurPrivilege;
 import util.Constant;
 import util.DBConnect;
 import util.Utility;
@@ -27,7 +29,7 @@ public class Utilisateur extends MapModel {
 		setSchema("public");
 		setCompleteTableName("utilisateur");
 	}
-	public void controlInsert() throws Exception{
+	public void controlInsert(Connection c) throws Exception{
 		if(Utility.stringWithoutNull(this.getNom()).compareTo("")==0) {
 			throw new Exception("Votre nom est invalid!");
 		}
@@ -43,6 +45,8 @@ public class Utilisateur extends MapModel {
 		if(Utility.stringWithoutNull(this.getLogin()).compareTo("")==0) {
 			throw new Exception("Votre login est invalid!");
 		}
+		this.setMot_passe(Utility.encrypt(String.valueOf(this.getMot_passe()),c));
+		this.setEtat(Constant.validatedState);
 	}
 	public boolean treatLogin(String login, String pwd) throws Exception {
 		String sql = "SELECT * FROM utilisateur where login like ? AND mot_passe like sha1(?::bytea) and etat > 1";
@@ -392,5 +396,38 @@ public class Utilisateur extends MapModel {
 	}
 	public boolean isAdmin() {
 		return Utility.stringWithoutNull(this.getRole_id()).compareTo(Constant.idAdmin)==0;
+	}
+	public void updateRole(Connection c,String roleID,String utilisateurID) throws Exception {
+		if(!this.isAdmin()) {
+			throw new Exception("Accès refusé pour cette action!");
+		}
+		String sql = "delete from utilisateur_privilege where utilisateur_id like ?";
+		PreparedStatement pstmt = null;
+		boolean isNullConn = false;
+		try {
+			if(c==null) {
+				c = new DBConnect().getConnection();
+			}
+			pstmt = c.prepareStatement(sql);
+			pstmt.setString(1, utilisateurID);
+			pstmt.executeUpdate();
+			//fin delete role
+			//new role
+			MenuRole[] menuRole = (MenuRole[]) Generalize.getListObject(new MenuRole(), c);
+			UtilisateurPrivilege utilisateurPrivilege = null;
+			for(int i=0;i<menuRole.length;i++) {
+				utilisateurPrivilege = new UtilisateurPrivilege();
+				utilisateurPrivilege.setMenu_id(menuRole[i].getMenu_id());
+				utilisateurPrivilege.setUtilisateur_id(utilisateurID);
+				utilisateurPrivilege.setEtat(Constant.createdState);
+				utilisateurPrivilege.insertIntoTable(c);
+			}	
+		}catch(Exception e) {
+			throw e;
+		}finally {
+			if(isNullConn&&c!=null) {
+				c.close();
+			}
+		}
 	}
 }

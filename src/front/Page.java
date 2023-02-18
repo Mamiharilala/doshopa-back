@@ -139,7 +139,7 @@ public class Page {
 			typeSimpleName = fields[i].getType().getSimpleName().toUpperCase();
 			methodName = "set" + (fieldName.charAt(0) + "").toUpperCase() + (fieldName.substring(1));
 			m = this.getMapModel().getClass().getMethod(methodName, new Class[] { fields[i].getType() });
-			if(request.getParameter(fieldName)!=null){
+			if(request.getParameter(fieldName)!=null&&Utility.stringWithoutNull(request.getParameter(fieldName)).compareTo("") != 0){
 				if (typeSimpleName.compareTo("STRING") == 0) {
 					m.invoke(getMapModel(), request.getParameter(fieldName));
 				} else if (typeSimpleName.compareTo("DOUBLE") == 0) {
@@ -222,7 +222,6 @@ public class Page {
 		return res;
 	}
 	public Object getValueWithFormat(String nameField,Object o) {
-		System.out.println("========"+nameField+" "+this.getPageField().get(nameField));
 		if(Utility.stringWithoutNull(this.getPageField().get(nameField).getFormat()).compareTo("money")==0) {
 			return Utility.format(o);
 		}

@@ -70,13 +70,10 @@ public class InscriptionServlet extends HttpServlet {
 			PageCreate pv = new PageCreate(new MapModel());
 			pv.completeAllField(request);
 			u = (Utilisateur)pv.getMapModel();
-			u.setRole_id("public");		
+			u.setRole_id(Constant.publicID);		
 			String pwd = u.getMot_passe();
-			u.controlInsert();
-			u.setMot_passe(Utility.encrypt(u.getMot_passe(),null));
-			u.insertIntoTable(c);
 			u.setEtat(Constant.validatedState);
-			u.updateIntoTable(null);
+			u.insertIntoTable(c);
   			boolean val = u.treatLogin(u.getLogin(), pwd);
  			request.getSession().setAttribute("user", u);
   			if (val) {

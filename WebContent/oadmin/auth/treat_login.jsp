@@ -7,16 +7,20 @@
 		Utilisateur u = new Utilisateur();
 		boolean val = u.treatLogin(request.getParameter("login"), request.getParameter("pwd"));
 		String nextTarget = request.getParameter("nextTarget");
+		boolean redirected = false;
 		if (val) {
 			session.setAttribute("user", u);
 			if (u != null && u.getRole_id().trim().compareTo("admin") == 0) {
 				response.sendRedirect("../container.jsp?content=boutique/dashboard_global_read.jsp");
+				redirected = true;
 			} else if (u != null && u.getRole_id().trim().compareTo("boutique") == 0) {
 				response.sendRedirect("../container.jsp?content=boutique/boutique_dashboard.jsp");
+				redirected = true;
 			}
-			return;
 		}
-		throw new Exception("Echec d\'authentification");
+		if(!redirected){
+			response.sendRedirect("../container.jsp?content=auth/login.jsp");
+		}
 	} catch (Exception e) {
 		e.printStackTrace();
 %>
