@@ -44,6 +44,9 @@
 			if(cf.isEst_payer()==true){
 				pv.setHtml("est_payer", " disabled ");
 			}
+			if(cf.getEtat()>=11){
+				pv.setHtml("etat", " disabled ");
+			}
 			pv.setVisibleEntry("id", false);
 			pv.setVisibleEntry("commande_type", false);
 			pv.setVisibleEntry("code_livrer", false);
@@ -53,6 +56,7 @@
 			pv.setNameDisplay("code_collecter", "Code collecter");
 			pv.setNameDisplay("code_livrer", "Code livrer");
 			pv.setNameDisplay("est_payer", "Payé");
+			pv.setNameDisplay("etat", "Status");
 			pv.setNameDisplay("mere", "Numéro de commande");
 			pv.setHtml("remarque", "readonly");
 			pv.setNameDisplay("article_id", "ID Produit");

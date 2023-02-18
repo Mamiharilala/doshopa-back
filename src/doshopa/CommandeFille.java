@@ -5,7 +5,7 @@ import java.sql.Date;
 import system.MapModelStateful;
 
 public class CommandeFille extends MapModelStateful{
-	String article_id, mere,commande_type,remarque,code_collecter,code_livrer;
+	String article_id, mere,commande_type,remarque,code_collecter,code_livrer,designation;
 	double quantite, pu;
 	Date date_fille;
 	boolean est_payer;
@@ -75,6 +75,12 @@ public class CommandeFille extends MapModelStateful{
 	}
 	public void setEst_payer(boolean est_payer) {
 		this.est_payer = est_payer;
+	}
+	public String getDesignation() {
+		return designation;
+	}
+	public void setDesignation(String designation) {
+		this.designation = designation;
 	}
 	
 }

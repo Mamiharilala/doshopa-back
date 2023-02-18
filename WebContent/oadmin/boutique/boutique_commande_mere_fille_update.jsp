@@ -28,11 +28,12 @@
 	<div class="pd-20 card-box mb-30">
 		<%
 			CommandeFille fille = new CommandeFille();
-			fille.setCompleteTableName("commande_fille");
+			fille.setCompleteTableName("commande_fillecomplet");
 			PageUpdateMultiple pv = new PageUpdateMultiple(p, fille, "mere");
  			pv.setVisibleEntry("etat", false);
 			pv.setVisibleEntry("remarque", false);
 			pv.setVisibleEntry("remarque", false);
+			pv.setWhere(" and etat >=10 ");
 			pv.setHtml("date_mere", "readonly");
 			pv.setHtml("id", "readonly");
 			pv.setHtml("utilisateur_id", "readonly");
@@ -51,8 +52,8 @@
 		<div class="table-responsive">
 			<table class="table table-striped">
 				<%
-					pv.setColDisplay(new String[] { "article_id", "quantite", "pu", "etat", "date_fille" });
-					pv.setColRenameDisplay(new String[] { "article_id", "quantite", "pu", "etat", "date_fille" });
+					pv.setColDisplay(new String[] { "article_id","designation", "quantite", "pu", "date_fille", "etatlib" });
+					pv.setColRenameDisplay(new String[] { "ID Article","designation", "quantit&eacute;", "PU", "date" , "status"});
 					pv.prepareData(request);
 					out.println(pv.getResultDisplay());
 				%>
