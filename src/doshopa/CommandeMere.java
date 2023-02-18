@@ -58,11 +58,12 @@ public class CommandeMere extends MapModelStateful{
  		Connection c = null;
 		try {
 			c = new DBConnect().getConnection();
-			String query = "UPDATE commande_fille SET code_collecter=? where mere=?";
+			String query = "UPDATE commande_fille SET code_collecter=? where mere=? and etat=? and code_collecter is null";
 			c.setAutoCommit(false);
 			pstmt = c.prepareStatement(query);
 			pstmt.setString(1, codeCollecter);
 			pstmt.setString(2, this.getId());
+			pstmt.setInt(3, Constant.validatedState);
 			pstmt.execute(); 
 			affecterCodeLivrer(c,codeCollecter);
 			c.commit();
@@ -113,10 +114,11 @@ public class CommandeMere extends MapModelStateful{
 				isNull = true;
 				c = new DBConnect().getConnection();
 			}
-			String query = "UPDATE commande_fille SET etat=? where code_collecter=? ";
+			String query = "UPDATE commande_fille SET etat=? where code_collecter=? and etat=?";
 			pstmt = c.prepareStatement(query);
 			pstmt.setInt(1, Constant.collectedState);
 			pstmt.setString(2, code_collecter);
+			pstmt.setInt(3, Constant.validatedState);
 			pstmt.execute(); 
 		}catch(Exception e) {
 			throw e;
@@ -138,7 +140,7 @@ public class CommandeMere extends MapModelStateful{
 				isNull = true;
 				c = new DBConnect().getConnection();
 			}
-			String query = "UPDATE commande_fille SET etat=? where code_livrer=?";
+			String query = "UPDATE commande_fille SET etat=? where code_livrer=? and etat=?";
 			pstmt = c.prepareStatement(query);
 			pstmt.setInt(1, Constant.deliveryState);
 			pstmt.setString(2, code_livraison);

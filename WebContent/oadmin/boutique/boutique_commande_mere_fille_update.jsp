@@ -15,7 +15,7 @@
 		<div class="col-md-6 col-sm-12">
 			<nav aria-label="breadcrumb" role="navigation">
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="index.html">Boutique</a></li>
+					<li class="breadcrumb-item">Boutique</li>
 					<li class="breadcrumb-item"><a href="index.html">Commande</a></li>
 					<li class="breadcrumb-item active" aria-current="page">Détail de commande</li>
 				</ol>

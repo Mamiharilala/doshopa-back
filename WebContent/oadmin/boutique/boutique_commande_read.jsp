@@ -74,10 +74,10 @@
 	<div class="table-responsive">
 		<table class="table table-striped">
 			<%
-				ps.setColDisplay(new String[] { "idmere","article_id", "designation", "quantite", "pu", "montant", "code_collecter",
+				ps.setColDisplay(new String[] { "idmere","article_id", "designation", "quantite", "pu", "montant", "code_collecter","code_livrer",
 						"date_mere", "etatlib" });
 				ps.setColRenameDisplay(new String[] { "Num&eacute;ro de commande","ID Article", "D&eacute;signation", "Quantit&eacute;",
-						"P.U", "Montant", "Code collecter", "Date", "Status" });
+						"P.U", "Montant", "Code collecter","Code livrer", "Date", "Status" });
 				// field to redirect
 				HashMap<String, String> map = new HashMap<String, String>();
 				map.put("designation", "id");

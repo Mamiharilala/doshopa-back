@@ -37,7 +37,7 @@ public class PageUpdate extends Page {
 			for (int i = 0; i < fields.length; i++) {
 				fieldName = fields[i].getName();
 				typeSimpleName = fields[i].getType().getSimpleName().toUpperCase();
-				if (request.getParameter(fieldName) != null && fieldName.compareTo("id")!=0) {
+				if (Utility.stringWithoutNull(request.getParameter(fieldName)).compareTo("") != 0 && fieldName.compareTo("id")!=0) {
 					if (typeSimpleName.compareTo("STRING") == 0) {
 						sql += " " + fieldName + " = '" + request.getParameter(fieldName) + "',";
 					} else if (typeSimpleName.compareTo("DOUBLE") == 0) {

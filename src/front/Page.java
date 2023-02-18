@@ -222,6 +222,7 @@ public class Page {
 		return res;
 	}
 	public Object getValueWithFormat(String nameField,Object o) {
+		System.out.println("========"+nameField+" "+this.getPageField().get(nameField));
 		if(Utility.stringWithoutNull(this.getPageField().get(nameField).getFormat()).compareTo("money")==0) {
 			return Utility.format(o);
 		}

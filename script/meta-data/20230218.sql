@@ -12,3 +12,50 @@ AS SELECT etat.id,
    FROM etat
   WHERE etat.id = ANY (ARRAY[11, 14, 12, 22, 10,0])
   ORDER BY etat.id desc;
+  
+  CREATE OR REPLACE VIEW commandeliste
+AS SELECT fille.id,
+    mere.id AS idmere,
+    mere.date_mere,
+    fille.article_id,
+    article.designation,
+    fille.pu,
+    fille.commande_type,
+    fille.date_fille,
+    fille.quantite,
+    fille.quantite::double precision * fille.pu AS montant,
+    mere.utilisateur_id,
+    fille.etat,
+    etat.description AS etatlib,
+    fille.remarque,
+    fille.code_collecter,
+    article.devise_id,
+    fille.code_livrer 
+   FROM commande_mere mere
+     JOIN commande_fille fille ON mere.id::text = fille.mere::text
+     LEFT JOIN article ON article.id::text = fille.article_id::text
+     LEFT JOIN etat ON fille.etat = etat.id;
+	 
+CREATE OR REPLACE VIEW commandeliste_boutique
+AS SELECT boutique.id AS boutique_id,
+    commandeliste.id,
+    commandeliste.idmere,
+    commandeliste.date_mere,
+    commandeliste.article_id,
+    commandeliste.designation,
+    commandeliste.pu,
+    commandeliste.commande_type,
+    commandeliste.date_fille,
+    commandeliste.quantite,
+    commandeliste.montant,
+    commandeliste.utilisateur_id,
+    commandeliste.etat,
+    commandeliste.etatlib,
+    commandeliste.remarque,
+    commandeliste.code_collecter,
+    commandeliste.devise_id,
+    commandeliste.code_livrer
+   FROM boutique,
+    article,
+    commandeliste
+  WHERE boutique.id::text = article.boutique_id::text AND article.id::text = commandeliste.article_id::text AND commandeliste.etat >= 10;

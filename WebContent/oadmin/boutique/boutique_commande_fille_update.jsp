@@ -47,12 +47,12 @@
 			if(cf.getEtat()>=11){
 				pv.setHtml("etat", " disabled ");
 			}
-			pv.setVisibleEntry("id", false);
+			pv.setHtml("id", "readonly");
+			pv.setNameDisplay("id", "N° Achat");
 			pv.setVisibleEntry("commande_type", false);
 			pv.setVisibleEntry("code_livrer", false);
 			pv.setType("remarque", "textarea");
 			pv.setNameDisplay("quantite", "Quantité");
-			pv.setVisibleEntry("code_collecter", false);
 			pv.setNameDisplay("code_collecter", "Code collecter");
 			pv.setNameDisplay("code_livrer", "Code livrer");
 			pv.setNameDisplay("est_payer", "Payé");
