@@ -409,7 +409,7 @@ public class Utilisateur extends MapModel {
 		return Utility.stringWithoutNull(this.getRole_id()).compareTo(Constant.idAdmin)==0;
 	}
 	public boolean isBoutique() {
-		return Utility.stringWithoutNull(this.getRole_id()).compareTo(Constant.boutiqueID)==0&&Utility.stringWithoutNull(this.getBoutique_id()).compareTo("") != 0;
+		return Utility.stringWithoutNull(this.getRole_id()).compareTo(Constant.boutiqueID)==0;
 	}
 	public void updateRole(Connection c,String roleID) throws Exception {
 		String sql = "delete from utilisateur_privilege where utilisateur_id like ?";

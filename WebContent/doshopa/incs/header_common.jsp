@@ -33,12 +33,13 @@
 					<li><a href="${pageContext.request.contextPath}/galerie"
 						class="nav-link px-2 link-dark">Galerie commerciale</a></li>
 					<li><a href="" class="nav-link px-2 link-dark">FAQS</a></li>
-					<% if(u!=null&&!u.isBoutique()){ %>
-					<li><a href="${pageContext.request.contextPath}/panier"
+					<% if(u!=null&&u.isBoutique()){ %>
+							<li><a href="${pageContext.request.contextPath}/oadmin" class="nav-link px-2 link-dark">G&eacute;rer ma boutique</a></li>
+					
+					<% }else{%>
+						<li><a href="${pageContext.request.contextPath}/panier"
 						class="nav-link px-2 link-dark"><i
 							class="fa-solid fa-cart-shopping fa-lg mt-1"></i></a></li>
-					<% }else{%>
-					<li><a href="${pageContext.request.contextPath}/oadmin" class="nav-link px-2 link-dark">G&eacute;rer ma boutique</a></li>
 					<% }%>
 				</ul>
 				<%
