@@ -10,7 +10,7 @@
 	user.setCompleteTableName("utilisateur");
 	Utilisateur u = (Utilisateur) session.getAttribute("user");
 	if (u == null||!u.isAdmin()){
-		throw new Exception("Veuillez contacter l\'administrateur!");
+		throw new Exception("Vous n\'avez pas l\'accès, veuillez contacter l\'admin!");
 	}
 	Categorie tempRole = new Categorie();
 	tempRole.setCompleteTableName("roles");
@@ -43,6 +43,7 @@
  			ps.setNameDisplay("boutique_id", "boutique(ID)");
  			ps.setNameDisplay("telephone", "t&eacute;l&eacute;phone");
  			ps.setNameDisplay("prenom", "pr&eacute;nom");
+ 			ps.setFormatEntry("boutique_id", "string");
 			ps.chargeForm();
 			out.println(ps.getSearchForm());
 			ps.loadResult(request);
@@ -66,14 +67,12 @@
 					ps.setColRenameDisplay(new String[] {"id", "nom", "pr&eacute;nom","t&eacute;l&eacute;phone", "adresse", "etat", "ID role", "ID Boutique" });
 					// field to redirect
 					HashMap<String,String>map = new HashMap<String,String>();
-	 				//map.put("designation","id");
-	 				//map.put("article_id","article_id");
-	 				ps.setColRedirection(map);
+	 				map.put("id","id");
+ 	 				ps.setColRedirection(map);
 	 				// Href of redirect
 	 				map = new HashMap<String,String>();
-	 				//map.put("designation","container.jsp?content=promotion/promotion_detail.jsp&id=");
-	 				//map.put("article_id","container.jsp?content=produit/produit_detail.jsp&id=");
- 					ps.setColRedirectionHref(map);
+	 				map.put("id","container.jsp?content=utilisateur/utilisateur_detail.jsp&id=");
+  					ps.setColRedirectionHref(map);
 					ps.prepareData(request);
 					out.println(ps.getResultDisplay());
 				%>

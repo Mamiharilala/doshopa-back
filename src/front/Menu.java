@@ -26,12 +26,17 @@ public class Menu extends MapModel{
 	}
 	public void loadFille(Connection c,Utilisateur u) throws Exception {
 		boolean isNullConn = false;
+		String where = "";
 		try {
 			if(c==null) {
 				c = new DBConnect().getConnection();
 				isNullConn = true;
 			}
-			this.setFille((Menu[]) Generalize.getListObjectWithWhere(this," AND utilisateur_id like '"+u.getId()+"'AND mere like '"+this.getId()+"' order by rang asc", c));
+			if(!u.isAdmin()) {
+				where = where+" "+" AND utilisateur_id like '"+u.getId()+"'";
+			}	
+			where = where+" AND mere like '"+this.getId()+"' order by rang asc";
+			this.setFille((Menu[]) Generalize.getListObjectWithWhere(this,where, c));
 			if(this.getFille()!=null) {
 				for(int i=0;i<this.getFille().length;i++) {
 					this.getFille()[i].setCompleteTableName(this.getCompleteTableName());
@@ -82,8 +87,10 @@ public class Menu extends MapModel{
 	public String getStringMenu(Utilisateur u)throws Exception {
 		try {
 			Menu[]menu = (Menu[]) new Generalize().getListObjectWithWhere(this," AND mere like '' or mere is null ", null); 
-			if(menu!=null&&menu.length>0) {	
-				menu[0].setCompleteTableName("menu_granted");
+			if(menu!=null&&menu.length>0) {
+				if(!u.isAdmin()) {
+					menu[0].setCompleteTableName("menu_granted");
+				}
 				return menu[0].generateMenu(menu[0].getId(),u);
 			}
 		}catch(Exception e) {

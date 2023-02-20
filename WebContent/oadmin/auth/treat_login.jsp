@@ -16,6 +16,9 @@
 			} else if (u != null && u.getRole_id().trim().compareTo("boutique") == 0) {
 				response.sendRedirect("../container.jsp?content=boutique/boutique_dashboard.jsp");
 				redirected = true;
+			}else if (u != null && u.getRole_id().trim().compareTo("livreur") == 0) {
+				response.sendRedirect("../container.jsp?content=boutique/boutique_livrer.jsp");
+				redirected = true;
 			}
 		}
 		if(!redirected){
