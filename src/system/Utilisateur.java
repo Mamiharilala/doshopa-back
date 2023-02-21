@@ -10,6 +10,7 @@ import doshopa.Article;
 import doshopa.Boutique;
 import doshopa.CommandeFille;
 import doshopa.CommandeMere;
+import doshopa.Notification;
 import doshopa.Promotion;
 import front.MenuRole;
 import front.UtilisateurPrivilege;
@@ -255,7 +256,6 @@ public class Utilisateur extends MapModel {
 			c.setAutoCommit(false);
 			Promotion tempPromotion = new Promotion();
 			tempPromotion.setId(idPromotion);
-			System.out.println("====="+idPromotion);
 			Promotion art = (Promotion) Generalize.getById(tempPromotion, c);
 			if (art == null) {
 				throw new Exception("Stock epuisé");
@@ -342,11 +342,22 @@ public class Utilisateur extends MapModel {
 		}
 	}
 	public void validerCommandeFille(String idPanier) throws Exception {
+  		try {
+ 			validerCommandeFille(idPanier,null);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	public void validerCommandeFille(String idPanier,Connection c) throws Exception {
 		PreparedStatement pstmt = null;
-		Connection c = null;
+		String message ="";
+		boolean isNullConn = false;
 		try {
 			String sql = "";
-			c = new DBConnect().getConnection();
+			if(c==null) {
+				c = new DBConnect().getConnection();
+				isNullConn = true;
+			}	
 			// Update fille
 			sql = "UPDATE commande_fille SET etat=? WHERE etat = ? and id=?";
 			pstmt = c.prepareStatement(sql);
@@ -355,10 +366,19 @@ public class Utilisateur extends MapModel {
 			pstmt.setString(3,idPanier);
 			pstmt.executeUpdate();
 			// Update fille fin
+			//notification
+			ObjectType[]object = (ObjectType[])Generalize.getListObject(new ObjectType()," select u.id,u.id,u.id from commande_fille cf,article a,utilisateur u where a.id = cf.article_id and a.boutique_id = u.boutique_id;\r\n" + 
+					" and commande_fille.id='"+idPanier+"'",  c);
+			if(object.length>0) {
+				message = " Commande num&eacute;ro "+idPanier+" a &eacute;t&eacute; valid&eacute;"; 
+				Notification n = new Notification(message,object[0].getId(), Constant.boutiqueID);
+				n.insertIntoTable(c);
+			}
+			//Fin notification
 		} catch (Exception e) {
 			throw e;
 		} finally {
-			if (c != null) {
+			if (isNullConn && c != null) {
 				c.close();
 			}
 		}
@@ -383,20 +403,17 @@ public class Utilisateur extends MapModel {
 			}
 		}
 	}
+	
 	public void validerTousCommandeFille() throws Exception {
 		PreparedStatement pstmt = null;
 		Connection c = null;
 		try {
-			String sql = "";
-			c = new DBConnect().getConnection();
+ 			c = new DBConnect().getConnection();
 			// Update fille
-			sql = "UPDATE commande_fille SET etat=? WHERE etat = ?";
-			pstmt = c.prepareStatement(sql);
-			pstmt.setDouble(1, Constant.waitingValidatedState);
-			pstmt.setInt(2, Constant.createdState);
- 			pstmt.executeUpdate();
-			// Update fille fin
-
+			CommandeFille[]cFille = (CommandeFille[]) Generalize.getListObjectWithWhere(new CommandeFille()," AND utilisateur_id='"+this.getId()+"'",c);
+ 			for(int i=0;i<cFille.length;i++) {
+ 				this.validerCommandeFille(cFille[i].getId(),c);
+ 			}
 		} catch (Exception e) {
 			throw e;
 		} finally {
