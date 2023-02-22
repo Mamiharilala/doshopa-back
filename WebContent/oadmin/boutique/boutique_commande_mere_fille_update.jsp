@@ -48,6 +48,11 @@
 		%>
 
 	</div>
+	<div class="nav justify-content-center">
+		<div class="col-xs-3  col-sm-3">
+			<a href="${pageContext.request.contextPath}/oadmin/container.jsp?content=boutique/boutique_commande_mere_update.jsp&id=<%=p.getId()%>"><button type="button" class="btn btn-warning btn-lg text-light btn-block">Modifier</button></a>
+		</div>
+	</div><br>
 	<div class="pd-20 mb-30 card-box">
 		<div class="table-responsive">
 			<table class="table table-striped">
