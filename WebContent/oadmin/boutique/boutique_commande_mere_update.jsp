@@ -5,7 +5,6 @@
 <%@ page import="front.*"%>
 <%@ page import="system.*"%>
 <%@ page import="java.sql.Date"%>
-
 <%
 	CommandeMere commande = new CommandeMere();
 	commande.setId(request.getParameter("id"));
@@ -35,6 +34,10 @@
 			pv.setVisibleEntry("id", false);
  			pv.setVisibleEntry("utilisateur_id", false);
  			pv.setNameDisplay("date_mere", "Date");
+ 			pv.setNameDisplay("etat", "Status");
+			pv.setNameDisplay("frais_livraison", "Frais de livraison");
+			pv.setNameDisplay("lieu_livraison", "Lieu de livraison");
+			pv.setType("date_mere", "date");
  			pv.setType("etat", "SELECT");
 			pv.setMutilpleKeyValue("etat", "code", "description");
 			pv.setMutilpleData("etat", etat);
@@ -45,9 +48,9 @@
 		<input type="hidden" class="form-control" value="update" name="mode">
 		<input type="hidden" class="form-control" value="<%=request.getParameter("id")%>" name="id">
 		<input type="hidden" class="form-control"
-			value="${pageContext.request.contextPath}/oadmin/container.jsp?content=boutique/commande_mere_update.jsp&id=<%=request.getParameter("id")%>"
+			value="${pageContext.request.contextPath}/oadmin/container.jsp?content=boutique/boutique_commande_mere_update.jsp&id=<%=request.getParameter("id")%>"
 			name="after"> <input type="hidden" class="form-control"
-			name="class" value="doshopa.Promotion">
+			name="class" value="doshopa.CommandeMere">
 		<div class="nav justify-content-center">
 			<button type="submit"
 				class="btn btn-warning text-light btn-lg col-xs-4  col-sm-4">Modifier</button>

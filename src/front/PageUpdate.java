@@ -135,7 +135,6 @@ public class PageUpdate extends Page {
 	
 	public void completeAllField(HttpServletRequest request) throws Exception {
 		String classPath = request.getParameter("class");
- 		Class <?> t = Class.forName(classPath);
   		this.setMapModel((MapModel)Class.forName(classPath).cast(Generalize.getById(this.getMapModel(), null)));
 		Field[]fields = this.getMapModel().getAllFields();
 		String fieldName = "";

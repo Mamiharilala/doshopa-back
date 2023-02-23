@@ -13,8 +13,8 @@ import util.DBConnect;
 
 public class CommandeMere extends MapModelStateful{
 	Date date_mere;
-	double quantite,montant;
-	String utilisateur_id,remarque;
+	double quantite,montant,frais_livraison;
+	String utilisateur_id,remarque,lieu_livraison,contact;
 	public CommandeMere() {
 		this.setTableName("commande_mere");
 		this.setSequenceName("seq_commandemere");
@@ -192,4 +192,23 @@ public class CommandeMere extends MapModelStateful{
 			throw e;
 		}
 	}
+	public String getLieu_livraison() {
+		return lieu_livraison;
+	}
+	public void setLieu_livraison(String lieu_livraison) {
+		this.lieu_livraison = lieu_livraison;
+	}
+	public String getContact() {
+		return contact;
+	}
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
+	public double getFrais_livraison() {
+		return frais_livraison;
+	}
+	public void setFrais_livraison(double frais_livraison) {
+		this.frais_livraison = frais_livraison;
+	}
+	
 }
