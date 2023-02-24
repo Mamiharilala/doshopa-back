@@ -10,6 +10,7 @@ import doshopa.Article;
 import doshopa.Boutique;
 import doshopa.CommandeFille;
 import doshopa.CommandeMere;
+import doshopa.Notification;
 import doshopa.Promotion;
 import front.MenuRole;
 import front.UtilisateurPrivilege;
@@ -39,7 +40,7 @@ public class Utilisateur extends MapModel {
 		if(Utility.stringWithoutNull(this.getMot_passe()).compareTo("")==0) {
 			throw new Exception("Votre mot de passe est invalid!");
 		}
-		if(Utility.stringWithoutNull(this.getMot_passe()).compareTo("")==0) {
+		if(Utility.stringWithoutNull(this.getAdresse()).compareTo("")==0) {
 			throw new Exception("Votre adresse est invalid!");
 		}
 		if(Utility.stringWithoutNull(this.getLogin()).compareTo("")==0) {
@@ -55,19 +56,16 @@ public class Utilisateur extends MapModel {
 		if(Utility.stringWithoutNull(this.getPrenom()).compareTo("")==0) {
 			throw new Exception("Votre prenom est invalid!");
 		}
-		if(Utility.stringWithoutNull(this.getMot_passe()).compareTo("")==0) {
-			throw new Exception("Votre mot de passe est invalid!");
+		if(Utility.stringWithoutNull(this.getAdresse()).compareTo("")==0) {
+			throw new Exception("Votre adresse est invalid!");
 		}
 		if(Utility.stringWithoutNull(this.getMot_passe()).length()<4) {
 			throw new Exception("Votre mot de passe est trop court!Choisissez au moins 4 charactère!");
 		}
-		if(Utility.stringWithoutNull(this.getMot_passe()).compareTo("")==0) {
-			throw new Exception("Votre adresse est invalid!");
-		}
 		if(Utility.stringWithoutNull(this.getLogin()).compareTo("")==0) {
 			throw new Exception("Votre login est invalid!");
 		}
-		this.setMot_passe(Utility.encrypt(String.valueOf(this.getMot_passe()),c));
+		updateRole(c,this.getRole_id());
 	}
 	public boolean treatLogin(String login, String pwd) throws Exception {
 		String sql = "SELECT * FROM utilisateur where login like ? AND mot_passe like sha1(?::bytea) and etat > 1";
@@ -118,13 +116,6 @@ public class Utilisateur extends MapModel {
 
 	public void setNom(String nom) {
 		this.nom = nom;
-	}
-
-	public boolean isBoutique() {
-		if (this.getBoutique_id() != null && this.getBoutique_id() != "" && this.getBoutique_id() != "null") {
-			return true;
-		}
-		return false;
 	}
 
 	public Boutique getBoutique() throws Exception {
@@ -265,7 +256,6 @@ public class Utilisateur extends MapModel {
 			c.setAutoCommit(false);
 			Promotion tempPromotion = new Promotion();
 			tempPromotion.setId(idPromotion);
-			System.out.println("====="+idPromotion);
 			Promotion art = (Promotion) Generalize.getById(tempPromotion, c);
 			if (art == null) {
 				throw new Exception("Stock epuisé");
@@ -352,11 +342,22 @@ public class Utilisateur extends MapModel {
 		}
 	}
 	public void validerCommandeFille(String idPanier) throws Exception {
+  		try {
+ 			validerCommandeFille(idPanier,null);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	public void validerCommandeFille(String idPanier,Connection c) throws Exception {
 		PreparedStatement pstmt = null;
-		Connection c = null;
+		String message ="";
+		boolean isNullConn = false;
 		try {
 			String sql = "";
-			c = new DBConnect().getConnection();
+			if(c==null) {
+				c = new DBConnect().getConnection();
+				isNullConn = true;
+			}	
 			// Update fille
 			sql = "UPDATE commande_fille SET etat=? WHERE etat = ? and id=?";
 			pstmt = c.prepareStatement(sql);
@@ -365,10 +366,19 @@ public class Utilisateur extends MapModel {
 			pstmt.setString(3,idPanier);
 			pstmt.executeUpdate();
 			// Update fille fin
+			//notification
+			ObjectType[]object = (ObjectType[])Generalize.getListObject(new ObjectType()," select u.id,u.id,u.id from commande_fille cf,article a,utilisateur u where a.id = cf.article_id and a.boutique_id = u.boutique_id;\r\n" + 
+					" and commande_fille.id='"+idPanier+"'",  c);
+			if(object.length>0) {
+				message = " Commande num&eacute;ro "+idPanier+" a &eacute;t&eacute; valid&eacute;"; 
+				Notification n = new Notification(message,object[0].getId(), Constant.boutiqueID);
+				n.insertIntoTable(c);
+			}
+			//Fin notification
 		} catch (Exception e) {
 			throw e;
 		} finally {
-			if (c != null) {
+			if (isNullConn && c != null) {
 				c.close();
 			}
 		}
@@ -393,20 +403,17 @@ public class Utilisateur extends MapModel {
 			}
 		}
 	}
+	
 	public void validerTousCommandeFille() throws Exception {
 		PreparedStatement pstmt = null;
 		Connection c = null;
 		try {
-			String sql = "";
-			c = new DBConnect().getConnection();
+ 			c = new DBConnect().getConnection();
 			// Update fille
-			sql = "UPDATE commande_fille SET etat=? WHERE etat = ?";
-			pstmt = c.prepareStatement(sql);
-			pstmt.setDouble(1, Constant.waitingValidatedState);
-			pstmt.setInt(2, Constant.createdState);
- 			pstmt.executeUpdate();
-			// Update fille fin
-
+			CommandeFille[]cFille = (CommandeFille[]) Generalize.getListObjectWithWhere(new CommandeFille()," AND utilisateur_id='"+this.getId()+"'",c);
+ 			for(int i=0;i<cFille.length;i++) {
+ 				this.validerCommandeFille(cFille[i].getId(),c);
+ 			}
 		} catch (Exception e) {
 			throw e;
 		} finally {
@@ -418,29 +425,31 @@ public class Utilisateur extends MapModel {
 	public boolean isAdmin() {
 		return Utility.stringWithoutNull(this.getRole_id()).compareTo(Constant.idAdmin)==0;
 	}
-	public void updateRole(Connection c,String roleID,String utilisateurID) throws Exception {
-		if(!this.isAdmin()) {
-			throw new Exception("Accès refusé pour cette action!");
-		}
+	public boolean isBoutique() {
+		return Utility.stringWithoutNull(this.getRole_id()).compareTo(Constant.boutiqueID)==0;
+	}
+	public void updateRole(Connection c,String roleID) throws Exception {
 		String sql = "delete from utilisateur_privilege where utilisateur_id like ?";
 		PreparedStatement pstmt = null;
 		boolean isNullConn = false;
+		String where = "";
 		try {
 			if(c==null) {
 				c = new DBConnect().getConnection();
 			}
 			pstmt = c.prepareStatement(sql);
-			pstmt.setString(1, utilisateurID);
+			pstmt.setString(1, this.getId());
 			pstmt.executeUpdate();
 			//fin delete role
 			//new role
-			MenuRole[] menuRole = (MenuRole[]) Generalize.getListObject(new MenuRole(), c);
+			where = " and role_id like '"+roleID+"'";
+ 			MenuRole[] menuRole = (MenuRole[]) Generalize.getListObjectWithWhere(new MenuRole(),where, c);
 			UtilisateurPrivilege utilisateurPrivilege = null;
 			for(int i=0;i<menuRole.length;i++) {
 				utilisateurPrivilege = new UtilisateurPrivilege();
 				utilisateurPrivilege.setMenu_id(menuRole[i].getMenu_id());
-				utilisateurPrivilege.setUtilisateur_id(utilisateurID);
-				utilisateurPrivilege.setEtat(Constant.createdState);
+				utilisateurPrivilege.setUtilisateur_id(this.getId());
+				utilisateurPrivilege.setEtat(Constant.validatedState);
 				utilisateurPrivilege.insertIntoTable(c);
 			}	
 		}catch(Exception e) {

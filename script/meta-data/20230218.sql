@@ -70,3 +70,11 @@ CREATE SEQUENCE seq_menu_roles INCREMENT BY 1 MINVALUE 1 START 1 CACHE 1 NO CYCL
 ALTER TABLE menu_roles
 ADD CONSTRAINT constraint_menu_roles
 UNIQUE(role_id,menu_id);
+
+CREATE OR REPLACE VIEW etat_commande
+AS SELECT etat.id,
+    etat.code,
+    etat.description
+   FROM etat
+  WHERE etat.id in(11, 14, 12, 22, 10, 0,1)
+  ORDER BY etat.id DESC;

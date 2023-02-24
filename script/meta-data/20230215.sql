@@ -36,7 +36,7 @@ create table notification(
 	message varchar(250) NOT NULL,
 	utilisateur_id varchar(100),
 	role_id varchar(100),
-	date_insert DATE not null default CURRENT_DATE,
+	date_insert timestamp not null default CURRENT_TIMESTAMP,
 	has_viewed boolean not null default false
 );
 CREATE SEQUENCE seq_notification INCREMENT BY 1 MINVALUE 1 START 1 CACHE 1 NO CYCLE;

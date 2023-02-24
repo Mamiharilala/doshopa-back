@@ -8,8 +8,8 @@
 <%
 	try {
 		Utilisateur u = (Utilisateur) session.getAttribute("user");
-		if (u == null || !u.isAdmin()) {
-			throw new Exception("Veuillez contacter l\'administrateur!");
+		if (u == null||!u.isAdmin()){
+			throw new Exception("Vous n\'avez pas l\'accès, veuillez contacter l\'admin!");
 		}
 		Utilisateur user = new Utilisateur();
 		Categorie tempRole = new Categorie();

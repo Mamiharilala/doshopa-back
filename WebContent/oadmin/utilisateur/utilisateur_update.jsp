@@ -7,6 +7,10 @@
 <%@ page import="java.sql.Date"%>
 
 <%
+	Utilisateur u = (Utilisateur) session.getAttribute("user");
+	if (u == null||!u.isAdmin()){
+		throw new Exception("Vous n\'avez pas l\'accès, veuillez contacter l\'admin!");
+	}
 	Utilisateur user = new Utilisateur();
 	user.setId(request.getParameter("id"));
 	//
@@ -43,9 +47,9 @@
 			user.setMot_passe("");
 			pv.setMapModel(user);
 			pv.setVisibleEntry("id", false);
+			pv.setVisibleEntry("mot_passe", false);
   			pv.setNameDisplay("boutique_id", "Boutique(ID)");
   			pv.setNameDisplay("role_id", "Role");
-  			pv.setNameDisplay("mot_passe", "Mot de passe");
   			pv.setNameDisplay("telephone", "t&eacute;l&eacute;phone");
   			pv.setNameDisplay("prenom", "pr&eacute;nom");
  			pv.setHtml("designation", "readonly");
@@ -76,9 +80,8 @@
 		</div>
 		<br>
 		<div class="nav justify-content-center">
-			<a href="${pageContext.request.contextPath}/oadmin/container.jsp?content=utilisateur/utilisateur_detaill.jsp&id=<%=request.getParameter("id")%>"><button type="button" class="btn btn-success">Voir détail</button>
+			<a href="${pageContext.request.contextPath}/oadmin/container.jsp?content=utilisateur/utilisateur_detail.jsp&id=<%=request.getParameter("id")%>"><button type="button" class="btn btn-success">Voir d&eacute;tail</button>
 		</div>
-
 	</form>
 	<br>
 </div>

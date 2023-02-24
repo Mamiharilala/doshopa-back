@@ -9,6 +9,10 @@
 	Utilisateur u = (Utilisateur) session.getAttribute("user");
 	CommandeMere p = new CommandeMere();
 	p.setId(request.getParameter("idMere"));
+	// Validation
+	Categorie etatCat = new Categorie();
+	etatCat.setCompleteTableName("etat_commande");
+	Categorie[] etat = (Categorie[]) Generalize.getListObject(etatCat, null);
 %>
 <div class="page-header">
 	<div class="row">
@@ -30,7 +34,6 @@
 			CommandeFille fille = new CommandeFille();
 			fille.setCompleteTableName("commande_fillecomplet");
 			PageUpdateMultiple pv = new PageUpdateMultiple(p, fille, "mere");
- 			pv.setVisibleEntry("etat", false);
 			pv.setVisibleEntry("remarque", false);
 			pv.setVisibleEntry("remarque", false);
 			pv.setWhere(" and etat >=10 ");
@@ -38,9 +41,16 @@
 			pv.setHtml("id", "readonly");
 			pv.setHtml("utilisateur_id", "readonly");
 			pv.setNameDisplay("id", "Numéro de commande");
+			pv.setNameDisplay("date_mere", "Date mère");
+			pv.setNameDisplay("etat", "Status");
+			pv.setNameDisplay("frais_livraison", "Frais de livraison");
+			pv.setNameDisplay("lieu_livraison", "Lieu de livraison");
 			pv.setFormatEntryFille("pu", "money");
 			pv.setFormatEntryFille("quantite", "money");
 			pv.setFormatEntryFille("date_fille", "date");
+			pv.setType("etat", "SELECT");
+			pv.setMutilpleKeyValue("etat", "code", "description");
+			pv.setMutilpleData("etat", etat);
 			pv.setAfterPageFille("container.jsp?content=boutique/boutique_commande_fille_update.jsp&mode=update");
 			pv.chargeForm();
 			out.println(pv.getLineForm());
@@ -48,6 +58,11 @@
 		%>
 
 	</div>
+	<div class="nav justify-content-center">
+		<div class="col-xs-3  col-sm-3">
+			<a href="${pageContext.request.contextPath}/oadmin/container.jsp?content=boutique/boutique_commande_mere_update.jsp&id=<%=p.getId()%>"><button type="button" class="btn btn-warning btn-lg text-light btn-block">Modifier</button></a>
+		</div>
+	</div><br>
 	<div class="pd-20 mb-30 card-box">
 		<div class="table-responsive">
 			<table class="table table-striped">

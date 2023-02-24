@@ -228,6 +228,9 @@ public class Page {
 		if(Utility.stringWithoutNull(this.getPageField().get(nameField).getFormat()).compareTo("date")==0) {
 			return Utility.getFormatDate((java.sql.Date)o);
 		}
+		if(Utility.stringWithoutNull(this.getPageField().get(nameField).getFormat()).compareTo("string")==0) {
+			return Utility.stringWithoutNull(String.valueOf(o));
+		}
 		return o;
 	}
 }
