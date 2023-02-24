@@ -17,7 +17,7 @@
                 <h4 class="fst-italic text-center py-3 text-center">Boutiques</h4>
                 <div class="owl-carousel owl-2">
                     <% image =""; for(int i=0;i<arrayBoutique.length;i++){%>
-                    <div class="media-29101">
+                    <div class="item">
                         <div class="m-10">
                             <div class="col-xs-12 col-sm-12">
                                 <div class="card shadow">
@@ -47,6 +47,7 @@
         </div>
     </div>
 </section><br><br>
+
 <section class="text-center">
     <a href="${pageContext.request.contextPath}/galerie" class="text-decoration-none"><button
             class="btn btn-outline-dark btn-sm">Voir toutes les boutiques</button></a>

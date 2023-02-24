@@ -6,6 +6,7 @@
 	Utilisateur u = (Utilisateur) request.getSession().getAttribute("user");
 %>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <jsp:include page='../incs/css.jsp' />
 <!-- Site favicon -->
 <link rel="site-brand-icon" sizes="180x180"
@@ -16,7 +17,7 @@
 	href="${pageContext.request.contextPath}/vendors/images/Doshopa16x16.png" />
 </head>
 <jsp:include page='../incs/notification.jsp' />
-<body class="body ">
+<body class="body">
 	<section>
 		<div class="container">
 			<header
