@@ -8,6 +8,7 @@
 %>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Site favicon -->
 <link rel="site-brand-icon" sizes="180x180"
 	href="${pageContext.request.contextPath}/vendors/images/Doshopa180x180.png" />
