@@ -10,4 +10,5 @@ public class Constant {
 	public static int collectedState = 12;
 	public static int deliveryState = 14;
 	public static String idAdmin = "admin";
+	public static double frais = 4000;
 }

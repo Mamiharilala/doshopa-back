@@ -26,16 +26,23 @@
    	        	}	 
   	        }
  	 	}
-		if(request.getParameter("mode").compareTo("validate_order")==0){
+		if(request.getParameter("mode").compareTo("remove_order")==0){
  			String[]numero = request.getParameterValues("numero");
    	        for(int i=0;i<numero.length;i++){
    	        	if(Utility.stringWithoutNull(request.getParameter("commande_checkbox"+numero[i])).compareTo("")!=0){
-   	        		u.validerCommandeFille(request.getParameter("idpanier"+numero[i]));
+   	        		u.removeCommandeFille(request.getParameter("idpanier"+numero[i]));
    	        	}	 
   	        }
  	 	}
-		if(request.getParameter("mode").compareTo("validate_all_order")==0){
-			u.validerTousCommandeFille();   
+		if(request.getParameter("mode").compareTo("confirm_purchase")==0){
+			String localisation = request.getParameter("localisation");
+			System.out.println(request.getParameter("localisation_checkbox"));
+			if(request.getParameter("localisation_checkbox")!=null){
+				localisation = request.getParameter("another_localisation");
+			}
+			String ref = request.getParameter("ref");
+			String contact = request.getParameter("contact");
+			u.validerAchat(ref,contact,localisation);
  	 	}
 		if(request.getParameter("mode").compareTo("logout")==0){
 			session.removeAttribute("user");

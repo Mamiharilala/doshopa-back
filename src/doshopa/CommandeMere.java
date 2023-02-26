@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Random;
 
+import system.Generalize;
 import system.MapModel;
 import system.MapModelStateful;
 import util.Constant;
@@ -192,6 +193,7 @@ public class CommandeMere extends MapModelStateful{
 			throw e;
 		}
 	}
+ 
 	public String getLieu_livraison() {
 		return lieu_livraison;
 	}

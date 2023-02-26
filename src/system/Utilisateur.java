@@ -332,7 +332,6 @@ public class Utilisateur extends MapModel {
 			pstmt.setString(3, idPanier);
 			pstmt.executeUpdate();
 			// Update fille fin
-
 		} catch (Exception e) {
 			throw e;
 		} finally {
@@ -341,48 +340,28 @@ public class Utilisateur extends MapModel {
 			}
 		}
 	}
-	public void validerCommandeFille(String idPanier) throws Exception {
-  		try {
- 			validerCommandeFille(idPanier,null);
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-	public void validerCommandeFille(String idPanier,Connection c) throws Exception {
+	public void removeCommandeFille(String idPanier) throws Exception {
 		PreparedStatement pstmt = null;
-		String message ="";
-		boolean isNullConn = false;
+		Connection c = null;
 		try {
 			String sql = "";
-			if(c==null) {
-				c = new DBConnect().getConnection();
-				isNullConn = true;
-			}	
+			c = new DBConnect().getConnection();
 			// Update fille
-			sql = "UPDATE commande_fille SET etat=? WHERE etat = ? and id=?";
+			sql = "delete from commande_fille  WHERE id =? and etat=?";
 			pstmt = c.prepareStatement(sql);
-			pstmt.setDouble(1, Constant.waitingValidatedState);
+			pstmt.setString(1, idPanier);
 			pstmt.setInt(2, Constant.createdState);
-			pstmt.setString(3,idPanier);
-			pstmt.executeUpdate();
+ 			pstmt.executeUpdate();
 			// Update fille fin
-			//notification
-			ObjectType[]object = (ObjectType[])Generalize.getListObject(new ObjectType()," select u.id,u.id,u.id from commande_fille cf,article a,utilisateur u where a.id = cf.article_id and a.boutique_id = u.boutique_id;\r\n" + 
-					" and commande_fille.id='"+idPanier+"'",  c);
-			if(object.length>0) {
-				message = " Commande num&eacute;ro "+idPanier+" a &eacute;t&eacute; valid&eacute;"; 
-				Notification n = new Notification(message,object[0].getId(), Constant.boutiqueID);
-				n.insertIntoTable(c);
-			}
-			//Fin notification
 		} catch (Exception e) {
 			throw e;
 		} finally {
-			if (isNullConn && c != null) {
+			if (c != null) {
 				c.close();
 			}
 		}
 	}
+	
 	public static void validEmail(String token) throws Exception{
 		PreparedStatement pstmt = null;
 		Connection c = null;
@@ -404,17 +383,34 @@ public class Utilisateur extends MapModel {
 		}
 	}
 	
-	public void validerTousCommandeFille() throws Exception {
-		PreparedStatement pstmt = null;
+	public void validerAchat(String idCommandeMere,String contact,String localisation) throws Exception {
 		Connection c = null;
+		PreparedStatement pstmt = null;
+		String sql = "";
 		try {
  			c = new DBConnect().getConnection();
-			// Update fille
-			CommandeFille[]cFille = (CommandeFille[]) Generalize.getListObjectWithWhere(new CommandeFille()," AND utilisateur_id='"+this.getId()+"'",c);
- 			for(int i=0;i<cFille.length;i++) {
- 				this.validerCommandeFille(cFille[i].getId(),c);
- 			}
+ 			c.setAutoCommit(false);
+ 			CommandeMere tempCM = new CommandeMere();
+ 			tempCM.setId(idCommandeMere);
+			tempCM = (CommandeMere)Generalize.getById(tempCM,c);
+			String where = " and mere like '" + idCommandeMere + "'";
+			CommandeFille[] cFille = (CommandeFille[]) Generalize.getListObjectWithWhere(new CommandeFille(), where, c);
+			for(int i=0;i<cFille.length;i++) {
+				cFille[i].validateObject(c);
+			}
+			//update mère
+			sql = "UPDATE commande_mere SET frais_livraison=?,lieu_livraison=?,contact=?,etat=? WHERE id = ?";
+			pstmt = c.prepareStatement(sql);
+			pstmt.setDouble(1, Constant.frais);
+			pstmt.setString(2, localisation);
+			pstmt.setString(3, contact);
+			pstmt.setInt(4, Constant.validatedState);
+			pstmt.setString(5, idCommandeMere);
+			pstmt.executeUpdate();
+			// Update mère fin
+			c.commit();
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw e;
 		} finally {
 			if (c != null) {
