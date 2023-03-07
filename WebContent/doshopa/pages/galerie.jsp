@@ -67,7 +67,7 @@ String image="";
 
 						<div class="mt-1">
 							<a
-								href="<?php echo base_url('boutique/' . $boutiques[$i]->id); ?>"
+								href="${pageContext.request.contextPath}/boutiques?ref=<%=arrayBoutique[i].getId() %>"
 								class="btn btn-dark active">Voir la boutique</a>
 						</div>
 					</div>

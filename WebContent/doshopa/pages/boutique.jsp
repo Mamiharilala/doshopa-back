@@ -32,6 +32,7 @@
 		</div>
 	</div>
 </section><br>
+<%if(arrayArticle.length>0){%>
 <section>
 	<div class="album py-5">
 		<div class="container" id="product">
@@ -78,20 +79,22 @@
 				</div>
 				<% } %>
 			</div>
-			<%if(arrayArticle.length>0){%>
+			
 			<div class="mt-4 container">
 				<div class="text-center">
 					<div><%=paginationArticle%></div>
 				</div>
 			</div>
-			<%}%>
+			
 		</div>
 	</div>
 </section>
+<%}%>
+<% if(arrayPromotion.length>0){%>
 <section>
 	<div class="album py-5">
 		<div class="container" id="promotion">
-			<% if(arrayPromotion.length>0){%>
+			
 			<h4 class="fst-italic text-center py-3 text-center">Promotions</h4>
 			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 				<%for(int i=0;i<arrayPromotion.length;i++){%>
@@ -137,18 +140,18 @@
 				</div>
 				<%} %>
 			</div>
-			<%} %>
-			<%if(arrayPromotion.length>0){%>
+			
 			<div class="mt-4 container">
 				<div class="text-center">
 					<div><%=paginationPromotion%></div>
 				</div>
 			</div>
-			<%}%>
 		</div>
 	</div>
 </section>
+<%} %>
 <br>
+<%if(arrayBlog.length>0){ %>
 <section>
     <div class="">
         <div class="site-section mb-3">
@@ -194,6 +197,7 @@
         </div>
     </div>
 </section>
+
 <section class="mt-5">
 	<div class="text-center">
 		<div>
@@ -201,6 +205,7 @@
 		</div>
 	</div>
 </section>
+<% } %>
 <br>
 <section class="mt-4 bg-dark text-white" id="about">
 	<div class="container p-5">

@@ -3,9 +3,7 @@ package front;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,9 +38,8 @@ public class PageUpdateMultiple extends PageUpdate {
 		loadFille();
 	}
 	public void loadFille() throws Exception {
-		Field[]fields = new Generalize().getCommonField(this.getClassFille(),null);
+		Field[]fields = Generalize.getCommonField(this.getClassFille(),null);
  		PageField pf = null;
-		String methodName = "";
 		for(int i=0;i<fields.length;i++) {
 			if (   fields[i].getName().toUpperCase().compareTo("SCHEMA") != 0 && fields[i].getName().toUpperCase().compareTo("TABLENAME") != 0
 					&& fields[i].getName().toUpperCase().compareTo("SEQUENCEPREFIXE") != 0
