@@ -183,7 +183,7 @@
                                 <p class="card-text text-dark text-truncate" style="height: 96px;">
                                     <%= arrayBlog[i].getBody() %></p>
                                 <!-- Button -->
-                                <a href=""
+                                <a href="${pageContext.request.contextPath}/blog?ref=<%=arrayBlog[i].getId() %>"
                                     class="btn btn-dark shadow-lg">Lire la suite</a>
 
                             </div>
