@@ -70,4 +70,15 @@ Nous facilitons les ventes de manière simple et rapide.
 </section>
 </body>
  <jsp:include page='../incs/js.jsp' />
+ <script>
+ /* Set the width of the side navigation to 250px */
+ function openNav() {
+   document.getElementById("sidemenuId").style.width = "250px";
+ }
+
+ /* Set the width of the side navigation to 0 */
+ function closeNav() {
+   document.getElementById("sidemenuId").style.width = "0";
+ } 
+ </script>
 </html>

@@ -39,6 +39,7 @@ public class IndexServlet extends HttpServlet {
 			}
 		}else{
 			response.sendRedirect(request.getContextPath() + "/user?action=login");
+			// response.getWriter().print("No Session");
 		}
 	}
 

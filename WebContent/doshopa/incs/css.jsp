@@ -8,3 +8,5 @@
 	href="${pageContext.request.contextPath}/doshopa/assets/css/owl.style.css" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/doshopa/assets/fontawesome/css/all.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/doshopa/assets/css/sidenav.css" />

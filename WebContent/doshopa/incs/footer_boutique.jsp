@@ -7,6 +7,17 @@
   </p>
 </footer>
 </body>
+<script>
+ /* Set the width of the side navigation to 250px */
+ function openNav() {
+   document.getElementById("sidemenuId").style.width = "250px";
+ }
+
+ /* Set the width of the side navigation to 0 */
+ function closeNav() {
+   document.getElementById("sidemenuId").style.width = "0";
+ } 
+ </script>
 </html>
 <jsp:include page='../incs/js.jsp' />
 <style>
