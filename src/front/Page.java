@@ -187,7 +187,7 @@ public class Page {
 		tabPage[0] = current - 2;
  		int nbPage = (int) Math.ceil(lenData / totalRowPage);
 		String res = "<nav aria-label='Page navigation'>\r\n" + 
-				"  <ul class='pagination'>";
+				"  <ul class='pagination' >";
 		Map<String, String[]> parameters = request.getParameterMap();
 		String cont = "?";
 		String paramName = "";
@@ -202,22 +202,22 @@ public class Page {
 				cont += "&" + paramName + "=" + request.getParameter(paramName);
 			}
 		}
- 		res+="<li class='page-item'><a class='page-link' href='"+ request.getRequestURL() + "" + cont +"&current_page=1'><span aria-hidden='true'>&laquo;</span></a></li>";
+ 		res+="<li class='page-item'><a class='page-link text-dark' href='"+ request.getRequestURL() + "" + cont +"&current_page=1'><span aria-hidden='true'>&laquo;</span></a></li>";
 		for (int i = 0; i < 5; i++) {
 			if (tabPage[i] > 0 && tabPage[i] <= nbPage) {
 				if (tabPage[i] == current) {
 					res += "<li class='page-item active'>";
 					res += "<a href='" + request.getRequestURL() + "" + cont + "&current_page=" + tabPage[i]
-							+ "'   class='page-link'>"
+							+ "'   class='page-link text-light bg-dark border-dark'>"
 							+ tabPage[i] + "</a></li>";
 				} else {
 					res += "<li class='page-item '>";
-					res += "<a href='" + request.getRequestURL() + "" + cont + "&current_page=" + tabPage[i]+ "' class='page-link'>"
+					res += "<a href='" + request.getRequestURL() + "" + cont + "&current_page=" + tabPage[i]+ "' class='page-link text-dark'>"
 							+ tabPage[i] + "</a></li>";
 				}
 			}
 		}
-		res += "<li class='page-item'><a class='page-link' href='" + request.getRequestURL() + "" + cont + "&current_page=" + nbPage +"'><span aria-hidden='true'>&raquo;</span></a></li>";
+		res += "<li class='page-item'><a class='page-link text-dark' href='" + request.getRequestURL() + "" + cont + "&current_page=" + nbPage +"'><span aria-hidden='true'>&raquo;</span></a></li>";
  		res += "</ul>";
 		return res;
 	}

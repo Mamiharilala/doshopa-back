@@ -53,7 +53,7 @@
 						<div class="card-body">
 							<h5 class="card-title">
 								<a
-									href="">
+									href="" class="text-decoration-none text-dark">
 									<%= arrayArticle[i].getDesignation() %>
 								</a>
 							</h5>
@@ -63,14 +63,17 @@
 							<p class="card-text">
 								<%= Utility.stringWithoutNull(arrayArticle[i].getObservation()) %>
 							</p>
+							<hr>
 							<div class="d-flex justify-content-between align-items-center">
 								<form action="${pageContext.request.contextPath}/doshopa/pages/treat.jsp" method="POST">
 								<input type="hidden" value="<%=arrayArticle[i].getId()%>" name="ref_object">
 								<input type="hidden" class="form-control" value="purchache_product" name="mode">
-								<input type="hidden" class="form-control" value="${pageContext.request.contextPath}/panier" name="after">		
+								<input type="hidden" class="form-control" value="${pageContext.request.contextPath}/panier" name="after">	
+								
 								<div class="btn-group">
+									
 									 <button
-											type="submit" class="btn btn-sm btn-warning text-white">Acheter</button>
+											type="submit" class="btn btn btn-danger text-light">Ajouter <i class="fa fa-shopping-cart text-light" aria-hidden="true"></i></button>
 								</div>
 								</form>
 							</div>
@@ -113,7 +116,7 @@
 						<div class="card-body">
 							<h5 class="card-title">
 								<a
-									href="<?php echo base_url('boutique/produit/'.$promotion[$i]->id);?>">
+									href="" class="text-decoration-none text-dark">
 									<%=arrayPromotion[i].getDesignation()%>
 								</a>
 							</h5>
@@ -123,7 +126,7 @@
 							<p class="card-text">
 								<%= Utility.stringWithoutNull(arrayPromotion[i].getObservation()) %>
 							</p>
- 
+ 							<hr>
 							<div class="d-flex justify-content-between align-items-center">
 								<form action="${pageContext.request.contextPath}/doshopa/pages/treat.jsp" method="POST">
 								<input type="hidden" value="<%=arrayPromotion[i].getId()%>" name="ref_object">
@@ -131,7 +134,7 @@
 								<input type="hidden" class="form-control" value="${pageContext.request.contextPath}/panier" name="after">		
 								<div class="btn-group">
 									 <button
-											type="submit" class="btn btn-sm btn-warning text-white">Acheter</button>
+											type="submit" class="btn btn btn-danger text-white">Ajouter <i class="fa fa-shopping-cart text-white" aria-hidden="true"></i></button>
 								</div>
 								</form>
 							</div>

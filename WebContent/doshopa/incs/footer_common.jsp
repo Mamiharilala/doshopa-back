@@ -59,12 +59,13 @@ Nous facilitons les ventes de manière simple et rapide.
 
     <!-- Right -->
     <div>
-        <a href="https://www.facebook.com/profile.php?id=100089675814054" class="me-4 link-dark">
-            <i class="fab fa-facebook-f"></i>
+        <a href="https://www.facebook.com/profile.php?id=100089675814054" class="btn btn btn-floating text-dark" role="button">
+            <i class="fab fa-facebook fa-xl"></i>
         </a>
-        <a href="https://www.instagram.com/doshopa/" class="me-4 link-dark">
-            <i class="fab fa-instagram"></i>
-        </a>
+    
+        <a class="btn btn btn-floating text-dark"  href="https://www.instagram.com/doshopa/" role="button">
+  <i class="fab fa-instagram fa-xl"></i>
+</a>
     </div>
     <!-- Right -->
 </section>

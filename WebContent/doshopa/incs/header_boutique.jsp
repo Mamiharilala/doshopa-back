@@ -4,7 +4,6 @@
 			<% Boutique boutique=(Boutique) request.getAttribute("boutique"); Utilisateur u=(Utilisateur)
 				request.getSession().getAttribute("user"); %>
 				<html>
-
 				<head>
 					<meta name="viewport" content="width=device-width, initial-scale=1.0">
 					<!-- Site favicon -->
@@ -39,8 +38,7 @@
 											href="${pageContext.request.contextPath}/boutiques?ref=<%=request.getParameter("ref")%>#about"
 											class="nav-link link-dark px-2">A propos</a></li>
 									<li class="nav-item"><a href="${pageContext.request.contextPath}/panier"
-											class="nav-link px-2 link-dark">Mon panier <i
-												class="fa-solid fa-cart-shopping fa-lg mt-1"></i></a></li>
+											class="nav-link px-2 link-dark">Mon panier<span class="badge bg-warning">0</span></a></li>
 
 								</ul>
 								<% if (u !=null) { %>
@@ -48,7 +46,7 @@
 										<li><a
 												href="${pageContext.request.contextPath}/doshopa/pages/treat.jsp?mode=logout&after=${pageContext.request.contextPath}/accueil"><button
 													type="button" class="btn btn-outline-dark me-2">Se
-													d�connecter</button></a></li>
+													d&eacute;connecter</button></a></li>
 									</ul>
 								<% } else { %>
 									<ul class="nav">
