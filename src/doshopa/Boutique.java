@@ -1,6 +1,11 @@
 package doshopa;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import system.Generalize;
 import system.MapModelStateful;
+import util.DBConnect;
 
 public class Boutique extends MapModelStateful{
 	String denomination;
@@ -17,13 +22,21 @@ public class Boutique extends MapModelStateful{
 	int views;
  
 	public Boutique(){
+		init();
+	}
+	public Boutique(String id){
+		this.setId(id);
+		init();
+	}
+	
+	public void init() {
 		this.setTableName("boutique");
 		this.setCompleteTableName("boutique");
 		this.setSchema("public");
 		this.setSequenceName("seq_boutique");
 		this.setSequencePrefixe("BTK459");
 	}
-
+	
 	public String getDenomination() {
 		return denomination;
 	}
@@ -124,5 +137,44 @@ public class Boutique extends MapModelStateful{
 	public void setCategorielib(String categorielib) {
 		this.categorielib = categorielib;
 	}
-	
+	public void incrementView(String utilisateurID) {
+		String where ="";
+		Visit v = null;
+		try {
+			v = new Visit();
+			where = " AND utilisateur_id like '"+utilisateurID+"' AND object_id like '"+this.getId()+"'";
+			Visit[] arrayVisit = (Visit[]) Generalize.getListObjectWithWhere(v,where, null);
+			if(arrayVisit.length==0) {
+				 v.setRef_object(Boutique.class.getName());
+				 v.setUtilisateur_id(utilisateurID);
+				 v.setObject_id(this.getId());
+				 v.setVisit(1);
+				 this.setViews(this.getViews()+1);
+				 v.insertIntoTable(null);
+				 updateViews(); 
+			}
+		}catch(Exception e) {
+			
+		}
+	}
+	public void updateViews() throws Exception{
+		PreparedStatement pstmt = null;
+		Connection c = null;
+		try {
+			String sql = "";
+			c = new DBConnect().getConnection();
+			sql = "UPDATE boutique SET views=? WHERE id = ?";
+			pstmt = c.prepareStatement(sql);
+			pstmt.setInt(1, this.getViews());
+			pstmt.setString(2, this.getId());
+			pstmt.executeUpdate();
+			// Update fille fin
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (c != null) {
+				c.close();
+			}
+		}
+	}
 }

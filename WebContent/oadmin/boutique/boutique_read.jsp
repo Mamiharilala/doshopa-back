@@ -34,12 +34,14 @@ Boutique boutique = new Boutique();
 	<div class="table-responsive">
 		<table class="table table-striped">
 			<% 
-				ps.setColDisplay(new String[]{"denomination","siege","categorie_id","logo","mail","telephone","type_id","views","remarque"});
-				ps.setColRenameDisplay(new String[]{"D&eacute;nomination","Siege","ID Cat&eacute;gorie","Logo","Email","T&eacute;l&eacute;phone","Type (ID)","Vues","Remarque"});
+				ps.setColDisplay(new String[]{"id","denomination","siege","categorie_id","logo","mail","telephone","type_id","views","remarque"});
+				ps.setColRenameDisplay(new String[]{"ID","D&eacute;nomination","Siege","ID Cat&eacute;gorie","Logo","Email","T&eacute;l&eacute;phone","Type (ID)","Vues","Remarque"});
 				HashMap<String,String>map = new HashMap<String,String>();
+				map.put("id","id");
  				ps.setColRedirection(map);
  				// Href of redirect
  				map = new HashMap<String,String>();
+ 				map.put("id","container.jsp?content=boutique/boutique_update.jsp&id=");
  				ps.setColRedirectionHref(map);
 				ps.prepareData(request);
 				out.println(ps.getResultDisplay());

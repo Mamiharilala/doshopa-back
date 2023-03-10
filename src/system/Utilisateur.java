@@ -48,6 +48,10 @@ public class Utilisateur extends MapModel {
 		}
 		this.setMot_passe(Utility.encrypt(String.valueOf(this.getMot_passe()),c));
 		this.setEtat(Constant.validatedState);
+		if(this.getId()==null) {
+			this.setId(c);
+		}
+		updateRole(c,this.getRole_id());
 	}
 	public void controlUpdate(Connection c)throws Exception {
 		if(Utility.stringWithoutNull(this.getNom()).compareTo("")==0) {

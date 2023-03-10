@@ -7,12 +7,11 @@
 <%@ page import="java.sql.Date"%>
 
 <%
-	Promotion promotion = new Promotion();
-	promotion.setCompleteTableName("v_article_promotion");
-	promotion.setId(request.getParameter("id"));
+	Boutique boutique = new Boutique();
+	boutique.setId(request.getParameter("id"));
 	// Validation
 	Categorie etatCat = new Categorie();
-	etatCat.setCompleteTableName("etat");
+	etatCat.setCompleteTableName("etat_categorie");
 	Categorie[] etat = (Categorie[]) Generalize.getListObject(etatCat, null);
 %>
 <div class="page-header">
@@ -20,8 +19,7 @@
 		<div class="col-md-6 col-sm-12">
 			<nav aria-label="breadcrumb" role="navigation">
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item">Boutique</li>
-					<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/oadmin/container.jsp?content=promotion/promotion_read.jsp">Promotion</a></li>
+					<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/oadmin/container.jsp?content=boutique/boutique_read.jsp">Boutique</a></li>
 					<li class="breadcrumb-item active" aria-current="page">Modification</li>
 				</ol>
 			</nav>
@@ -32,25 +30,24 @@
 	<form action="${pageContext.request.contextPath}/oadmin/treat.jsp"
 		method="POST">
 		<%
-			PageUpdate pv = new PageUpdate(promotion);
+			PageUpdate pv = new PageUpdate(boutique);
 			pv.setVisibleEntry("id", false);
  			pv.setVisibleEntry("image", false);
- 			pv.setVisibleEntry("etalib", false);
- 			pv.setNameDisplay("article_id", "ID Produit");
+ 			pv.setNameDisplay("categorie_id", "Cat&eacute;gorie ID");
  			pv.setHtml("designation", "readonly");
    			pv.setType("etat", "SELECT");
 			pv.setMutilpleKeyValue("etat", "code", "description");
 			pv.setMutilpleData("etat", etat);
-			pv.setType("observation", "TEXTAREA");
+			pv.setType("remarque", "TEXTAREA");
 			pv.chargeForm();	
 			out.println(pv.getLineForm());
 		%>
 		<input type="hidden" class="form-control" value="update" name="mode">
 		<input type="hidden" class="form-control" value="<%=request.getParameter("id")%>" name="id">
 		<input type="hidden" class="form-control"
-			value="${pageContext.request.contextPath}/oadmin/container.jsp?content=promotion/promotion_update.jsp&id=<%=request.getParameter("id")%>"
+			value="${pageContext.request.contextPath}/oadmin/container.jsp?content=boutique/boutique_update.jsp&id=<%=request.getParameter("id")%>"
 			name="after"> <input type="hidden" class="form-control"
-			name="class" value="doshopa.Promotion">
+			name="class" value="doshopa.Boutique">
 		<div class="nav justify-content-center">
 			<button type="submit"
 				class="btn btn-warning text-light btn-lg col-xs-4  col-sm-4">Modifier</button>
@@ -58,7 +55,7 @@
 		</div>
 		<br>
 		<div class="nav justify-content-center">
-			<a href="${pageContext.request.contextPath}/oadmin/container.jsp?content=promotion/promotion_detail.jsp&id=<%=request.getParameter("id")%>"><button type="button" class="btn btn-success">Voir détail</button>
+			<a href="${pageContext.request.contextPath}/oadmin/container.jsp?content=boutique/boutique_read.jsp&id=<%=request.getParameter("id")%>"><button type="button" class="btn btn-success">Retourner</button>
 		</div>
 
 	</form>

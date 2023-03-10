@@ -20,6 +20,7 @@ import doshopa.Promotion;
 import front.Page;
 import system.Generalize;
 import system.MapModel;
+import system.Utilisateur;
 import util.DBConnect;
 
 /**
@@ -51,6 +52,10 @@ public class BoutiqueServlet extends HttpServlet {
 			tempBoutique.setCompleteTableName("boutique_libcomplet");
 			tempBoutique.setId(request.getParameter("ref"));
 			Boutique boutique = (Boutique)Generalize.getById(tempBoutique, c);
+			Utilisateur u = (Utilisateur) request.getSession().getAttribute("user");
+			if(u!=null) {
+				boutique.incrementView(u.getId());
+			}
 			Article tempArticle = new Article();
 			String currentPage = util.Utility.stringWithoutNull(request.getParameter("current_page")); 
 			if(currentPage.compareTo("")==0) {

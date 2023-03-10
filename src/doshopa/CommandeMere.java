@@ -141,7 +141,7 @@ public class CommandeMere extends MapModelStateful{
 				isNull = true;
 				c = new DBConnect().getConnection();
 			}
-			String query = "UPDATE commande_fille SET etat=? where code_livrer=? and etat=?";
+			String query = "UPDATE commande_fille SET etat=? where code_livrer=?";
 			pstmt = c.prepareStatement(query);
 			pstmt.setInt(1, Constant.deliveryState);
 			pstmt.setString(2, code_livraison);

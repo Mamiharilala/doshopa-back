@@ -139,7 +139,9 @@ public class MapModel {
 				isConnNull = true;
 			}
 			this.controlInsert(c);
-			this.setId(c);
+			if(this.getId()==null) {
+				this.setId(c);
+			}
 			String sql = "INSERT INTO "+this.getCompleteTableName()+" (";
 			String val ="VALUES(";
 			Field[] listFieldName = new Generalize().getCommonField(this, c);
