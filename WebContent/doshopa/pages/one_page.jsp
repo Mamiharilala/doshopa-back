@@ -25,7 +25,7 @@
                                         <% 
                                         	image = request.getContextPath()+arrayBoutique[i].getLogo(); 
                                         %>
-                                        <img src="<%=image%>" alt="">
+                                        <img src="<%=image%>" alt=""><br>
                                         <h5 class="card-title text-center"><%=arrayBoutique[i].getDenomination()%> 
                                         </h5>
                                         <p class="card-text text-center">
@@ -33,9 +33,9 @@
                                             <%=  arrayBoutique[i].getCategorielib()%>
                                         </div>
                                         </p>
-                                        <a class="btn btn-dark"
+                                        <a class="btn btn-danger"
                                             href="${pageContext.request.contextPath}/boutiques?ref=<%=arrayBoutique[i].getId() %>">Voir
-                                            la boutique</a>
+                                            la boutique <i class="fa-solid fa-arrow-right text-light fa fa-lg"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +81,7 @@
                         <!-- Link -->
                         <a href="${pageContext.request.contextPath}/galerie?categorie_ref=<%=boutique_categorie_boutique[i].getId()%>"
                             class="text-dark d-flex justify-content-end text-decoration-none">
-                            <h5>Voir tous <i class="fas fa-angle-double-right"></i></h5>
+                            <h5>Voir tous <i class="text-danger fas fa-angle-double-right"></i></h5>
                         </a>
                     </div>
                 </div>
@@ -134,7 +134,7 @@ vous pouvez acheter dans les boutiques ce que vous voulez de n'importe où, en to
                                     <%= arrayBlog[i].getBody() %></p>
                                 <!-- Button -->
                                 <a href="${pageContext.request.contextPath}/blog?ref=<%=arrayBlog[i].getId() %>"
-                                    class="btn btn-dark shadow-lg">Lire la suite</a>
+                                    class="btn btn-danger shadow-lg">Lire la suite</a>
 
                             </div>
 
