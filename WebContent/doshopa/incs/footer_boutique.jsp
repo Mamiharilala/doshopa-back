@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <footer class="blog-footer">
-  <p>Boutique sur <a href="www.doshopa.com">doshopa.com</a></p>
+  <p>Boutique sur <a href="www.doshopa.com" class="text-decoration-none text-dark"><img alt="" src="${pageContext.request.contextPath}/vendors/images/Doshopa16x16.png">Doshopa</a></p>
   <p>
-    <a href="#">Aller en haut</a>
+    <a href="#" class="text-decoration-none text-dark">Aller en haut</a>
   </p>
 </footer>
 </body>

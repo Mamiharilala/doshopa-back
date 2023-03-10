@@ -39,7 +39,7 @@
 											href="${pageContext.request.contextPath}/boutiques?ref=<%=request.getParameter("ref")%>#about"
 											class="nav-link link-dark px-2">A propos</a></li>
 									<li class="nav-item"><a href="${pageContext.request.contextPath}/panier"
-											class="nav-link px-2 link-dark">Panier <i
+											class="nav-link px-2 link-dark">Mon panier <i
 												class="fa-solid fa-cart-shopping fa-lg mt-1"></i></a></li>
 
 								</ul>
@@ -73,7 +73,7 @@
 						<% if (u !=null) { %>
 						<a href="${pageContext.request.contextPath}/doshopa/pages/treat.jsp?mode=logout&after=${pageContext.request.contextPath}/accueil"><button
 											type="button" class="btn btn-outline-dark me-2">Se
-											d�connecter</button></a>
+											d&eacute;connecter</button></a>
 						<% } else { %>
 						<a href="${pageContext.request.contextPath}/login">Se connecter</a>
 						<a href="${pageContext.request.contextPath}/inscription">S'inscrire</a>
@@ -82,7 +82,7 @@
 
 					<div class="nav-scroller py-1 mb-2">
 						<nav class="nav d-flex justify-content-center">
-							<a class="p-2 link-secondary text-decoration-none">Cat�gorie:</a> <a
+							<a class="p-2 link-secondary text-decoration-none">Cat&eacute;gorie:</a> <a
 								class="p-2 link-secondary" href="">
 								<%=boutique.getCategorielib()%>
 							</a>

@@ -11,6 +11,7 @@
 	String numeroCommande = (String) request.getAttribute("idCommande");
 	String paginationCommande = (String) request.getAttribute("paginationCommande");
 	BoutiqueCommande[] arrayCommande = (BoutiqueCommande[]) request.getAttribute("arrayCommande");
+	LocalisationLivraison[] localisation = (LocalisationLivraison[]) request.getAttribute("localisation");
 %>
 <div class="container">
 	<!-- Delivery button -->
@@ -33,9 +34,9 @@
 							<label for="lieu_livraison" class="form-label">Lieu de
 								livraison </label> <select class="form-select" id="lieu_livraison"
 								aria-label="Localisation" name="localisation">
-								<option value="1">Tanjombato</option>
-								<option value="2">Analakely</option>
-								<option value="3">Tsimbazaza</option>
+								<%for(int i=0;i<localisation.length;i++){%>
+								<option value="<%=localisation[i].getLocalisation()%>"><%=localisation[i].getLocalisation()%></option>
+								<%}%>
 							</select>
 						</div>
 						<input type="hidden" class="form-control" value="${pageContext.request.contextPath}/panier" name="after">

@@ -8,7 +8,7 @@
             <div class="row">
                 <!--Grid column-->
                 <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-                    <h5 class="text-uppercase">Doshopa</h5>
+                    <h5 class="text-uppercase"><img alt="" src="${pageContext.request.contextPath}/vendors/images/Doshopa_150x36.png"></h5>
                     <p class="text-dark">
                         Notre objectif est d'aider les boutiques à se développer et à vendre plus de produits en ligne. 
 Nous facilitons les ventes de manière simple et rapide.
@@ -50,19 +50,19 @@ Nous facilitons les ventes de manière simple et rapide.
         <!-- Copyright -->
     </footer>
 </section>
-<section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom bg-dark text-white">
+<section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom text-dark">
     <!-- Left -->
     <div class="me-5 d-none d-lg-block">
-        <span> © 2023 Doshopa</span>
+        <span> © 2023 <img alt="" src="${pageContext.request.contextPath}/vendors/images/Doshopa16x16.png"> Doshopa</span>
     </div>
     <!-- Left -->
 
     <!-- Right -->
     <div>
-        <a href="https://www.facebook.com/profile.php?id=100089675814054" class="me-4 link-light">
+        <a href="https://www.facebook.com/profile.php?id=100089675814054" class="me-4 link-dark">
             <i class="fab fa-facebook-f"></i>
         </a>
-        <a href="https://www.instagram.com/doshopa/" class="me-4 link-light">
+        <a href="https://www.instagram.com/doshopa/" class="me-4 link-dark">
             <i class="fab fa-instagram"></i>
         </a>
     </div>

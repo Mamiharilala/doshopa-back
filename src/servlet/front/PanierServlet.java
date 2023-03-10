@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import doshopa.Article;
 import doshopa.BoutiqueCommande;
+import doshopa.LocalisationLivraison;
 import front.Page;
 import system.Generalize;
 import system.Utilisateur;
@@ -72,6 +73,8 @@ public class PanierServlet extends HttpServlet {
 				String paginationArticle = Page.getpagination(request,Generalize.getCountTable(boutiqueCommande," AND utilisateur_id like '"
 						+u.getId()+ "' ", c),totalRowInPage);
 				request.setAttribute("paginationCommande", paginationArticle);
+				LocalisationLivraison[]locs = (LocalisationLivraison[])Generalize.getListObjectWithWhere(new LocalisationLivraison(), "", c);
+				request.setAttribute("localisation", locs);
 				RequestDispatcher view = request.getRequestDispatcher("doshopa/pages/panier.jsp");
 				view.forward(request, response);
 			}

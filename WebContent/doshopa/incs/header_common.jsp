@@ -14,8 +14,6 @@
                 <link rel="icon" type="image/png" sizes="16x16"
                     href="${pageContext.request.contextPath}/vendors/images/Doshopa16x16.png" />
             </head>
-            <jsp:include page='../incs/notification.jsp' />
-
             <body class="body">
                 <section>
                     <div class="container">
@@ -36,14 +34,12 @@
                                     <li class="nav-item"><a href="${pageContext.request.contextPath}" class="nav-link px-2 link-dark">Accueil</a></li>
                                     <li class="nav-item"><a href="${pageContext.request.contextPath}/galerie" class="nav-link px-2 link-dark">Galerie commerciale</a>
                                     </li>
-                                    <li class="nav-item"><a href="" class="nav-link px-2 link-dark">FAQS</a></li>
                                     <% if(u!=null&&u.isBoutique()){ %>
                                         <li class="nav-item"><a href="${pageContext.request.contextPath}/oadmin" class="nav-link px-2 link-dark">G&eacute;rer ma
                                                 boutique</a></li>
                                 
                                         <% }else{%>
-                                            <li class="nav-item"><a href="${pageContext.request.contextPath}/panier" class="nav-link px-2 link-dark"><i
-                                                        class="fa-solid fa-cart-shopping fa-lg mt-1"></i></a></li>
+                                            <li class="nav-item"><a href="${pageContext.request.contextPath}/panier" class="nav-link px-2 link-dark">Mon panier</a></li>
                                             <% }%>
                                 </ul>
                                 <ul class="navbar-nav mw-auto">
@@ -52,7 +48,7 @@
                                         <a
                                             href="${pageContext.request.contextPath}/doshopa/pages/treat.jsp?mode=logout&after=${pageContext.request.contextPath}/accueil"><button
                                                 type="button" class="btn btn-outline-dark me-2">Se
-                                                déconnecter</button></a>
+                                                d&eacute;connecter</button></a>
                                     </li>
                                 <% } else { %>
                                     <li class="nav-item">
@@ -83,7 +79,7 @@
                                   <a
                                       href="${pageContext.request.contextPath}/doshopa/pages/treat.jsp?mode=logout&after=${pageContext.request.contextPath}/accueil"><button
                                           type="button" class="btn btn-outline-light btn-sm me-2">Se
-                                          déconnecter</button></a>
+                                          d&eacute;connecter</button></a>
                           <% } else { %>
                                   <a href="${pageContext.request.contextPath}/login"><button type="button"
                                           class="btn btn-outline-light btn-sm me-2">Se
