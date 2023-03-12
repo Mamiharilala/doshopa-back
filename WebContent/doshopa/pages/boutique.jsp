@@ -187,7 +187,7 @@
                                     <%= arrayBlog[i].getBody() %></p>
                                 <!-- Button -->
                                 <a href="${pageContext.request.contextPath}/blog?ref=<%=arrayBlog[i].getId() %>"
-                                    class="btn btn-dark shadow-lg">Lire la suite</a>
+                                    class="btn btn-danger shadow-lg">Lire la suite</a>
 
                             </div>
 

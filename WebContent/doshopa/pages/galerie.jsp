@@ -68,7 +68,7 @@ String image="";
 						<div class="mt-1">
 							<a
 								href="${pageContext.request.contextPath}/boutiques?ref=<%=arrayBoutique[i].getId() %>"
-								class="btn btn-dark active">Voir la boutique</a>
+								class="btn btn-danger active">Voir la boutique <i class="fa-solid fa-arrow-right text-light fa fa-lg"></i></a>
 						</div>
 					</div>
 				</div>

@@ -39,7 +39,7 @@
                                                 boutique</a></li>
                                 
                                         <% }else{%>
-                                            <li class="nav-item"><a href="${pageContext.request.contextPath}/panier" class="nav-link px-2 link-dark">Mon panier<span class="badge bg-danger">0</span></a></li>
+                                            <li class="nav-item"><a href="${pageContext.request.contextPath}/panier" class="nav-link px-2 link-dark">Mon panier <span class="badge bg-danger">0</span></a></li>
                                             <% }%>
                                 </ul>
                                 <ul class="navbar-nav mw-auto">
